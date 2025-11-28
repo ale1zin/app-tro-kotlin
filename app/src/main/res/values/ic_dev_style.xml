@@ -4,21 +4,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item> <!-- 50% de um canto arredondado resulta em um círculo -->
     </style>
-        <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- ... (seu tema existente) ... -->
-    </style>
-
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
-
-        <!-- ============================================================= -->
-        <!--   COLE O ESTILO ABAIXO NO SEU ARQUIVO DE TEMAS                  -->
-        <!-- ============================================================= -->
-
-    <style name="MyRounded.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="android:windowBackground">@drawable/dialog_rounded_background</item>
-        <item name="android:background">@drawable/dialog_rounded_background</item>
-        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
-    </style>
 </resources>

@@ -112,11 +112,20 @@ class ColaboradoresActivity : AppCompatActivity(), DevActionsListener {
                 githubUrl = null,
                 linkedinUrl = null,
                 instagramUrl = null
+            ),
+            Desenvolvedor(
+                id = "c7",
+                nome = "Rafael Galli",
+                fotoUrl = "ic_c7",
+                funcao = "Professor do Curso de Eletrônica",
+                tipo = TipoDesenvolvedor.PROFESSOR,
+                email = "rafaelgalli@ifsul.edu.br",
+                githubUrl = null,
+                linkedinUrl = "https://www.linkedin.com/in/rafael-galli-964471318",
+                instagramUrl = null
             )
         )
     }
-
-    // --- Métodos do DevActionsListener (Copiados) ---
 
     private fun fallbackEmailChooser(email: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
