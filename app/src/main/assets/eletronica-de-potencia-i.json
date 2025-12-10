@@ -1,0 +1,325 @@
+{
+    "name_disc": "Eletrônica de Potência I",
+    "id": 0,
+    "status": "ativo",
+    "slug": "eletronica-de-potencia-i",
+    "parents": ["eletronica-de-potencia-i", "eletronica-de-potencia-ii", "eletronica-de-potencia-iii"],
+    "needs": [],
+    "semmester": 6,
+    "course": "eletrônica",
+    "period": "integrado",
+    "description": "Estudo de fontes chaveadas, topologia Flyback, dimensionamento de componentes magnéticos e No-Breaks",
+    "content": null,
+    "obs": null,
+    "chapters": [null],
+    "formulas": [
+        {
+            "name": "Tensões de Entrada",
+            "description": "Cálculo dos níveis de tensão contínua (CC) mínima e máxima no barramento de entrada, obtidos da retificação da tensão alternada (CA) da rede elétrica.",
+            "latex": [
+                "V_{in(min)} = V_{in(min)AC} \\cdot \\sqrt{2}"
+            ],
+            "variables": {
+                "Vin(min)": "Tensão contínua mínima de entrada (V)",
+                "Vin(min)AC": "Tensão alternada mínima da rede (V)"
+            }
+        },
+        {
+            "name": "Cálculo da potência de entrada",
+            "description": "Calcula a potência de entrada necessária considerando o rendimento",
+            "latex": [
+                "P_{out} = \\sum_{k=1} |V_{O_K}| |I_{O_K}|",
+                "P_{in} = \\frac{P_{out}}{\\eta}"
+            ],
+            "variables": {
+                "Pout": "Potência total de saída (W)",
+                "Vok": "Tensão de saída do enrolamento",
+                "Iok": "Corrente de saída do enrolamento",
+                "Pin": "Potência de entrada (W)",
+                "η": "Rendimento da fonte (ex: 0.8)"
+            }
+        },
+        {
+            "name": "Projeto do Transformador",
+            "description": "Dimensionamento do núcleo magnético pelo produto da área efetiva pela área da janela (Ae.Aw) e da espessura do entreferro (gap) para evitar saturação",
+            "latex": [
+                "Ae \\cdot Aw = \\frac{1,1 \\cdot P_{out} \\cdot 10^{4}}{K_p \\cdot K_w \\cdot f \\cdot f_s \\cdot \\Delta B}"
+            ],
+            "variables": {
+                "Ae": "Área efetiva do núcleo (em cm²)",
+                "Aw": "Área da janela do núcleo",
+                "Pout": "Potência total de saída",
+                "Kp": "Fator de utilização do primário",
+                "Kw": "Fator de enrolamento",
+                "fs": "Frequência de chaveamento",
+                "f": "Parâmetro da fórmula",
+                "ΔB": "Variação da indução magnética (em Tesla)"
+            }
+        },
+        {
+            "name": "Cálculo do Entreferro",
+            "description": "Determina a espessura do gap (entreferro) necessário no núcleo magnético",
+            "latex": [
+                "\\delta = \\frac{2 \\cdot \\mu_{0} \\cdot P_{out} \\cdot 10^{4}}{\\Delta B^{2} \\cdot A_e \\cdot 10^{-2} \\cdot \\eta \\cdot f_s}",
+                "l_g = \\frac{\\delta}{2}"
+            ],
+            "variables": {
+                "δ": "Parâmetro Delta (cm)",
+
+                "Pout": "Potência total de saída (W)",
+                "ΔB": "Variação da indução magnética (Tesla)",
+                "Ae": "Área efetiva do núcleo (em cm²)",
+                "η": "Rendimento da fonte (ex: 0.8)",
+                "fs": "Frequência de chaveamento (Hz)",
+                "lg": "Comprimento do entreferro (cm)"
+            },
+            "constants": {
+                "μ0": "Permeabilidade magnética do vácuo"
+            }
+        },
+        {
+            "name": "Corrente do Primário",
+            "description": "Calcula a corrente de pico que circulará no enrolamento primário do transformador",
+            "latex": [
+                "I_p = \\frac{2 \\cdot P_{out}}{\\eta \\cdot V_{in_{min}} \\cdot D_{max}}"
+            ],
+            "variables": {
+                "Ip": "Corrente de pico no primário (A)",
+                "Pout": "Potência total de saída (W)",
+                "η": "Rendimento da fonte",
+                "VINmin": "Tensão mínima de entrada (V)",
+                "Dmax": "Ciclo de trabalho máximo (Duty Cycle)"
+            }
+        },
+        {
+            "name": "Número de Espiras do Primário",
+            "description": "Calcula a quantidade de espiras do enrolamento primário do transformador",
+            "latex": [
+                "N_p = \\frac{B \\cdot \\delta}{0,4 \\cdot \\pi \\cdot I_p}"
+            ],
+            "variables": {
+                "Np": "Número de espiras do primário",
+                "B": "Indução magnética máxima (em Gauss)",
+                "δ": "Parâmetro Delta (cm)",
+                "Ip": "Corrente de pico no primário (A)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3.14159)"
+            }
+        },
+        {
+            "name": "Corrente de Pico dos Secundário",
+            "description": "Determina a corrente de pico em cada enrolamento secundário, importante para o dimensionamento dos retificadores de saída e capacitores",
+            "latex": [
+                "I_{S_K}| = \\frac{2 \\cdot I_{O_K}}{(1 - D_{max})}"
+            ],
+            "variables": {
+                "Isk": "Corrente de pico no secundário k",
+                "Iok": "Corrente média de saída do enrolamento k",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        },
+        {
+            "name": "Número de Espiras dos Secundário",
+            "description": "Calcula o número de espiras para cada enrolamento secundário do transformador",
+            "latex": [
+                "N_{S_{K}} = N_p \\cdot \\frac{(|V_{O_K}| + V_d)}{V_{in_{min}}} \\cdot \\frac{(1 - D_{max})}{D_{max}}"
+            ],
+            "variables": {
+                "Nsk": "Número de espiras do secundário k",
+                "Np": "Número de espiras do primário",
+                "Vok": "Tensão de saída do enrolamento secundário k",
+                "Vd": "Queda de tensão no diodo retificador",
+                "VINmin": "Tensão mínima de entrada",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        },
+        {
+            "name": "Corrente Eficaz no Primário",
+            "description": "Calcula a corrente eficaz (RMS) no enrolamento primário, utilizada para determinar a seção (bitola) do fio condutor necessária",
+            "latex": [
+                "I_{Pef_{max}} = I_p \\cdot \\sqrt{\\frac{D_{max}}{3}}"
+            ],
+            "variables": {
+                "IPef_max": "Corrente eficaz no primário",
+                "Ip": "Corrente de pico no primário",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        },
+        {
+            "name": "Seção do fio do Primário",
+            "description": "Calcula a área da seção transversal do condutor (fio) do enrolamento primário, baseando-se na corrente eficaz e na densidade de corrente adotada",
+            "latex": [
+                "S_{CU_P} = \\frac{I_{Pef_{max}}}{J}"
+            ],
+            "variables": {
+                "Scu_p": "Seção do fio do primário (cm² ou mm²)",
+                "IPef_max": "Corrente eficaz no primário (A)",
+                "J": "Densidade de corrente (A/cm²)"
+            }
+        },
+        {
+            "name": "Corrente eficaz no Secundário",
+            "description": "Calcula a corrente eficaz (RMS) em cada enrolamento secundário (k), considerando a forma de onda triangular típica do modo descontínuo",
+            "latex": [
+                "I_{Sef_{kmax}} = I_{S_{pk}} \\cdot \\sqrt{\\frac{1 - D_{max}}{3}}"
+            ],
+            "variables": {
+                "ISefk_max": "Corrente eficaz no secundário",
+                "IS_pk": "Corrente de pico no secundário",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        },
+        {
+            "name": "Seção do fio dos Secundário",
+            "description": "Determina a bitola do fio para cada enrolamento secundário (k), utilizando a corrente eficaz calculada e a densidade de corrente de projeto",
+            "latex": [
+                "S_{CU_{SK}} = \\frac{I_{Sef_{kmax}}}{J}"
+            ],
+            "variables": {
+                "Scu_sk": "Seção do fio do secundário",
+                "ISefk_max": "Corrente eficaz no secundário",
+                "J": "Densidade de corrente"
+            }
+        },
+        {
+            "name": "Tensão máxima sobre o interruptor",
+            "description": "Calcula a tensão de pico suportada pelo transistor chaveador (Vds ou Vce), somando a tensão máxima de entrada e a tensão refletida da saída",
+            "latex": [
+                "Vs_{max} = Vin_{max} \\cdot \\frac{1}{1 - D_{max}}"
+            ],
+            "variables": {
+                "Vsmax": "Tensão máxima sobre o interruptor (V)",
+                "Vinmax": "Tensão máxima de entrada (V)",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        },
+        {
+            "name": "Corrente média no interruptor",
+            "description": "Calcula a corrente média no interruptor (transistor), que é equivalente à soma das correntes de saída refletidas para o primário",
+            "latex": [
+                "I_{S_{med}} = \\sum_{k=1}^{n} \\left( \\frac{N_{s_k}}{N_p} \\cdot I_{o_k} \\right)"
+            ],
+            "variables": {
+                "Is_med": "Corrente média no interruptor (A)",
+                "Nsk": "Número de espiras do secundário",
+                "Np": "Número de espiras do primário",
+                "Iok": "Corrente de saída do enrolamento"
+            }
+        },
+        {
+            "name": "Corrente eficaz no interruptor",
+            "description": "Calcula a corrente eficaz (RMS) no transistor chaveador, considerando as tensões extremas de entrada e o ciclo de trabalho",
+            "latex": [
+                "I_{S_{ef}} = \\frac{V_{in_{max}} \\cdot I_p}{V_{in_{min}} \\cdot D_{max}} \\cdot \\sqrt{\\frac{D_{max}^3}{3}}"
+            ],
+            "variables": {
+                "ISef": "Corrente eficaz no interruptor (A)",
+                "Vin_max": "Tensão máxima de entrada",
+                "Ip": "Corrente de pico no primário",
+                "Vin_min": "Tensão mínima de entrada",
+                "Dmax": "Ciclo de trabalho máximo"
+            }
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Rafael Galli",
+            "role": "Professor",
+            "degree": "",
+            "university": "",
+            "campus": "",
+            "course": "Curso Técnico em Eletrônica",
+            "email": "rafaelgalli@ifsul.edu.br",
+            "telephone": null,
+            "github": null,
+            "instagram": null,
+            "youtube": null,
+            "whatsapp": null
+        }
+    ],
+    "references": [
+        {
+            "name": "",
+            "url": "",
+            "description": ""
+        }
+    ],
+    "images": [
+        {
+            "name": null,
+            "id": null,
+            "alt": null,
+            "url": null,
+            "source": null,
+            "author": null
+        }
+    ],
+    "tags": [null],
+    "alias": ["epi", "ep1", "eletrônica de potência", "potência", "ep 1", "ep i", "ep-1", "ep-i"],
+    "articleWriters": [
+        {
+            "summary": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "formulas": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "json": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ]
+        }
+    ],
+    "files": [
+        {
+            "name": null,
+            "id": null,
+            "description": null,
+            "url": null,
+            "fileId": null,
+            "type": null,
+            "source": null,
+            "author": null,
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "embededVideos": [
+        {
+            "name": null,
+            "id": null,
+            "description": null,
+            "url": null,
+            "type": null,
+            "source": null,
+            "author": null,
+            "suggestedBy": null,
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "fileVersion": 2
+}
