@@ -35,7 +35,7 @@ import java.io.InputStreamReader
 class FormulasAdapter(
     private val context: Context,
     private val formulas: List<FormulaX>,
-    formulaFocoIndice: Int, // Warning resolvido: removido 'val' pois é usado apenas na inicialização
+    formulaFocoIndice: Int,
     private val onFormulaClick: (FormulaX) -> Unit
 ) : RecyclerView.Adapter<FormulasAdapter.FormulaViewHolder>() {
 
@@ -59,7 +59,6 @@ class FormulasAdapter(
         loadKatexTemplate(context)
     }
 
-    // Warning resolvido: Função simplificada e parâmetro removido pois era constante
     private fun loadKatexTemplate(context: Context): String {
         return try {
             val inputStream = context.assets.open("katex_renderer.html")
@@ -102,7 +101,6 @@ class FormulasAdapter(
         private val separatorView: View = view.findViewById(R.id.separator_variables_constants)
 
         val cardView: CardView = view as CardView
-        // Warning resolvido: tipo inferido automaticamente
         val contentLayout: LinearLayout = view.findViewById(R.id.contentLayout)
         val formulaName: TextView = view.findViewById(R.id.tv_formula_name)
         val formulaDescription: TextView = view.findViewById(R.id.tv_formula_description)
@@ -250,7 +248,6 @@ class FormulasAdapter(
 
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                     super.onReceivedError(view, request, error)
-                    // Warning resolvido: Removida checagem SDK_INT >= M pois minSdk é 24
                     val errorDescription = "${error?.errorCode} ${error?.description}"
                     val urlString = request?.url?.toString() ?: "Unknown URL"
                     Log.e("KaTeX_WebView_Error", "Erro ao carregar WebView ($urlString): $errorDescription")
@@ -275,7 +272,6 @@ class FormulasAdapter(
         holder.contentLayout.setBackgroundColor(defaultBackgroundColor)
         holder.contentLayout.tag = null
 
-        // Warning resolvido: Removida condição redundante 'targetPosition != -1'
         if (position == targetPosition && animatedId == null) {
             animatedId = animationId
             holder.contentLayout.tag = animationId
