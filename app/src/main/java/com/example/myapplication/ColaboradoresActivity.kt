@@ -48,6 +48,28 @@ class ColaboradoresActivity : AppCompatActivity(), DevActionsListener {
         // (Sua lista de colaboradores ATUALIZADA)
         return listOf(
             Desenvolvedor(
+                id = "c8",
+                nome = "Murilo Chagas Martin",
+                fotoUrl = "ic_c8",
+                funcao = "Técnico em Eletrônica",
+                tipo = TipoDesenvolvedor.PROFESSOR,
+                email = "martinmurilo29@gmail.com",
+                githubUrl = "https://github.com/murcilonx",
+                linkedinUrl = "https://www.linkedin.com/in/murilo-c-a58128342/",
+                instagramUrl = "https://www.instagram.com/murcilonx"
+            ),
+            Desenvolvedor(
+                id = "c10",
+                nome = "Ezequiel Soares da Silva",
+                fotoUrl = "ic_c10",
+                funcao = "Técnico em Eletrônica",
+                tipo = TipoDesenvolvedor.PROFESSOR,
+                email = null,
+                githubUrl = null,
+                linkedinUrl = null,
+                instagramUrl = "https://www.instagram.com/ezequiel__sds/"
+            ),
+            Desenvolvedor(
                 id = "c1",
                 nome = "Mateus Mendes Gonçalves",
                 fotoUrl = "ic_c1",
@@ -123,6 +145,17 @@ class ColaboradoresActivity : AppCompatActivity(), DevActionsListener {
                 githubUrl = null,
                 linkedinUrl = "https://www.linkedin.com/in/rafael-galli-964471318",
                 instagramUrl = null
+            ),
+            Desenvolvedor(
+                id = "c9",
+                nome = "Eric Cezar Domingues",
+                fotoUrl = "ic_c9",
+                funcao = "Cursando Design Gráfico",
+                tipo = TipoDesenvolvedor.PROFESSOR,
+                email = null,
+                githubUrl = null,
+                linkedinUrl = null,
+                instagramUrl = "https://www.instagram.com/saikwo_i/"
             )
         )
     }
