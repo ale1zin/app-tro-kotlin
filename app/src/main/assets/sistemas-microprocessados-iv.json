@@ -1,0 +1,167 @@
+{
+    "name_disc": "Sistemas Microprocessados IV",
+    "id": 11,
+    "status": "ativo",
+    "slug": "sistemas-microprocessados-iv",
+    "parents": ["sistemas-microprocessados-i, sistemas-microprocessados-ii, sistemas-microprocessados-iii, sistemas-microprocessados-iv"],
+    "needs": [],
+    "semmester": 8,
+    "course": "eletrônica",
+    "period": "integrado",
+    "description": "Estudo dos meios/métodos de transmissão e dos equipamentos de interconexão utilizados em sistemas de redes de computadores",
+    "content": "A disciplina de Organização de Computadores e Sistemas Microprocessados explora a estrutura fundamental do hardware, começando pela hierarquia de memórias, que otimiza o desempenho do sistema. Aprofunda-se no estudo da memória cache (SRAM), detalhando sua organização em níveis (L1, L2, L3) e seu funcionamento através de mapeamento, hits e misses. Em paralelo, aborda a memória principal (DRAM), incluindo seus ciclos de leitura/escrita e especificações técnicas. O curso integra esse conhecimento teórico com a prática de diagnóstico, ensinando procedimentos para solucionar problemas comuns de hardware, como a limpeza de contatos, a verificação de conexões, a interpretação de bipes da BIOS e a execução de um Clear CMOS.",
+    "obs": "",
+    "chapters": [""],
+    "formulas": [
+        {
+            "name": "Overhead de Transmissão",
+            "description": "Mede a porcentagem de bits de controle (necesário para o envio) em relação ao total (controle + dados) de bits enviados.",
+            "latex": [
+                "Overhead = \\frac{\\text{bits-controle}}{\\text{bits-controle} + \\text{bits-dados}} \\times 100\\%"
+            ],
+            "variables": {
+                "Overhead": "Taxa de Overhead (em porcentagem)",
+                "bits-controle": "Quantidade de bits de controle (ex: start bit, stop bit, paridade...)",
+                "bits-dados": "Quantidade de bits de informação útil"
+            }
+        },
+        {
+            "name": "Eficiência da Transmissão",
+            "description": "Mede a porcentagem de bits de dados (informação útil) em relação ao total (controle + dados) de bits enviados.",
+            "latex": [
+                "Eficiência = 100\\% - Overhead",
+                "Eficiência = \\frac{\\text{bits-dados}}{\\text{bits-controle} + \\text{bits-dados}} \\times 100\\%"
+            ],
+            "variables": {
+                "Eficiência": "Taxa de Eficiência (em porcentagem)",
+                "Overhead": "Taxa de Overhead (em porcentagem)",
+                "bits-controle": "Quantidade de bits de controle (ex: start bit, stop bit, paridade...)",
+                "bits-dados": "Quantidade de bits de informação útil"
+            }
+        },
+        {
+            "name": "Relação Velocidade de Modulação e Velocidade do sinal",
+            "description": "Define a velocidade de modulação (Vm) em relação à taxa de transmissão (Vs) e ao número de bits por símbolo (N).",
+            "latex": [
+                "V_M = \\frac{V_S}{N}"
+            ],
+            "variables": {
+                "Vm": "Velocidade ou taxa de modulação (baud rate)",
+                "Vs": "Velocidade do sinal, velocidade de dados, ou taxa de transmissão (bit rate)",
+                "N": "Número de bits por símbolo"
+            }
+        },
+        {
+            "name": "Velocidade de Modulação (Inverso do Tempo)",
+            "description": "Calcula a velocidade ou taxa de modulação como o inverso do tempo de duração de um símbolo.",
+            "latex": [
+                "V_M = \\frac{1}{T_M}"
+            ],
+            "variables": {
+                "Vm": "Velocidade ou taxa de modulação (baud rate)",
+                "Tm": "Tempo de duração de um símbolo"
+            }
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Mateus Mendes Gonçalves",
+            "role": "",
+            "degree": "",
+            "university": "",
+            "campus": "",
+            "course": null,
+            "email": null,
+            "telephone": null,
+            "github": null,
+            "instagram": null,
+            "youtube": null,
+            "whatsapp": null
+        }
+    ],
+    "references": [
+        {
+            "name": "",
+            "url": "",
+            "description": ""
+        }
+    ],
+    "images": [
+        {
+            "name": "",
+            "id": null,
+            "alt": "",
+            "url": "",
+            "source": "",
+            "author": ""
+        }
+    ],
+    "tags": [],
+    "alias": [],
+    "articleWriters": [
+        {
+            "summary": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "formulas": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "json": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ]
+        }
+    ],
+    "files": [
+        {
+            "name": "",
+            "id": null,
+            "description": "",
+            "url": "",
+            "fileId": "",
+            "type": "",
+            "source": "",
+            "author": "",
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "embededVideos": [
+        {
+            "name": "",
+            "id": null,
+            "description": "",
+            "url": "",
+            "type": "",
+            "source": "",
+            "author": "",
+            "suggestedBy": "",
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "fileVersion": 2
+}
+

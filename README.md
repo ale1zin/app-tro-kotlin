@@ -10,28 +10,36 @@
 
 > ⚠️ *Algumas funcionalidades ainda estão em desenvolvimento.*
 
-- 🏠 Página inicial do aplicativo
-- 📒 Listagem de fórmulas organizada por disciplinas.
-- 📠 Calculadora de resistores
+- 🏠 **Página Inicial:** Carrossel de fórmulas favoritas, acesso rápido às últimas visualizadas e frases motivacionais.
+- 📒 **Conteúdo Didático:** Listagem completa de fórmulas organizadas por disciplinas e semestres.
+- 🔍 **Busca Inteligente:** Pesquisa rápida por nome de fórmula, disciplina ou tags.
+- 📠 **Calculadora de Resistores:** Ferramenta interativa para identificar valores de resistores pelas cores (4 faixas) com validação da série E12.
+- ⭐ **Favoritos:** Sistema para salvar e acessar rapidamente as fórmulas mais utilizadas.
 
 ---
 
-## 🚀 Futuras Implementações
+## 🚀 Para o Futuro!
 
-- 📈 Estatísticas do usuário para auxiliar o próprio
+- 📈 Estatísticas de uso do usuário.
+- 📚 Expansão para incluir disciplinas teóricas e conceituais (sem fórmulas).
+- 📡 Integração com API para atualizações de conteúdo online.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- `Kotlin`  
-- `Android Studio`  
-- `Jetpack Compose` (para interface moderna e responsiva)
-- `Kotlin Multiplatform` (para rodar o app em IOS também)  
-- `Room` (para banco de dados local)  
-- `Retrofit` (para comunicação com servidor futuro)
+O projeto utiliza a arquitetura nativa clássica do Android, priorizando compatibilidade e performance em dispositivos variados.
 
-> Buscamos compatibilidade com a maior variedade de dispositivos Android e uma interface responsiva.
+- **Linguagem:** `Kotlin`
+- **IDE:** `Android Studio`
+- **Interface (UI):** `XML Layouts` (View System com Material Design Components)
+- **Navegação:** `ViewPager2` com `TabLayout` (Navegação por abas) e `Fragments`
+- **Processamento de Dados:** - `Gson` (Leitura de conteúdo educacional via arquivos JSON locais)
+  - `SharedPreferences` (Persistência leve para Favoritos, Recentes e Configurações)
+- **Renderização:** `WebView` com `KaTeX` (Para exibição precisa de fórmulas matemáticas em LaTeX)
+- **Imagens:** `Glide` (Carregamento e gerenciamento de mídia)
+
+> Buscamos compatibilidade com a maior variedade de dispositivos Android (Min SDK 24 - Android 7.0).
 
 ---
 
@@ -43,10 +51,10 @@
 4. Execute **Build > Run** ou pressione o botão de execução para instalar o aplicativo no emulador ou dispositivo conectado.
 
 > [!WARNING]  
-> ⚠️ *Evite utilizar versões do Android Studio ou Kotlin incompatíveis com o projeto, para prevenir erros de build.*  
+> ⚠️ *Evite utilizar versões do Android Studio ou Kotlin muito antigas e incompatíveis com o projeto, para prevenir erros de build.*  
 
 > [!TIP]  
-> 💡 *Na primeira execução, o Gradle pode demorar um pouco para sincronizar as dependências.*
+> 💡 *Na primeira execução, o Gradle pode demorar um pouco para sincronizar as dependências e indexar os assets.*
 
 ---
 

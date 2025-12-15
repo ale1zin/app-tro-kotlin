@@ -33,28 +33,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="8dp"
-                android:layout_toStartOf="@+id/tv_disciplina_status"
                 android:text="Análise de Circuitos I"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" /> <!-- MODIFICADO: Adapta ao tema -->
             <!-- android:fontFamily="sans-serif-medium" /> --> <!-- Removido fontFamily para usar o padrão do tema ou defina um compatível com temas -->
 
-            <!-- Badge do Status (Alinhado à direita) -->
-            <TextView
-                android:id="@+id/tv_disciplina_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/status_active_background"
-                android:elevation="2dp"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="6dp"
-                android:text="ATIVO"
-                android:textColor="@android:color/white"
-                android:textSize="11sp"
-                android:textStyle="bold" />
 
         </RelativeLayout>
 

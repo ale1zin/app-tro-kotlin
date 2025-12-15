@@ -1,5 +1,6 @@
 package com.example.myapplication.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,26 +11,27 @@ import com.example.myapplication.models.SearchableItem
 
 class SearchAdapter(
     private var itemList: List<SearchableItem>,
-    // Adiciona um parâmetro para o listener de clique
     private val onItemClicked: (SearchableItem) -> Unit
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
+    // Mantém as referências das views do layout
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.item_title)
         val description: TextView = view.findViewById(R.id.item_description)
     }
 
+    // Cria a visualização do item a partir do XML
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search_result, parent, false)
         return ViewHolder(view)
     }
 
+    // Vincula os dados (título/descrição) aos componentes visuais
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
         holder.title.text = item.title
         holder.description.text = item.description
 
-        // Configura o clique para o item inteiro
         holder.itemView.setOnClickListener {
             onItemClicked(item)
         }
@@ -37,6 +39,8 @@ class SearchAdapter(
 
     override fun getItemCount() = itemList.size
 
+    // Atualiza a lista de resultados da busca
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<SearchableItem>) {
         itemList = newList
         notifyDataSetChanged()

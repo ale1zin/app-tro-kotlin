@@ -15,8 +15,8 @@
     "formulas": 
     [
         {
-            "name": "Tensão de Saída em Função do Tempo",
-            "description":"Circuito Integrador",
+            "name": "Tensão de Saída em Função do Tempo (Circuito Integrador)",
+            "description":null,
             "latex": ["V_o(t) = - \\frac{1}{R \\times C} \\int_{t_1}^{t_2} V_{in}(t) \\, dt + V_C"],
             "constants":null,
 
@@ -32,8 +32,8 @@
             }
         },
         {
-            "name": "Frequência de Corte",
-            "description":"Circuito Integrador Prático",
+            "name": "Frequência de Corte (Circuito Integrador Prático)",
+            "description":null,
             "latex": ["F_c = \\frac{1}{2 \\times \\pi \\times R_f \\times C}"],
             "constants":
             {
@@ -49,8 +49,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Circuito Integrador Prático",
+            "name": "Ganho de Tensão (Circuito Integrador Prático)",
+            "description":null,
             "latex": ["A_v = - \\frac{R_f}{R_i}"],
             "constants":null,
 
@@ -63,8 +63,8 @@
             }
         },
         {
-            "name": "Tensão de Saída em Função do tempo",
-            "description":"Circuito Diferenciador",
+            "name": "Tensão de Saída em Função do tempo (Circuito Diferenciador)",
+            "description":null,
             "latex": ["V_o(t) = -R \\times C \\times \\frac{dV_{in}(t)}{dt}"],
             "constants":null,
 
@@ -79,8 +79,8 @@
             }
         },
         {
-            "name": "Frequência de Corte",
-            "description":"Circuito Diferenciador Prático",
+            "name": "Frequência de Corte (Circuito Diferenciador Prático)",
+            "description":null,
             "latex": ["F_c = \\frac{1}{2 \\times \\pi \\times R_i \\times C}"],
             "constants":
             {
@@ -95,8 +95,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Conversão de Sinal Retangular em Triangular",
+            "name": "Tensão de Saída (Conversão Retangular - Triangular)",
+            "description":null,
             "latex": ["V_{o} = \\frac{V_{in}}{4 \\times \\pi \\times R_1 \\times C}"],
             "constants":
             {
@@ -112,8 +112,8 @@
             }
         },
         {
-            "name": "Ciclo de Trabalho",
-            "description":"Conversão de Sinal Triangular em Pulso",
+            "name": "Ciclo de Trabalho (Conversão Triangular - Senosoidal)",
+            "description":null,
             "latex": ["D = \\frac{W}{T}"],
             "constants":null,
 
@@ -125,8 +125,8 @@
             }
         },
         {
-            "name": "Tensão de Comutação Superior",
-            "description":"Oscilador de Relaxação",
+            "name": "Tensão de Comutação Superior (Oscilador de Relaxação)",
+            "description":null,
             "latex": ["V_{CS} = \\beta \\times V_{Sat+}"],
             "constants":null,
 
@@ -137,8 +137,8 @@
             }
         },
         {
-            "name": "Tensão de Comutação Inferior",
-            "description":"Oscilador de Relaxação",
+            "name": "Tensão de Comutação Inferior (Oscilador de Relaxação)",
+            "description":null,
             "latex": ["V_{CI} = \\beta \\times V_{Sat-}"],
             "constants":null,
 
@@ -149,8 +149,8 @@
             }
         },
         {
-            "name": "Período de Oscilação",
-            "description":"Oscilador de Relaxação",
+            "name": "Período de Oscilação (Oscilador de Relaxação)",
+            "description":null,
             "latex": ["T = 2 \\times R_f \\times C \\times \\ln \\frac{1 + \\beta}{1 - \\beta}"],
             "constants":null,
 

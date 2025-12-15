@@ -1,0 +1,863 @@
+{
+  "name_disc": "Eletricidade III",
+  "id": 5,
+  "status":"ativo",
+  "slug": "eletricidade-iii",
+  "parents": ["eletricidade-i", "eletricidade-ii", "eletricidade-iii", "eletricidade-iv"],
+  "needs": ["introducao-a-eletronica,eletricidade-i,eletricidade-ii"],
+  "semmester": 4,
+  "course": "eletrônica",
+  "period": "integrado",
+  "description": "Eletricidade focada principalmente em corrente alternada, circuitos RLC, números complexos e potência em sistemas monofásicos e trifásicos.",
+  "content": "Eletricidade III aprofunda o estudo dos fenômenos eletromagnéticos e dos circuitos de corrente alternada, abordando temas como indutância, associação de indutores, reatância capacitiva e indutiva, leis de Kirchhoff, impedância, admitância, números complexos e potência elétrica. A disciplina enfatiza a aplicação da matemática para analisar circuitos, introduz métodos de resolução com números complexos e explora sistemas monofásicos e trifásicos, preparando o aluno para compreender e projetar sistemas elétricos mais avançados e inovadores.",
+  "obs": "Entender o conceito por detrás das fórmulas é mais fácil que decorá-las",
+  "chapters": ["relação entre tensão e corrente","lei de ohm","relação entre tensão e corrente","reatância capacitiva","reatância capacitiva","relação entre tensão e corrente","reatância indutiva","reatância indutiva","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","impedância","impedância","impedância","impedância","lei de ohm em circuitos de c.a.","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","impedância","impedância","impedância","impedância","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","lei das tensões de kirchhoff para ca","impedância","impedância","impedância","impedância","frequência de ressonância","lei das correntes de kirchhoff para ca","lei das correntes de kirchhoff para ca","lei das correntes de kirchhoff para ca","lei das correntes de kirchhoff para ca","admitância","admitância","admitância","admitância","condutância","suscetância capacitiva","suscetância indutiva","impedância equivalente","resistência equivalente","resistência equivalente","condutância","suscetância","operador imaginário","número complexo na forma retangular","número complexo na forma polar","conjugado de um número complexo","conversão de retangular para polar","conversão de polar para retangular","soma","subtração","multiplicação","divisão","impedância complexa","impedância complexa","tensão complexa","corrente complexa","potência ativa ou real","potência reativa","potência aparente","potência reativa do capacitor","capacitância","potência aparente complexa","força eletromotriz","força eletromotriz","fase 1","fase 2","fase 3","ligação estrela","ligação estrela","ligação estrela","ligação triângulo","ligação triângulo","potência aparente","potência aparente","potência ativa ou real","potência reativa","potência reativa do capacitor trifásico","capacitância equivalente dos capacitores de uma fase"],
+  "formulas":
+  [
+    {
+      "name": "Relação entre Tensão e Corrente (Circuitos resistivos)",
+      "description": "Circuitos puramente resistivos",
+      "latex": ["V = R \\times I"],
+      "constants": null,
+
+      "variables":
+      {
+        "V": "Tensão (Volt = V)",
+        "R": "Resistência (Ohm = Ω)",
+        "I": "Corrente (Ampere = A)"
+      }
+    },
+    {
+      "name": "Relação entre Tensão e Corrente (Circuitos capacitivos)",
+      "description": "Circuitos puramente capacitivos",
+      "latex": ["I = \\omega \\times C \\times V"],
+      "constants":
+      {
+        "ω": "Frequência Angular (rad/s)"
+      },
+
+      "variables":
+      {
+        "I": "Corrente (Ampere = A)",
+        "R": "Resistência (Ohm = Ω)",
+        "C": "Capacitância (Farad = F)",
+        "V": "Tensão (Volt = V)"
+      }
+    },
+    {
+      "name": "Relação entre Tensão e Corrente (Circuitos indutivos)",
+      "description":"Circuitos puramente indutivos",
+      "latex": ["V = \\omega \\times L \\times I"],
+      "constants":
+      {
+        "ω": "Frequência Angular (rad/s)"
+      },
+
+      "variables":
+      {
+        "Xc": "Reatância Capacitiva (Ohm = Ω)",
+        "L": "Indutância (Henry = H)",
+        "I": "Corrente (Ampere = A)",
+        "C": "Capacitância (Farad = F)",
+        "f": "Frequência (Hertz = Hz)"
+      }
+    },
+
+    {
+      "name": "Reatância Capacitiva",
+      "description":null,
+      "latex": ["X_C = \\frac{1}{\\omega \\times C}"],
+      "constants":
+      {
+        "ω": "Frequência Angular (rad/s)"
+      },
+
+      "variables":
+      {
+        "Xc": "Reatância Capacitiva (Ohm = Ω)",
+        "L": "Indutância (Henry = H)",
+        "I": "Corrente (Ampere = A)",
+        "C": "Capacitância (Farad = F)"
+      }
+    },
+    {
+      "name": "Reatância Capacitiva (Alternativa)",
+      "description":null,
+      "latex": ["X_C = \\frac{1}{\\omega \\times C}", "X_C = \\frac{1}{2 \\times \\pi \\times f \\times C}"],
+      "constants":
+      {
+        "ω": "Frequência Angular (rad/s)"
+      },
+
+      "variables":
+      {
+        "Xc": "Reatância Capacitiva (Ohm = Ω)",
+        "L": "Indutância (Henry = H)",
+        "I": "Corrente (Ampere = A)",
+        "C": "Capacitância (Farad = F)",
+        "f": "Frequência (Hertz = Hz)"
+      }
+    },
+    {
+      "name": "Reatância Indutiva",
+      "description":null,
+      "latex": ["X_L = \\omega \\times L", "X_L = 2 \\times \\pi \\times f \\times L"],
+      "constants":
+      {
+        "ω": "Frequência Angular (rad/s)",
+        "π": "3,14"
+      },
+
+      "variables":
+      {
+        "XL": "Reatância Indutiva (Ohm = Ω)",
+        "L": "Indutância (Henry = H)",
+        "I": "Corrente (Ampere = A)",
+        "f": "Frequência (Hertz = Hz)"
+      }
+    },
+    {
+      "name": "Lei das Tensões de Kirchhoff para Corrente Alternada (RC em Série)",
+      "description":"Circuitos RC em Série",
+      "latex": ["V_T = \\sqrt{(V_R)^2 + (V_C)^2}", "\\sin{\\phi} = \\frac{V_C}{V}","\\cos{\\phi} = \\frac{V_R}{V},","\\tan{\\phi} = \\frac{V_C}{V_R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "VT": "Tensão total (Volt = V)",
+        "VR": "Tensão no resistor (Volt = V)",
+        "VC": "Tensão no capacitor (Volt = V)"
+      }
+    },
+    {
+      "name": "Impedância (RC em Série)",
+      "description":"Circuitos RC em Série",
+      "latex": ["Z = \\sqrt{R^2 + X_C^2}", "\\sin{\\phi} = \\frac{X_C}{Z}","\\cos{\\phi} = \\frac{R}{Z},","\\tan{\\phi} = \\frac{X_C}{R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "R": "Resistência (Ohm = Ω)",
+        "Xc": "Reatância Capacitiva (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Lei das Tensões de Kirchhoff para Corrente Alternada (RL em Série)",
+      "description":"Circuitos RL em Série",
+      "latex": ["V_T = \\sqrt{(V_R)^2 + (V_L)^2}", "\\sin{\\phi} = \\frac{V_L}{V}","\\cos{\\phi} = \\frac{V_R}{V},","\\tan{\\phi} = \\frac{V_L}{V_R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "VT": "Tensão total (Volt = V)",
+        "VR": "Tensão no resistor (Volt = V)",
+        "VL": "Tensão no indutor (Volt = V)"
+      }
+    },
+    {
+      "name": "Impedância (RL em Série)",
+      "description":"Circuitos RL em Série",
+      "latex": ["Z = \\sqrt{R^2 + X_L^2}", "\\sin{\\phi} = \\frac{X_L}{Z}","\\cos{\\phi} = \\frac{R}{Z},","\\tan{\\phi} = \\frac{X_L}{R}", "\\phi"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "R": "Resistência (Ohm = Ω)",
+        "XL": "Reatância Indutiva (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Lei de Ohm em Circuitos de C.A.",
+      "description":null,
+      "latex": ["V = Z \times I"],
+      "constants":null,
+
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "V": "Tensão (Volt = V)",
+        "I": "Corrente (Ampere = A)"
+      }
+    },
+    {
+      "name": "Lei das Tensões de Kirchhoff para Corrente Alternada (RLC em Série)",
+      "description":"Circuitos RLC em Série",
+      "latex": ["V_T = \\sqrt{(V_R)^2 + (V_L)^2 + (V_C)^2}", "\\sin{\\phi} = \\frac{|V_L - V_C|}{V}","\\cos{\\phi} = \\frac{V_R}{V},","\\tan{\\phi} = \\frac{|V_L - V_C|}{V_R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "VT": "Tensão total (Volt = V)",
+        "VR": "Tensão no resistor (Volt = V)",
+        "VL": "Tensão no indutor (Volt = V)"
+      }
+    },
+    {
+      "name": "Impedância (RLC em Série)",
+      "description":"Circuitos RLC em Série",
+      "latex": ["Z = \\sqrt{R^2 + (X_L - X_C)^2}", "\\sin{\\phi} = \\frac{|X_L - X_C|}{Z}","\\cos{\\phi} = \\frac{R}{Z},","\\tan{\\phi} = \\frac{|X_L - X_C|}{R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "R": "Resistência (Ohm = Ω)",
+        "XL": "Reatância Indutiva (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Frequência de Ressonância (RLC em Série)",
+      "description":"Circuitos RLC em Série",
+      "latex": ["f_0 = \\frac{1}{2 \\pi \\sqrt{L C}}"],
+      "constants":
+      {
+        "π": "3,14"
+      },
+
+      "variables":
+      {
+        "f0": "Frequência de ressonância (Hertz = Hz)",
+        "L": "Indutância (Henry = H)",
+        "C": "Capacitância (Farad = F)"
+      }
+    },
+    {
+      "name": "Lei das Correntes de Kirchhoff para Corrente Alternada (RLC em Paralelo)",
+      "description":"Circuitos RLC em Paralelo",
+      "latex": ["I^2 = I_R^2 + ( I_C - I_L )^2", "\\sin{\\phi} = \\frac{|I_C - I_L|}{I}","\\cos{\\phi} = \\frac{I_R}{I},","\\tan{\\phi} = \\frac{|I_C - I_L|}{I_R}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "I": "Corrente total (Ampere = A)",
+        "IR": "Corrente no resistor (Ampere = A)",
+        "IL": "Corrente no indutor (Ampere = A)",
+        "IC": "Corrente no capacitor (Ampere = A)"
+      }
+    },
+    {
+      "name": "Admitância (RLC em Paralelo)",
+      "description":"Circuitos RLC em Paralelo",
+      "latex": ["Y^2 = g^2 + (b_C - b_L)^2", "\\sin{\\phi} = \\frac{|b_C - b_L|}{Y}","\\cos{\\phi} = \\frac{g}{Y},","\\tan{\\phi} = \\frac{|b_C - b_L|}{g}"],
+      "constants":
+      {
+        "ϕ": "Ângulo de Fase"
+      },
+      "variables":
+      {
+        "Y": "Admitância (Siemens = S)",
+        "g": "Condutância (Siemens = S)",
+        "bC": "Suscetância Capacitiva (Siemens = S)",
+        "bL": "Suscetância Indutiva (Siemens = S)"
+      }
+    },
+    {
+      "name": "Condutância (RLC em Paralelo)",
+      "description":"Circuitos RLC em Paralelo",
+      "latex": ["g = \\frac{1}{R}"],
+      "constants":null,
+      "variables":
+      {
+        "g": "Condutância (Siemens = S)",
+        "R": "Resistência (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Suscetância Capacitiva (RLC em Paralelo)",
+      "description":"Circuitos RLC em Paralelo",
+      "latex": ["b_C = \\frac{1}{X_C}"],
+      "constants":null,
+      "variables":
+      {
+        "bC": "Suscetância Capacitiva (Siemens = S)",
+        "XC": "Reatância Capacitiva (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Suscetância Indutiva (RLC em Paralelo)",
+      "description":"Circuitos RLC em Paralelo",
+      "latex": ["b_L = \\frac{1}{X_L}"],
+      "constants":null,
+      "variables":
+      {
+        "bL": "Suscetância Indutiva (Siemens = S)",
+        "XL": "Reatância Indutiva (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Impedância Equivalente (Série - Paralelo)",
+      "description":"Equivalente Série do Circuito Paralelo",
+      "latex": ["Z = \\frac{1}{Y}"],
+      "constants":null,
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "Y": "Admitância (Siemens = S)"
+      }
+    },
+    {
+      "name": "Resistência Equivalente (Série - Paralelo)",
+      "description":"Equivalente Série do Circuito Paralelo",
+      "latex": ["R = \\frac{g}{Y^2}"],
+      "constants":null,
+      "variables":
+      {
+        "R": "Resistência (Ohm = Ω)",
+        "Y": "Admitância (Siemens = S)",
+        "g": "Condutância (Siemens = S)"
+      }
+    },
+    {
+      "name": "Resistência Equivalente (Alternativa) (Série - Paralelo)",
+      "description":"Equivalente Série do Circuito Paralelo",
+      "latex": ["R_{eq} = \\frac{g}{Y^2}","R_{eq} = \\frac{b}{Y^2}"],
+      "constants":null,
+      "variables":
+      {
+        "R": "Resistência (Ohm = Ω)",
+        "Y": "Admitância (Siemens = S)",
+        "g": "Condutância (Siemens = S)",
+        "b": "Suscetância (Siemens = S)"
+      }
+    },
+    {
+      "name": "Resistência Equivalente (Série - Paralelo)",
+      "description":"Equivalente Série do Circuito Paralelo",
+      "latex": ["R_{eq} = \\frac{g}{Y^2}","R_{eq} = \\frac{b}{Y^2}"],
+      "constants":null,
+      "variables":
+      {
+        "R": "Resistência (Ohm = Ω)",
+        "Y": "Admitância (Siemens = S)",
+        "g": "Condutância (Siemens = S)",
+        "b": "Suscetância (Siemens = S)"
+      }
+    },
+    {
+      "name": "Condutância (Paralelo - Série)",
+      "description":"Equivalente Paralelo do Circuito Série",
+      "latex": ["g = \\frac{R}{Z^2}"],
+      "constants":null,
+      "variables":
+      {
+        "R": "Resistência (Ohm = Ω)",
+        "g": "Condutância (Siemens = S)",
+        "Z": "Impedância (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Suscetância (Paralelo - Série)",
+      "description":"Equivalente Paralelo do Circuito Série",
+      "latex": ["b = \\frac{X}{Z^2}"],
+      "constants":null,
+      "variables":
+      {
+        "b": "Suscetância (Siemens = S)",
+        "X": "Reatância (Ohm = Ω)",
+        "Z": "Impedância (Ohm = Ω)"
+      }
+    },
+    {
+      "name": "Operador Imaginário",
+      "description":null,
+      "latex": ["j = \\sqrt{-1}"],
+      "constants":null,
+      "variables":
+      {
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name": "Número Complexo na Forma Retangular",
+      "description":null,
+      "latex": ["C = a + jb"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "a": "Parte real do número complexo",
+        "b": "Parte imaginária do número complexo",
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name": "Número Complexo na Forma Retangular (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = a + jb"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "a": "Parte real do número complexo",
+        "b": "Parte imaginária do número complexo",
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name": "Número Complexo na Forma Polar (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = |C| \\angle \\theta"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "|Ċ|": "Módulo do número complexo",
+        "θ": "Ângulo do número complexo"
+      }
+    },
+    {
+      "name": "Conjugado de um Número Complexo (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C^* = a - jb = |C| \\angle -\\theta"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ*": "Conjugado de um Número complexo",
+        "|Ċ|": "Módulo do número complexo",
+        "θ": "Ângulo do número complexo"
+      }
+    },
+    {
+      "name": "Conversão de Retangular para Polar (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = |C| \\angle \\theta", "|C| = \\sqrt{a^2 + b^2}", "\\theta = \\tan^{-1}{\\frac{b}{a}}"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "|Ċ|": "Módulo do número complexo",
+        "θ": "Ângulo do número complexo"
+      }
+    },
+    {
+      "name": "Conversão de Polar para Retangular (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = a + jb", "a = |C| \\times \\cos{\\theta}", "b = |C| \\times \\sin{\\theta}"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "|Ċ|": "Módulo do número complexo",
+        "θ": "Ângulo do número complexo"
+      }
+    },
+    {
+      "name": "Soma de Números Complexos (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = C_1 + C_2 + ... + C_n"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "Ċn": "n Números complexos"
+      }
+    },
+    {
+      "name": "Subtração de Números Complexos (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = C_1 - C_2 - ... - C_n"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "Ċn": "n Números complexos"
+      }
+    },
+    {
+      "name": "Multiplicação de Números Complexos (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = |C_1| \\times |C_2| \\times ... \\times |C_n|"],
+      "constants":null,
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "|Ċn|": "Módulo de n Números complexos"
+      }
+    },
+    {
+      "name": "Divisão de Números Complexos (Circuitos RLC)",
+      "description":"Método dos números complexos - Circuitos RLC",
+      "latex": ["C = \\frac{|C_1|}{|C_2|} \\angle (\\theta_1 - \\theta_2)"],
+      "constants":
+      {
+        "θ": "Ângulo do número complexo"
+      },
+      "variables":
+      {
+        "Ċ": "Número complexo",
+        "|Ċn|": "Módulo de n Números complexos"
+      }
+    },
+    {
+      "name": "Impedância Complexa (RL Série)",
+      "description":"RL Série",
+      "latex": ["Z = R + jX"],
+      "constants":null,
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "R": "Resistência (Ohm = Ω)",
+        "X": "Reatância (Ohm = Ω)",
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name": "Impedância Complexa (RC Série)",
+      "description":"RC Série",
+      "latex": ["Z = R - jX"],
+      "constants":null,
+      "variables":
+      {
+        "Z": "Impedância (Ohm = Ω)",
+        "R": "Resistência (Ohm = Ω)",
+        "X": "Reatância (Ohm = Ω)",
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name":"Tensão Complexa",
+      "description":null,
+      "latex": ["V = V \\angle \\alpha"],
+      "constants":null,
+      "variables":
+      {
+        "Ṽ": "Tensão complexa (Volt = V)",
+        "V": "Valor eficaz da tensão (Volt = V)",
+        "α": "Ângulo de fase da tensão"
+      }
+    },
+    {
+      "name":"Corrente Complexa",
+      "description":null,
+      "latex": ["I = I \\angle \\beta"],
+      "constants":null,
+      "variables":
+      {
+        "İ": "Corrente complexa (Ampere = A)",
+        "I": "Valor eficaz da corrente (Ampere = A)",
+        "β": "Ângulo de fase da corrente"
+      }
+    },
+    {
+      "name":"Potência Ativa",
+      "description":null,
+      "latex": ["P = V \\times I \\times \\cos{\\phi}"],
+      "constants":null,
+      "variables":
+      {
+        "P": "Potência ativa (Watt = W)",
+        "V": "Tensão eficaz (Volt = V)",
+        "I": "Corrente eficaz (Ampere = A)",
+        "ϕ": "Ângulo de defasagem entre tensão e corrente"
+      }
+    },
+    {
+      "name":"Potência Reativa",
+      "description":null,
+      "latex": ["Q = V \\times I \\times \\sin{\\phi}"],
+      "constants":null,
+      "variables":
+      {
+        "Q": "Potência reativa (Volt-Ampere reativo = VAR)",
+        "V": "Tensão eficaz (Volt = V)",
+        "I": "Corrente eficaz (Ampere = A)",
+        "ϕ": "Ângulo de defasagem entre tensão e corrente"
+      }
+    },
+    {
+      "name":"Potência Aparente",
+      "description":null,
+      "latex": ["S = P_ap = V \\times I"],
+      "constants":null,
+      "variables":
+      {
+        "S": "Potência aparente (Volt-Ampere = VA)",
+        "P_ap": "Potência aparente (Volt-Ampere = VA)",
+        "V": "Tensão eficaz (Volt = V)",
+        "I": "Corrente eficaz (Ampere = A)"
+      }
+    },
+    {
+      "name":"Potência Reativa do Capacitor",
+      "description":null,
+      "latex": ["Q_C = P \\times ( \\tan{\\phi} - \\tan{\\phi_1})"],
+      "constants":null,
+      "variables":
+      {
+        "QC": "Potência reativa do capacitor (VAr)",
+        "P": "Potência ativa (W)",
+        "ϕ": "Ângulo de defasagem inicial",
+        "ϕ_1": "Ângulo de defasagem desejado"
+      }
+    },
+    {
+      "name":"Capacitância",
+      "description":null,
+      "latex": ["C = \\frac{Q_C}{V^2 \\times 2 \\times \\pi \\times f})"],
+      "constants":
+      {
+        "π": "3,14"
+      },
+      "variables":
+      {
+        "C": "Capacitância (Farad = F)",
+        "QC": "Potência reativa do capacitor (VAr)",
+        "V": "Tensão eficaz (Volt = V)",
+        "f": "Frequência (Hertz = Hz)"
+      }
+    },
+    {
+      "name":"Potência Aparente Complexa",
+      "description":"+jQ Potência Reativa Indutiva e -jQ Potência Reativa Capacitiva",
+      "latex": ["S = P \\pm jQ"],
+      "constants":null,
+      "variables":
+      {
+        "S": "Potência aparente (Volt-Ampere = VA)",
+        "P": "Potência ativa (W)",
+        "Q": "Potência reativa (VAr)",
+        "j": "Unidade imaginária"
+      }
+    },
+    {
+      "name":"Força Eletromotriz",
+      "description":"Gerador Trifásico de Corrente Alternada - Alternador Monofásico Induzido Rotativo",
+      "latex": ["e = n \\times 2 \\times B \\times l \\times v \\times \\sin{\\omega t}"],
+      "constants":null,
+      "variables":
+      {
+        "e": "Força eletromotriz induzida (Volt = V)",
+        "n": "Número de espiras",
+        "B": "Densidade de fluxo magnético (Tesla = T)",
+        "l": "Comprimento do condutor (metro = m)",
+        "v": "Velocidade do condutor (metro/segundo = m/s)",
+        "ω": "Frequência angular (rad/s)",
+        "t": "Tempo (segundo = s)"
+      }
+    },
+    {
+      "name":"Força Eletromotriz",
+      "description":"Gerador Trifásico de Corrente Alternada - Alternador Monofásico Induzido Rotativo",
+      "latex": ["e = n \\times 2 \\times B \\times l \\times v \\times \\sin{\\theta}"],
+      "constants":null,
+      "variables":
+      {
+        "e": "Força eletromotriz induzida (Volt = V)",
+        "n": "Número de espiras",
+        "B": "Densidade de fluxo magnético (Tesla = T)",
+        "l": "Comprimento do condutor (metro = m)",
+        "v": "Velocidade do condutor (metro/segundo = m/s)",
+        "θ": "Ângulo entre a velocidade e o campo magnético"
+      }
+    },
+    {
+      "name":"Fase 1 (Alternador Trifásico)",
+      "description":"Alternador Trifásico Bipolar Induzido Rotativo",
+      "latex": ["e\\_1 = E_M \\times \\sin{\\theta}"],
+      "constants":null,
+      "variables":
+      {
+        "e_1": "Tensão instantânea da fase 1 (Volt = V)",
+        "E_M": "Tensão máxima (pico) (Volt = V)",
+        "θ": "Ângulo (graus ou radianos)"
+      }
+    },
+    {
+      "name":"Fase 2 (Alternador Trifásico)",
+      "description":"Alternador Trifásico Bipolar Induzido Rotativo",
+      "latex": ["e\\_2 = E_M \\times \\sin{(\\theta - 120^\\circ)}"],
+      "constants":null,
+      "variables":
+      {
+        "e_2": "Tensão instantânea da fase 2 (Volt = V)",
+        "E_M": "Tensão máxima (pico) (Volt = V)",
+        "θ": "Ângulo (graus ou radianos)"
+      }
+    },
+    {
+      "name":"Fase 3 (Alternador Trifásico)",
+      "description":"Alternador Trifásico Bipolar Induzido Rotativo",
+      "latex": ["e\\_3 = E_M \\times \\sin{(\\theta - 240^\\circ)}"],
+      "constants":null,
+      "variables":
+      {
+        "e_3": "Tensão instantânea da fase 3 (Volt = V)",
+        "E_M": "Tensão máxima (pico) (Volt = V)",
+        "θ": "Ângulo (graus ou radianos)"
+      }
+    },
+    {
+      "name":"Ligação Estrela",
+      "description":"IL = IF",
+      "latex": ["I_N = I_L1 + I_L2 + I_L3", "I_L1 = I_F1", "I_L2 = I_F2", "I_L3 = I_F3"],
+      "constants":null,
+      "variables":
+      {
+        "I_N": "Corrente na ligação estrela (Ampere = A)",
+        "I_L1": "Corrente da fase 1 (Ampere = A)",
+        "I_L2": "Corrente da fase 2 (Ampere = A)",
+        "I_L3": "Corrente da fase 3 (Ampere = A)"
+      }
+    },
+    {
+      "name":"Ligação Estrela",
+      "description":"EL = EF",
+      "latex": ["E_L = \\sqrt{3} \\times E_F"],
+      "constants":null,
+      "variables":
+      {
+        "V_L": "Tensão entre linhas (Volt = V)",
+        "V_F": "Tensão de fase (Volt = V)"
+      }
+    },
+    {
+      "name":"Ligação Triângulo",
+      "description":"EL = EF",
+      "latex": ["E_F1 + E_F2 + E_F3 = 0"],
+      "constants":null,
+      "variables":
+      {
+        "V_L": "Tensão entre linhas (Volt = V)",
+        "V_F": "Tensão de fase (Volt = V)"
+      }
+    },
+    {
+      "name":"Variante de Ligação Triângulo, ou Delta",
+      "description":"EL = EF",
+      "latex": ["I_L = I_F \\times \\sqrt{3}"],
+      "constants":null,
+      "variables":
+      {
+        "I_L": "Corrente entre linhas (Ampere = A)",
+        "I_F": "Corrente de fase (Ampere = A)"
+      }
+    },
+    {
+      "name":"Potência Aparente (Circuito Trifásico)",
+      "description":"Potência dos Circuitos Trifásicos - Triângulo e Estrela",
+      "latex": ["S_T = \\sqrt{3} \\times V_L \\times I_L"],
+      "constants":null,
+      "variables":
+      {
+        "S_T": "Potência aparente total (Volt-Ampere = VA)",
+        "V_L": "Tensão entre linhas (Volt = V)",
+        "I_L": "Corrente entre linhas (Ampere = A)"
+      }
+    },
+    {
+      "name":"Potência Ativa (Circuito Trifásico)",
+      "description":"Potência dos Circuitos Trifásicos - Triângulo",
+      "latex": ["P_T = S_T \\times \\cos{\\phi}"],
+      "constants":null,
+      "variables":
+      {
+        "P_T": "Potência ativa total (Watt = W)",
+        "S_T": "Potência aparente total (Volt-Ampere = VA)",
+        "ϕ": "Ângulo de defasagem entre tensão e corrente"
+      }
+    },
+    {
+      "name":"Potência Reativa (Circuito Trifásico)",
+      "description":"Potência dos Circuitos Trifásicos - Triângulo",
+      "latex": ["Q_T = S_T \\times \\sin{\\phi}"],
+      "constants":null,
+      "variables":
+      {
+        "Q_T": "Potência reativa total (Volt-Ampere reativo = VAR)",
+        "S_T": "Potência aparente total (Volt-Ampere = VA)",
+        "ϕ": "Ângulo de defasagem entre tensão e corrente"
+      }
+    },
+    {
+      "name":"Potência Reativa do Capacitor Trifásico (Circuito Trifásico)",
+      "description":"Correção do Fator de Potência em Circuitos Trifásicos",
+      "latex": ["Q_C = P_T \\times ( \\tan{\\phi} - \\tan{\\phi_1})"],
+      "constants":null,
+      "variables":
+      {
+        "Q_C": "Potência reativa do capacitor (Volt-Ampere reativo = VAr)",
+        "P_T": "Potência ativa total (Watt = W)",
+        "ϕ": "Ângulo de defasagem entre tensão e corrente",
+        "ϕ_1": "Ângulo de defasagem após a correção"
+      }
+    },
+    {
+      "name":"Capacitância Equivalente dos Capacitores de Uma Fase",
+      "description":null,
+      "latex": ["CF = \\frac{Q_CF}{3 \\times V_F^2 \\times 2 \\times \\pi \\times f}"],
+      "constants":null,
+      "variables":
+      {
+        "CF": "Capacitância de cada capacitor da fase (Farad = F)",
+        "Q_CF": "Potência reativa do capacitor (Volt-Ampere reativo = VAr)",
+        "V_F": "Tensão de fase (Volt = V)",
+        "f": "Frequência (Hertz = Hz)"
+      }
+    }
+  ],
+  "supervisors": [
+    {
+      "name": "Fabricio Neitzke Ferreira",
+      "role": "Professor",
+      "degree": "Doutor",
+      "university": "Universidade Federal de Pelotas",
+      "campus": "Campus Pelotas",
+      "course": "Curso Ténico em Eletrônica",
+      "email": "fabricioferreira@ifsul.edu.br",
+      "telephone": null,
+      "github": null,
+      "instagram": null,
+      "youtube": null,
+      "whatsapp": null
+    }
+  ],
+  "references":null,
+  "images":null,
+  "tags": ["Indutância","Frequência","Frequência Angular","tensão média","eletricidade", "associação de indutores","indutores","indutor", "tensão", "corrente", "potência","Lei de Lenz","espiras","Força Magnética","eletromotriz","Indução Magnética","Fluxo magnético","Lei de Faraday"],
+  "alias": ["eletricidade", "eletricidade III", "eletricidade 3","Eletricidade iii","ele iii","Ele III","eletricidade3","ele3", "ele 3"],
+  "articleWriters": [
+    {
+      "formulas": [
+        {
+          "name": "Murilo",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": null,
+          "date": "2024-12-01"
+        }
+      ],
+      "json": [
+        {
+          "name": "Carlos Alexandre Dutra Volz",
+          "roles": ["Desenvolvedor","Code Review", "Estudante de Eletrônica"],
+          "email": null,
+          "github":null,
+          "date": "2025-10-24"
+        }
+      ]
+
+    }
+  ],
+  "files":null,
+  "embededVideos":null,
+  "created_at": null,
+  "updated_at": null,
+  "deleted_at": null,
+  "fileVersion": 2
+}

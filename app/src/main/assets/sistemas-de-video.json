@@ -1,0 +1,293 @@
+{
+  "name_disc": "Sistemas de Vídeo",
+  "id": 0,
+  "status": "ativo",
+  "slug": "sistemas-de-video",
+  "parents": [],
+  "needs": [],
+  "semmester": 8,
+  "course": "eletrônica",
+  "period": "integrado",
+  "description": "Estudo de sistemas de vídeo analógicos e digitais.",
+  "content": "",
+  "obs": "Informações baseadas nas aulas do Prof. Sandro Silva do IFSul.",
+  "chapters": [
+    "Sinal de Vídeo",
+    "Vídeo em Cores",
+    "Padrão JPEG",
+    "Padrão MPEG",
+    "Sistema Visual Humano"
+  ],
+  "formulas": [
+    {
+      "name": "Luminância",
+      "description": "Cálculo da luminância (Y) a partir das componentes de cor RGB.",
+      "latex": [
+        "Y=R+G+B"
+      ],
+      "constants": {},
+      "variables": {
+        "Y": "Luminância",
+        "R": "Nível de Vermelho",
+        "G": "Nível de Verde",
+        "B": "Nível de Azul"
+      }
+    },
+    {
+      "name": "Crominância (Cb)",
+      "description": "Cálculo da componente de crominância Cb (componente azul), uma informação essencial para a transmissão de vídeo em cores.",
+      "latex": [
+        "Cb=B-Y"
+      ],
+      "constants": {},
+      "variables": {
+        "Cb": "Crominância (componente azul)",
+        "B": "Nível de Azul",
+        "Y": "Luminância"
+      }
+    },
+    {
+      "name": "Crominância (Cr)",
+      "description": "Cálculo da componente de crominância Cr (componente vermelha), uma informação essencial para a transmissão de vídeo em cores.",
+      "latex": [
+        "Cr=R-Y"
+      ],
+      "constants": {},
+      "variables": {
+        "Cr": "Crominância (componente vermelha)",
+        "R": "Nível de Vermelho",
+        "Y": "Luminância"
+      }
+    },
+    {
+      "name": "Reconstrução do Vermelho (R)",
+      "description": "Fórmula para converter a componente YCbCr de volta para RGB, especificamente para o nível de vermelho.",
+      "latex": [
+        "R=Cr+Y"
+      ],
+      "constants": {},
+      "variables": {
+        "R": "Nível de Vermelho",
+        "Cr": "Crominância (componente vermelha)",
+        "Y": "Luminância"
+      }
+    },
+    {
+      "name": "Reconstrução do Azul (B)",
+      "description": "Fórmula para converter a componente YCbCr de volta para RGB, especificamente para o nível de azul.",
+      "latex": [
+        "B=Cb+Y"
+      ],
+      "constants": {},
+      "variables": {
+        "B": "Nível de Azul",
+        "Cb": "Crominância (componente azul)",
+        "Y": "Luminância"
+      }
+    },
+    {
+      "name": "Reconstrução do Verde (G)",
+      "description": "Fórmula para converter a componente YCbCr de volta para RGB, especificamente para o nível de verde.",
+      "latex": [
+        "G=-(Cr+Cb+Y)"
+      ],
+      "constants": {},
+      "variables": {
+        "G": "Nível de Verde",
+        "Cr": "Crominância (componente vermelha)",
+        "Cb": "Crominância (componente azul)",
+        "Y": "Luminância"
+      }
+    },
+    {
+      "name": "Cálculo da Frequência Máxima de Vídeo",
+      "description": "Determina a frequência máxima do sinal de vídeo (Fmax) com base no tempo de duração de um pixel, assumindo que cada pixel é diferente do anterior.",
+      "latex": [
+        "Fmax = \\frac{1}{2 \\times t{pixel}}"
+      ],
+      "constants": {
+        "1/2": "Fator que representa a taxa de Nyquist (metade da taxa de amostragem)"
+      },
+      "variables": {
+        "Fmax": "Frequência máxima do vídeo",
+        "tpixel": "Tempo do pixel"
+      }
+    },
+    {
+      "name": "Pixels por Frame",
+      "description": "Cálculo da quantidade total de pixels em um quadro (frame) com base na resolução horizontal e vertical.",
+      "latex": [
+        "pixels\\_por\\_frame = resH \\times resV"
+      ],
+      "constants": {},
+      "variables": {
+        "pixels_por_frame": "Quantidade de pixels de uma tela",
+        "resH": "Resolução Horizontal (pixels por linha)",
+        "resV": "Resolução Vertical (pixels)"
+      }
+    },
+    {
+      "name": "Pixels por Segundo (Varredura Progressiva)",
+      "description": "Cálculo da quantidade de pixels por segundo para um sinal de vídeo em varredura progressiva.",
+      "latex": [
+        "pixels\\_por\\_segundo = pixels\\_por\\_frame \\times fps"
+      ],
+      "constants": {},
+      "variables": {
+        "pixels_por_segundo": "Quantidade de pixels por segundo",
+        "pixels_por_frame": "Quantidade de pixels por quadro",
+        "fps": "Taxa de troca de tela (frames per second)"
+      }
+    },
+    {
+      "name": "Pixels por Segundo (Varredura Entrelaçada)",
+      "description": "Cálculo da quantidade de pixels por segundo para um sinal de vídeo em varredura entrelaçada ('i'), onde apenas metade das linhas é atualizada por vez.",
+      "latex": [
+        "pixels\\_por\\_segundo = \\frac{pixels\\_por\\_frame \\times fps}{2}"
+      ],
+      "constants": {
+        "2": "Fator de redução para varredura entrelaçada"
+      },
+      "variables": {
+        "pixels_por_segundo": "Quantidade de pixels por segundo",
+        "pixels_por_frame": "Quantidade de pixels por quadro",
+        "fps": "Taxa de troca de tela (frames per second)"
+      }
+    },
+    {
+      "name": "Tempo de Pixel",
+      "description": "Cálculo do tempo de duração de cada pixel, que é o inverso da taxa de pixels por segundo.",
+      "latex": [
+        "t_{pixel} = \\frac{1}{pixels\\_por\\_segundo}"
+      ],
+      "constants": {},
+      "variables": {
+        "tpixel": "Tempo de cada pixel",
+        "pixels_por_segundo": "Quantidade de pixels por segundo"
+      }
+    },
+    {
+      "name": "Relação Angular Mínima",
+      "description": "Relação para calcular o tamanho mínimo do pixel (P) para que a imagem pareça contínua (acuidade visual de 1 minuto de arco) a uma distância (d).",
+      "latex": [
+        "\\frac{P}{d}=291\\times10^{-6}",
+        "\\alpha(rad) = \\frac{P}{d}",
+        "sen\\,\\alpha = \\frac{P}{d}"
+      ],
+      "constants": {
+        "291x10^{-6}": "Valor limite de P/d, correspondente a 1 minuto de arco (ângulo mínimo perceptível)"
+      },
+      "variables": {
+        "P": "Tamanho do pixel",
+        "d": "Distância olho-imagem",
+        "alpha": "Ângulo mínimo perceptível pelo olho"
+      }
+    }
+  ],
+  "supervisors": [
+    {
+      "name": "Sandro Silva",
+      "role": "Professor",
+      "degree": "",
+      "university": "",
+      "campus": "",
+      "course": "Curso Técnico em eletrônica",
+      "email": "sandro@pelotas.ifsul.edu.br",
+      "telephone": null,
+      "github": null,
+      "instagram": null,
+      "youtube": null,
+      "whatsapp": null
+    }
+  ],
+  "references": [
+    {
+      "name": "",
+      "url": "",
+      "description": ""
+    }
+  ],
+  "images": [
+    {
+      "name": "",
+      "id": null,
+      "alt": "",
+      "url": "",
+      "source": "",
+      "author": ""
+    }
+  ],
+  "tags": [
+    "sistemas de video",
+    "eletronica",
+    "ifsul"
+  ],
+  "alias": [
+    "sistemas de video, sv"
+  ],
+  "articleWriters": [
+    {
+      "summary": [
+        {
+          "name": "",
+          "roles": [],
+          "email": null,
+          "github": null,
+          "date": null
+        }
+      ],
+      "formulas": [
+        {
+          "name": "",
+          "roles": [],
+          "email": null,
+          "github": null,
+          "date": null
+        }
+      ],
+      "json": [
+        {
+          "name": "",
+          "roles": [],
+          "email": null,
+          "github": null,
+          "date": null
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "fileId": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "embededVideos": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "suggestedBy": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "created_at": null,
+  "updated_at": null,
+  "deleted_at": null,
+  "fileVersion": 2
+}

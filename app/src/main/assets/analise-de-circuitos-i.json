@@ -34,7 +34,7 @@
             }
         },
         {
-            "name": "Fonte de Corrente Real",
+            "name": "Fonte de Corrente Real (Fontes não ideais)",
             "description": "Fontes de correntes não ideais, com resistência interna.",
             "latex": [
                 "I_{RL} = I_{T} - I_{Rs}",
@@ -54,7 +54,7 @@
             }
         },
         {
-            "name": "Divisor de Corrente",
+            "name": "Divisor de Corrente (Circuitos paralelos)",
             "description": "Fórmula para encontrar a corrente em uma carga específica em circuitos paralelos.",
             "latex": [
                 "I_{n} = \\frac{I_{T} \\times R_{T}}{R_{n}}"
@@ -68,7 +68,7 @@
             }
         },
         {
-            "name": "Divisor de Tensão",
+            "name": "Divisor de Tensão (Circuitos em série)",
             "description": "Fórmula para encontrar a tensão em uma carga específica em circuitos em série.",
             "latex": [
                 "V_{n} = \\frac{V_{T} \\times R_{n}}{R_{T}}"

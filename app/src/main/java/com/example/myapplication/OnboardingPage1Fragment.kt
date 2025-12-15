@@ -30,7 +30,6 @@ class OnboardingPage1Fragment : Fragment() {
         val imageView2 = view.findViewById<ImageView>(R.id.if_tro_logo)
         val textViewEletronica = view.findViewById<TextView>(R.id.textView)
 
-
         Glide.with(this)
             .asGif()
             .load(R.drawable.ifsul_gif)
@@ -41,10 +40,8 @@ class OnboardingPage1Fragment : Fragment() {
             .load(R.drawable.tro_gif)
             .into(imageView2)
 
-
         Handler(Looper.getMainLooper()).postDelayed({
             Log.d("OnboardingFragment", "Handler ativado. Iniciando animação.")
-
 
             val animationDuration = 1000L
 

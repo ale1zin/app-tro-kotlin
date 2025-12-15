@@ -1,0 +1,340 @@
+{
+    "name_disc": "Eletrônica de Potência II",
+    "id": 0,
+    "status": "ativo",
+    "slug": "eletronica-de-potencia-ii",
+    "parents": ["eletronica-de-potencia-i", "eletronica-de-potencia-ii", "eletronica-de-potencia-iii"],
+    "needs": [],
+    "semmester": 7,
+    "course": "eletrônica",
+    "period": "integrado",
+    "description": "A disciplina aborda o controle de potência em Corrente Alternada (CA) utilizando tiristores como SCR e TRIAC",
+    "content": null,
+    "obs": null,
+    "chapters": [null],
+    "formulas": [
+        {
+            "name": "Tensão Média na Carga (SCR)",
+            "description": "Calcula a tensão média na carga para um circuito retificador controlado com SCR (Meia Onda)",
+            "latex": [
+                "V_{m} = \\frac{V_{p} \\cdot (1 - \\cos \\alpha)}{2 \\pi}"
+            ],
+            "variables": {
+                "Vm": "Tensão média na carga (V)",
+                "Vp": "Tensão de pico da entrada (V)",
+                "α": "Ângulo de disparo (radianos ou graus)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3,14159)"
+            }
+        },
+        {
+            "name": "Tensão Eficaz (SCR)",
+            "description": "Calcula a tensão eficaz (RMS) na carga para um retificador controlado (SCR), considerando o ângulo de disparo em graus",
+            "latex": [
+                "V_{rms} = V_p \\cdot \\sqrt{\\frac{1}{4} - \\frac{\\alpha}{720} + \\frac{\\sin(2 \\cdot \\alpha)}{8 \\cdot \\pi}}"
+            ],
+            "variables": {
+                "Vrms": "Tensão eficaz na carga (V)",
+                "Vp": "Tensão de pico da entrada (V)",
+                "α": "Ângulo de disparo (em graus)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3,14159)"
+            }
+        },
+        {
+            "name": "Corrente Média na Carga (SCR)",
+            "description": "Calcula a corrente média na carga resistiva, utilizando a tensão média ou uma aproximação baseada na tensão de entrada",
+            "latex": [
+                "I_{L_{med}} = \\frac{V_{L_{med}}}{R} \\cong \\frac{0,225 \\cdot V_{o}}{R} \\cdot (1 + \\cos \\alpha)"
+            ],
+            "variables": {
+                "IL_med": "Corrente média na carga (A)",
+                "VL_med": "Tensão média na carga (V)",
+                "R": "Resistência da carga (Ohms)",
+                "Vo": "Tensão de entrada (V)",
+                "α": "Ângulo de disparo"
+            }
+        },
+        {
+            "name": "Corrente Eficaz na Carga (SCR)",
+            "description": "Calcula a corrente eficaz na carga resistiva",
+            "latex": [
+                "I_{Lef} = \\frac{V_{o}}{R} \\cdot \\sqrt{\\frac{1}{2} - \\frac{\\alpha}{2\\pi} + \\frac{\\sin(2\\alpha)}{4\\pi}}"
+            ],
+            "variables": {
+                "ILef": "Corrente eficaz na carga (A)",
+                "Vo": "Tensão de pico da entrada (V)",
+                "R": "Resistência da carga (Ohms)",
+                "α": "Ângulo de disparo (em radianos)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3,14159)"
+            }
+        },
+        {
+            "name": "Potência na Carga (SCR)",
+            "description": "Calcula a potência ativa dissipada na carga resistiva, proporcional ao quadrado da tensão eficaz controlada pelo ângulo de disparo",
+            "latex": [
+                "P_{R} = R \\cdot {I_{Lef}}^2 = \\frac{{V_{0}}^2}{R} \\cdot \\left(\\frac{1}{2} - \\frac{\\alpha}{2\\pi} + \\frac{\\sin(2\\alpha)}{4\\pi}\\right)"
+            ],
+            "variables": {
+                "PR": "Potência na carga (W)",
+                "R": "Resistência da carga (Ohms)",
+                "ILef": "Corrente eficaz na carga",
+                "Vo": "Tensão de pico da entrada",
+                "α": "Ângulo de disparo (radianos)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3,14159)"
+            }
+        },
+        {
+            "name": "Resistor de Disparo (até 90º)",
+            "description": "Calcula o valor do resistor limitador de corrente de gate para circuitos de disparo resistivo (até 90º).",
+            "latex": [
+                "R = \\frac{V_{in_{max}} \\cdot \\sin(\\omega t) - V_G - V_D}{I_G}"
+            ],
+            "variables": {
+                "R": "Resistor de disparo (Ohms)",
+                "Vin_max": "Tensão de pico da entrada (V)",
+                "ωt": "Ângulo de disparo desejado (em radianos ou graus convertidos)",
+                "VG": "Tensão de gatilho do tiristor (V)",
+                "VD": "Queda de tensão no diodo (V)",
+                "IG": "Corrente de gatilho necessária (A)"
+            }
+        },
+        {
+            "name": "Tensão Média (TRIAC)",
+            "description": "Calcula a tensão na carga controlada por TRIAC",
+            "latex": [
+                "V_{m} = V_p \\cdot \\sqrt{\\frac{1}{2} - \\frac{\\alpha}{360} + \\frac{\\sin(2 \\cdot \\alpha)}{4 \\cdot \\pi}}"
+            ],
+            "variables": {
+                "Vm": "Tensão Média (conforme material)",
+                "Vp": "Tensão de pico da entrada",
+                "α": "Ângulo de disparo (em graus)"
+            },
+            "constants": {
+                "π": "Constante Pi (aproximadamente 3,14159)"
+            }
+        },
+        {
+            "name": "Oscilador de Relaxação (TRIAC)",
+            "description": "Calcula a tensão sobre a resistência interna da base 1 (RB1) do UJT, atuando como um divisor de tensão da fonte VBB",
+            "latex": [
+                "V_{RB1} = \\frac{R_{B1} \\cdot V_{BB}}{R_{B1} + R_{B2}} = \\frac{R_{B1} \\cdot V_{BB}}{R_{BB}}"
+            ],
+            "variables": {
+                "VRB1": "Tensão sobre a base 1 interna (V)",
+                "RB1": "Resistência da base 1 interna",
+                "RB2": "Resistência da base 2 interna",
+                "VBB": "Tensão de alimentação interbase",
+                "RBB": "Resistência interbase total (RB1 + RB2)"
+            }
+        },
+        {
+            "name": "Relação Intrínseca de Equilíbrio (TRIAC)",
+            "description": "Razão definida pela geometria interna do UJT (eta), representando a proporção da tensão de alimentação que aparece no ponto de disparo intrínseco",
+            "latex": [
+                "\\eta = \\frac{R_{B1}}{R_{B1} + R_{B2}} = \\frac{R_{B1}}{R_{BB}}"
+            ],
+            "variables": {
+                "η": "Relação intrínseca de equilíbrio (0,4 a 0,9)",
+                "RB1": "Resistência da base 1",
+                "RB2": "Resistência da base 2",
+                "RBB": "Resistência interbase total"
+            }
+        },
+        {
+            "name": "Tensão em RB1 Simplificada (TRIAC)",
+            "description": "Calcula a tensão de referência na base interna do UJT utilizando a relação intrínseca de equilíbrio (eta). Esta tensão determina o ponto de disparo do oscilador",
+            "latex": [
+                "V_{RB1} = \\eta \\cdot V_{BB}"
+            ],
+            "variables": {
+                "VRB1": "Tensão na base 1 interna (V)",
+                "η": "Relação intrínseca de equilíbrio (constante do componente)",
+                "VBB": "Tensão de alimentação interbase (V)"
+            }
+        },
+        {
+            "name": "Cálculo da Frequência do Oscilador (TRIAC)",
+            "description": "Determina a frequência de oscilação do circuito de relaxação com UJT, dependendo da constante de tempo RC e da relação intrínseca de equilíbrio",
+            "latex": [
+                "F = \\frac{1}{R \\cdot C \\cdot \\ln\\left(\\frac{1}{1-\\eta}\\right)}"
+            ],
+            "variables": {
+                "F": "Frequência de oscilação (Hz)",
+                "R": "Resistor de temporização/emissor (RT)",
+                "C": "Capacitor de temporização/emissor (CT)",
+                "η": "Relação intrínseca de equilíbrio (eta)"
+            }
+        },
+        {
+            "name": "Limites do Resistor de Temporização (TRIAC)",
+            "description": "Determina a faixa de valores permitidos para o resistor de temporização (RT) para garantir que o oscilador UJT oscile",
+            "latex": [
+                "R_{T_{min}} = \\frac{V_{BB} - V_V}{I_V}",
+                "R_{T_{max}} = \\frac{V_{BB} - V_P}{I_P}",
+                "R_{T_{min}} \\le R_T \\le R_{T_{max}}"
+            ],
+            "variables": {
+                "RT": "Resistor de temporização",
+                "RTmin": "Valor mínimo de RT para garantir o desligamento",
+                "RTmax": "Valor máximo de RT para garantir o disparo",
+                "VBB": "Tensão de alimentação interbase",
+                "VV": "Tensão de vale (Valley Voltage) do UJT",
+                "IV": "Corrente de vale (Valley Current) do UJT",
+                "VP": "Tensão de pico do UJT",
+                "IP": "Corrente de pico do UJT"
+            }
+        },
+        {
+            "name": "Cálculo de VB1 e VB2 (TRIAC)",
+            "description": "Determina as tensões elétricas nos terminais Base 1 e Base 2 do UJT antes do disparo, formadas pelo divisor de tensão entre os resistores externos e a resistência interna",
+            "latex": [
+                "V_{B1} = \\frac{V_{BB} \\cdot R_1}{R_1 + R_2 + R_{BB}}",
+                "V_{B2} = \\frac{V_{BB} \\cdot (R_1 + R_{BB})}{R_1 + R_2 + R_{BB}}"
+            ],
+            "variables": {
+                "VB1": "Tensão na Base 1 (V)",
+                "VB2": "Tensão na Base 2 (V)",
+                "VBB": "Tensão de alimentação do circuito",
+                "R1": "Resistor externo da Base 1",
+                "R2": "Resistor externo da Base 2",
+                "RBB": "Resistência interbase total (interna do UJT)"
+            }
+        },
+        {
+            "name": "Cálculo do Resistor de Sincronismo (TCA 785)",
+            "description": "Calcula o valor do resistor R (pino 5) para limitar a corrente de sincronismo em 1mA, baseado na tensão de referência da rede",
+            "latex": [
+                "R = \\frac{V_{ref} - 0,7}{1 \\cdot 10^{-3}}"
+            ],
+            "variables": {
+                "R": "Resistor de sincronismo (Ohms)",
+                "Vref": "Amostra de tensão (V)"
+            }
+        },
+        {
+            "name": "Cálculo da Rampa (TCA 785)",
+            "description": "Dimensionamento da rampa de controle do TCA 785. Determina a corrente de carga do capacitor e a amplitude da tensão da rampa em função do tempo",
+            "latex": [
+                "I_c = \\frac{V_{cc_{int}} \\cdot K}{R}",
+                "V_c = \\frac{I_c}{C} \\cdot t"
+            ],
+            "variables": {
+                "Ic": "Corrente de carga do capacitor (A)",
+                "Vcc_int": "Tensão interna de referência (aprox. 3,8V)",
+                "K": "Constante do CI (1,1)",
+                "R": "Resistor de rampa (Ohms)",
+                "Vc": "Tensão da rampa (V)",
+                "C": "Capacitor de rampa (F)",
+                "t": "Tempo (0,01s p/ 50Hz ou 0,0083s p/ 60Hz)"
+            }
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Rafael Galli",
+            "role": "Professor",
+            "degree": "",
+            "university": "",
+            "campus": "",
+            "course": "Curso Técnico em Eletrônica",
+            "email": "rafaelgalli@ifsul.edu.br",
+            "telephone": null,
+            "github": null,
+            "instagram": null,
+            "youtube": null,
+            "whatsapp": null
+        }
+    ],
+    "references": [
+        {
+            "name": "",
+            "url": "",
+            "description": ""
+        }
+    ],
+    "images": [
+        {
+            "name": null,
+            "id": null,
+            "alt": null,
+            "url": null,
+            "source": null,
+            "author": null
+        }
+    ],
+    "tags": [null],
+    "alias": ["epii", "ep2", "eletrônica de potência", "potência", "ep 2", "ep ii", "ep-2", "ep-ii"],
+    "articleWriters": [
+        {
+            "summary": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "formulas": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "json": [
+                {
+                    "name": null,
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ]
+        }
+    ],
+    "files": [
+        {
+            "name": null,
+            "id": null,
+            "description": null,
+            "url": null,
+            "fileId": null,
+            "type": null,
+            "source": null,
+            "author": null,
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "embededVideos": [
+        {
+            "name": null,
+            "id": null,
+            "description": null,
+            "url": null,
+            "type": null,
+            "source": null,
+            "author": null,
+            "suggestedBy": null,
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "fileVersion": 2
+}
+

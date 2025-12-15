@@ -5,35 +5,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.viewpager2.widget.ViewPager2 // Importar ViewPager2
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.adapters.TabsAdapter
-import com.google.android.material.tabs.TabLayout // Importar TabLayout
-import com.google.android.material.tabs.TabLayoutMediator // Importar TabLayoutMediator
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewPager: ViewPager2
-    private lateinit var tabLayout: TabLayout
-    private lateinit var adapter: TabsAdapter // Nosso adaptador
+    // Componentes de navegação
+    private lateinit var viewPager: ViewPager2 // Gerencia o deslize entre telas
+    private lateinit var tabLayout: TabLayout // A barra de abas superior/inferior
+    private lateinit var adapter: TabsAdapter // O adaptador que define quais fragments aparecem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // enableEdgeToEdge() // Você pode manter ou remover conforme sua necessidade de UI
+
         setContentView(R.layout.activity_main)
 
-        // 1. Encontrar as Views do layout pelo ID
+        // Inicializa as views
         viewPager = findViewById(R.id.view_pager)
         tabLayout = findViewById(R.id.tab_layout)
 
-        // 2. Criar uma instância do nosso TabsPagerAdapter
-        // 'this' refere-se à MainActivity, que é uma FragmentActivity
+        // Configura o adapter e vincula ao ViewPager
         adapter = TabsAdapter(this)
-
-        // 3. Definir o adapter para o ViewPager2
         viewPager.adapter = adapter
 
-        // 4. Conectar o TabLayout com o ViewPager2 usando TabLayoutMediator
-        // Isso também define os títulos das abas
+        // TabLayoutMediator conecta o TabLayout com o ViewPager2
+        // Define o texto e ícone de cada aba baseado na posição
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> { tab.text = "Início"; tab.icon = ContextCompat.getDrawable(this, R.drawable.ic_home) }
@@ -43,8 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
-
-        // Código para ajustar o padding para barras do sistema (opcional, pode manter)
+        // Ajusta o padding do app para não ficar atrás das barras do sistema (status bar/navegação)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

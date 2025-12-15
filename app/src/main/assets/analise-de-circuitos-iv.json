@@ -1,892 +1,841 @@
 {
-    "name_disc": "Análise de Circuitos IV",
-    "id": 0,
-    "status": "active",
-    "slug": "analise-de-circuitos-iv",
-    "parents": ["analise-de-circuitos-i", "analise-de-circuitos-ii", "analise-de-circuitos-iii", "analise-de-circuitos-iv"],
-    "needs": ["analise de circuitos i", "analise-de-circuitos-ii", "analise-de-circuitos-iii"],
-    "semmester": 6,
-    "course": "eletronica",
-    "period": "integrado",
-    "description": "Demonstração dos diferentes usos dos amplificadores operacionais em filtros",
-    "content": "A disciplina de Análise de Circuitos IV aborda o estudo de filtros ativos, abrangendo filtros passa-altas, passa-baixas e passa-faixa com amplificadores operacionais.",
-    "obs": "tente compreender o conceito de filtros ativos por meio de exemplos práticos, como por exemplo os graficos gerados por cada um deles.",
-    "chapters": ["Largura de Banda", "Largura de Banda(alternativa)", "Frequência Angular de Corte Superior", "Frequência Angular de Corte Inferior", "Função Resposta", "Função Resposta(alternativa1)" , "Função Resposta(alternativa2)","taxa de atenuação", "Polinômio de Chebyshev", "Expressão de ganho em decibeis", "fator de ripple", "fator de ripple em dB", "ganho do filtro","Resistor 1", "Resistor 1(alternativa)", "Resistor 2", "Resistor 3", "Resistor 4", "capacitor", "capacitor 1","capacitor 2","frequencia central", "frequencia de corte superior", "frequencia de Corte Superior", "frequencia de corte inferior", "frequencia de Corte Inferior", "Fator de Qualidade"],
-    "formulas": 
-    [
-        {
-            "name": "Largura de Banda",
-            "description":"Circuito RLC Série",
-            "latex": ["BW = f_{cs} - f_{ci}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "BW": "Largura de banda (Hertz = Hz)",
-                 "f_{cs}": "Frequencia de Corte superior (Hertz = Hz)",
-                 "f_{ci}": "Frequencia de Corte inferior (Hertz = Hz)"
-            }
-        },
-        {
-            "name": "Largura de Banda(alternativa)",
-            "description":"Circuito RLC Série",
-            "latex": ["BW = \\frac{f_{o}}{Q_{o}}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "BW": "Largura de banda (Hertz = Hz)",
-                 "fo": "Frequencia de saida (Hertz = Hz)",
-                 "Qo": "Fator de Qualidade"
-            }
-        },
-        {
-            "name": "Frequência Angular de Corte Superior",
-            "description":"Circuito RLC Série",
-            "latex": ["W_{cs} = W_o \\times \\left( \\sqrt{1 + \\left(\\frac{1}{4 \\times Q_o^2}\\right)} + \\frac{1}{2 \\times Q_o} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "Wcs": "frequencia angular de corte superior (Radiano por segundo = rad/s)",
-                 "Wo": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "Qo": "Fator de Qualidade"
-            }
-        },
-        {
-            "name": "Frequência Angular de Corte Inferior",
-            "description":"Circuito RLC Série",
-            "latex": ["W_{ci} = W_o \\times \\left( \\sqrt{1 + \\left(\\frac{1}{4 \\times Q_o^2}\\right)} - \\frac{1}{2 \\times Q_o} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "Wci": "frequencia angular de corte inferior (Radiano por segundo = rad/s)",
-                 "Wo": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "Qo": "Fator de Qualidade"
-            }
-        },
-        {
-            "name": "Função Resposta",
-            "description":"filtro butterworth",
-            "latex": ["\\left| H(j\\omega) \\right| = \\frac{K_{PB}}{\\sqrt{1+\\left(\\frac{\\omega}{\\omega_c}\\right)^{2n}}}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "|H(jw)|": "Resposta em Magnitude",
-                 "K_{PB}": "Ganho",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "W_{c}": "Frequência Angular de Corte (Radiano por segundo = rad/s)",
-                 "n": "Ordem do Filtro Butterworth"
-            }
-        },
-        {
-            "name": "Função Resposta(alternativa1)",
-            "description":"se W >= 10 x Wc, filtro butterworth",
-            "latex": ["\\left| H(j\\omega) \\right| \\approx K_{PB} \\times \\left( \\frac{\\omega_c}{\\omega} \\right)^n"],
-            "constants":null,
-
-            "variables":
-            {
-                 "|H(jw)|": "Resposta em Magnitude",
-                 "KPB": "Ganho",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "wc": "Frequência Angular de Corte (Radiano por segundo = rad/s)",
-                 "n": "ordem do Filtro"
-            }
-        },
-        {
-            "name": "Função Resposta(alternativa2)",
-            "description":"se w > wc, filtro butterworth",
-            "latex": ["\\left| H(j\\omega) \\right|_{dB} \\approx K_{PB} - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "|H(jw)|dB": "Resposta em Magnitude em (decibéis = dB)",
-                 "K_{PB}": "Ganho",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "W_{c}": "Frequência Angular de Corte (Radiano por segundo = rad/s)",
-                 "n": "ordem do Filtro"
-            }
-        },
-        {
-            "name": "taxa de atenuação",
-            "description":"filtro butterworth",
-            "latex": ["TA = -20 \\times n \\times \\log \\left( \\frac{\\omega}{\\omega_c} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "TA": "taxa de atenuação (dB)",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "wc": "Frequência Angular de Corte (Radiano por segundo = rad/s)",
-                 "n": "ordem do Filtro"
-            }
-        },
-        {
-            "name": "Função Resposta",
-            "description":"filtro Chebyshev",
-            "latex": ["\\left| H(j\\omega) \\right| = \\frac{K_{PB}}{\\sqrt{1+E^2 \\times C_n^2 \\times \\left(\\frac{\\omega}{\\omega_c}\\right)}}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "|H(jw)|": "Resposta em Magnitude",
-                 "K_{PB}": "Ganho",
-                 "C_n": "Polinômio de Chebyshev",
-                 "E": "fator de amplitude maxima do ripple",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "W_{c}": "Frequência Angular de Corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "Polinômio de Chebyshev",
-            "description":"filtros Chebyshev.",
-            "latex": ["C_n(\\omega) = \\cos(n \\times \\omega)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C_n": "Polinômio de Chebyshev",
-                 "KPB": "Ganho",
-                 "n": "ordem do Filtro",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "Expressão de ganho em decibéis",
-            "description":"filtros Chebyshev",
-            "latex": ["\\left| H(j\\omega) \\right|_{dB} \\approx K_{PB} - 20 \\times \\log(E) - 6 \\times (n-1) - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "|H(jw)|dB": "Resposta em Magnitude em (decibéis = dB)",
-                 "K_{PB}": "Ganho",
-                 "E": "fator de amplitude maxima do ripple",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "W_{c}": "Frequência Angular de Corte (Radiano por segundo = rad/s)",
-                 "n": "ordem do Filtro"
-            }
-        },
-        {
-            "name": "taxa de atenuação",
-            "description":"filtros Chebyshev",
-            "latex": ["TA = -20 \\times \\log(E) - 6 \\times (n-1) - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "TA": "taxa de atenuação (dB)",
-                 "E": "fator de amplitude maxima do ripple",
-                 "n": "ordem do Filtro",
-                 "W": "Frequência Angular (Radiano por segundo = rad/s)",
-                 "W_{c}": "Frequência Angular de Corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "fator de ripple",
-            "description":"Filtro Chebyshev",
-            "latex": ["E = \\sqrt{10^{\\left(\\frac{PR}{10}\\right)}-1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "E": "fator de amplitude maxima do ripple",
-                 "PR": "fator de amplitude maxima do ripple em (decibeis = dB)"
-            }
-        },
-        {
-            "name": "fator de ripple em dB",
-            "description":"Filtro Chebyshev",
-            "latex": ["PR(dB) = 20 \\times \\log\\sqrt{1+E^2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "E": "fator de amplitude maxima do ripple",
-                 "PR(dB)": "fator de amplitude maxima do ripple em (decibeis = dB)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
-            "latex": ["K = 1 + \\frac{R_3}{R_2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "R_3": "Resistor (Ohm = Ω)",
-                 "R_2": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-Baixas de Primeira Ordem - VCVS",
-            "latex": ["R_1 = \\frac{R_2 \\times R_3}{R_2 + R_3}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1": "resistor (Ohm = Ω)",
-                 "R_2": "resistor (Ohm = Ω)",
-                 "R_3": "resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 1(alternativa)",
-            "description":"Filtro Passa-Baixas de Primeira Ordem - VCVS",
-            "latex": ["R_1 = \\frac{1}{B \\times \\omega_c \\times C}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "B": "Fator de Amortecimento",
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)",
-                 "C": "Capacitor (Farad = F)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-Baixas de Primeira Ordem - VCVS",
-            "latex": ["R_2 = R_1 \\times \\frac{K}{K-1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "R_2": "Resistor (Ohm = Ω)",
-                 "R_1": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-Baixas de Primeira Ordem - VCVS",
-            "latex": ["R_3 = K \\times R_1"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_3": "Resistor 3 (Ohm = Ω)",
-                 "K": "Ganho do filtro",
-                 "R_1": "Resistor 1 (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "capacitor",
-            "description":"Filtro Passa-Baixas de Primeira Ordem - VCVS",
-            "latex": ["C \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C": "Capacitor (Farad = F)",
-                 "Fc": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["K = 1 + \\frac{R_4}{R_3}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "R_4": "Resistor (Ohm = Ω)",
-                 "R_3": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["R_3 = \\frac{K \\times (R_1 + R_2)}{K-1}"],
-            "constants":null,
-
-            "variables":
-            {       
-                 "R3": "Resistor (Ohm = Ω)",
-                 "K":  "Ganho do filtro",
-                 "R1": "Resistor (Ohm = Ω)",
-                 "R2": "Resistor (Ohm = Ω)"  
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["R_1 = \\frac{2}{\\left( a \\times C_2 + \\sqrt{(a^2 + 4 \\times b \\times (K-1)) \\times C^2 - (4 \\times b \\times C_1 \\times C_2)} \\right) \\times W_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "a":   "Coeficiente Polinomial",
-                 "b":   "Coeficiente Polinomial",
-                 "C_2": "Capacitor (Farad = F)",
-                 "C_1": "Capacitor (Farad = F)",
-                 "K":   "Ganho do filtro",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "resistor 4",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["R_4 = K \\times (R_1 + R_2)"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_4": "Resistor 4 (Ohm = Ω)",
-                 "K": "Ganho do filtro",
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "R_2": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["R_2 = \\frac{1}{b \\times C_1 \\times C_2 \\times \\omega_c^2 \\times R_1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_2":     "Resistor (Ohm = Ω)",
-                 "b":       "Coeficiente Polinomial",
-                 "C_1":     "Capacitor (Farad = F)",
-                 "C_2":     "Capacitor (Farad = F)",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)",
-                 "R_1":     "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Capacitor 1",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["C_1 \\le \\frac{\\left[ a^2 + 4 \\times b \\times (K-1) \\right] \\times C_2}{4 \\times b}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C_1": "Capacitor (Farad = F)",
-                 "C_2": "Capacitor (Farad = F)",
-                 "K":   "Ganho do filtro",
-                 "b":   "Coeficiente Polinômial",
-                 "a":   "Coeficiente Polinômial"
-            }
-        },
-        {
-            "name": "Capacitor 2",
-            "description":"Filtro Passa-Baixa de segunda Ordem - VCVS",
-            "latex": ["C_2 \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C2": "Capacitor 2 (Farad = F)",
-                 "Fc": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["K = -\\frac{R_2}{R_1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "R_2": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["R_2 = \\frac{2 \\times (K + 1)}{\\left[a \\times C_2 + \\sqrt{a^2 \\times C_2^2 - 4 \\times b \\times C_1 \\times C_2 \\times (K+1)}\\right] \\times \\omega_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_2":      "Resistor (Ohm = Ω)",
-                 "K":       "Ganho do filtro",
-                 "C_1":      "Capacitor (Farad = F)",
-                 "C_2":      "Capacitor (Farad = F)",
-                 "a":       "Coeficiente Polinomial",
-                 "b":       "Coeficiente Polinomial",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["R_1 = \\frac{R_2}{K}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1": "Resistor 1 (Ohm = Ω)",
-                 "R_2": "Resistor 2 (Ohm = Ω)",
-                 "K": "Ganho do filtro passa-baixas"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["R_3 = \\frac{1}{b \\times C_1 \\times C_2 \\times \\omega_c^2 \\times R_2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_3": "Resistor 3 (Ohm = Ω)",
-                 "b": "Coeficiente Polinomial",
-                 "C_1": "Capacitor (Farad = F)",
-                 "C_2": "Capacitor (Farad = F)",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)",
-                 "R_2": "Resistor 2 (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Capacitor 1",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["C_1 \\le \\frac{a^2 \\times C_2}{4 \\times b \\times (K+1)}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C_1": "Capacitor (Farad = F)",
-                 "C_2": "Capacitor (Farad = F)",
-                 "a": "Coeficiente polinomial",
-                 "b": "Coeficiente polinomial",
-                 "K": "Ganho do filtro"
-            }
-        },
-        {
-            "name": "Capacitor 2",
-            "description":"Filtro Passa-Baixa de segunda Ordem - MFB",
-            "latex": ["C_2 \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C_2": "Capacitor (Farad = F)",
-                 "F_c": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["K = 1 + \\frac{R_3}{R_2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro passa-alta",
-                 "R_3": "Resistor (Ohm = Ω)",
-                 "R_2": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["R_2 = R_1 \\times \\frac{K}{K-1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K":   "Ganho do filtro",
-                 "R_2": "Resistor (Ohm = Ω)",
-                 "R_1": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["R_1 = \\frac{R_2 \\times R_3}{R_2 + R_3}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "R_2": "Resistor (Ohm = Ω)",
-                 "R_3": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["R_3 = K \\times R_1"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_3": "Resistor (Ohm = Ω)",
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "K":   "Ganho do filtro"
-            }
-        },
-        {
-            "name": "Resistor 1(alternativa)",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["R_1 = \\frac{b}{\\omega_C \\times C}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1": "Resistor (Ohm = Ω)",
-                 "b": "Coeficiente Polinomial",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)",
-                 "C": "Capacitor (Farad = F)"
-            }
-        },
-        {
-            "name": "capacitor",
-            "description":"Filtro Passa-alta de primeira Ordem - VCVS",
-            "latex": ["C \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C": "Capacitor (Farad = F)",
-                 "F_c": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["K = 1 + \\frac{R_4}{R_3}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "R_4": "Resistor 4 (Ohm = Ω)",
-                 "R_3": "Resistor 3 (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["R_3 = \\frac{K \\times R_1}{K-1}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_3": "Resistor 3 (Ohm = Ω)",
-                 "R_1": "Resistor 1 (Ohm = Ω)",
-                 "K":   "Ganho do filtro"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["R_1 = \\frac{4 \\times b}{\\left[a + \\sqrt{a^2 + 8 \\times b \\times (K-1)}\\right] \\times \\omega_c \\times C}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_1":     "Resistor (Ohm = Ω)",
-                 "a":       "Coeficiente Polinomial",
-                 "b":       "Coeficiente Polinomial",
-                 "K":       "Ganho do filtro",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)",
-                 "C":       "Capacitor (Farad = F)"
-            }
-        },
-        {
-            "name": "resistor 4",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["R_4 = K \\times R_1"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_4": "Resistor 4 (Ohm = Ω)", 
-                 "K": "Ganho do filtro",
-                 "R_1": "Resistor 1 (Ohm = Ω)"
-                
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["R_2 = \\frac{b}{\\omega_c^2 \\times R_1 \\times C^2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R_2":     "Resistor (Ohm = Ω)",
-                 "b":       "Coeficiente polinomial",
-                 "R_1":     "Resistor (Ohm = Ω)",
-                 "C":       "Capacitor (Farad = F)",
-                 "W_c": "Frequencia angular de corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "capacitor",
-            "description":"Filtro Passa-alta de segunda Ordem - VCVS",
-            "latex": ["C \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C": "Capacitor (Farad = F)",
-                 "F_c": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"Filtro Passa-alta de segunda Ordem - MFB",
-            "latex": ["K = -\\frac{C_1}{C_2}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "K": "Ganho do filtro",
-                 "C_1": "Capacitor (Farad = F)",
-                 "C_2": "Capacitor (Farad = F)"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-alta de segunda Ordem - MFB",
-            "latex": ["R_1 = \\frac{a}{(2 \\times C_1 + C_2) \\times \\omega_C}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R1":      "Resistor (Ohm = Ω)",
-                 "C1":      "Capacitor (Farad = F)",
-                 "C2":      "Capacitor (Farad = F)",
-                 "a":       "Coeficiente Polinomial",
-                 "W_C": "Frequencia angular de corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-alta de segunda Ordem - MFB",
-            "latex": ["R_2 = \\frac{(2 \\times C_1 + C_2) \\times b}{a \\times C_1 \\times C_2 \\times \\omega_C}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "R2":      "Resistor (Ohm = Ω)",
-                 "C1":      "Capacitor (Farad = F)",
-                 "C2":      "Capacitor (Farad = F)",
-                 "a":       "Coeficiente Polinomial",
-                 "b":       "Coeficiente Polinomial",
-                 "W_C": "Frequencia angular de corte (Radiano por segundo = rad/s)"
-            }
-        },
-        {
-            "name": "capacitor",
-            "description":"Filtro Passa-alta de segunda Ordem - MFB",
-            "latex": ["C \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C": "Capacitor (Farad = F)",
-                 "F_c": "Frequencia de corte (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "frequencia central",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["F_o = \\sqrt{F_{ci} \\times F_{cs}}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "F_o": "Frequencia Central (Hertz = Hz)",
-                 "F_{ci}": "Frequencia de corte inferior (Hertz = Hz)",
-                 "F_{cs}": "Frequencia de corte superior (Hertz = Hz)"
-            }
-        },
-        {
-            "name": "Resistor 1",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["R_1 = \\frac{Q_o}{\\omega_o \\times C \\times K}"],
-            "constants":null,
-
-            "variables":
-            {
-                "R_1":      "Resistor (Ohm = Ω)",
-                "Q_o":     "Fator de Qualidade",
-                "omega_o": "frequência angular central (Radiano por segundo = rad/s)",
-                "C":       "Capacitor (Farad = F)",
-                "K":       "Ganho do filtro"
-            }
-        },
-        {
-            "name": "capacitor",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["C \\approx \\frac{10}{F_c}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "C": "Capacitor (Farad = F)",
-                 "F_o": "Frequencia central (frequencia = Hz)"
-            }
-        },
-        {
-            "name": "ganho do filtro",
-            "description":"se K < 2 x Qo^2, Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["K = \\frac{R_3}{2 \\times R_1}"],
-            "constants":null,
-
-            "variables":
-            {
-                "K": "Ganho do filtro",
-                "R_3": "Resistor (Ohm = Ω)",
-                "R_1": "Resistor (Ohm = Ω)"
-            }
-        },
-        {
-            "name": "Resistor 2",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["R_2 = \\frac{Q_o}{F_o \\times C \\times (2 \\times Q_o^2 - K)}"],
-            "constants":null,
-
-            "variables":
-            {
-                "R_2": "Resistor (Ohm = Ω)",
-                "Q_o": "Fator de Qualidade",
-                "W_o": "frequência angular central (Radiano por segundo = rad/s)",
-                "C": "Capacitor (Farad = F)",
-                "K": "Ganho do filtro"
-            }
-        },
-        {
-            "name": "Resistor 3",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["R_3 = \\frac{2 \\times Q_o}{W_o \\times C}"],
-            "constants":null,
-
-            "variables":
-            {
-                "R_3": "Resistor (Ohm = Ω)",
-                "Q_o": "Fator de Qualidade",
-                "W_o": "frequência angular central (Radiano por segundo = rad/s)",
-                "C": "Capacitor (Farad = F)"
-            }
-        },
-        {
-            "name": "Fator de Qualidade",
-            "description":"Filtro Passa-faixa com estrutura - MFB",
-            "latex": ["Q_o = \\frac{F_o}{F_{c2} - F_{c1}}"],
-            "constants":null,
-
-            "variables":
-            {
-                 "Q_o": "Fator de Qualidade",
-                 "F_o": "Frequencia Central (Hertz = Hz)",
-                 "F_{ci}": "Frequencia de corte inferior (Hertz = Hz)",
-                 "F_{cs}": "Frequencia de corte superior (Hertz = Hz)"
-            }
-        }
-    ],
-    "supervisors": [
-        {
-            "name": "Fabricio Neitzke Ferreira",
-            "role": "Professor",
-            "degree": "Doutor",
-            "university": "Universidade Federal de Pelotas",
-            "campus": "Campus Pelotas",
-            "course": "Curso Ténico em Eletrônica",
-            "email": "fabricioferreira@ifsul.edu.br",
-            "telephone": null,
-            "github": null,
-            "instagram": null,
-            "youtube": null,
-            "whatsapp": null
-        }
-    ],
-    "references": [
-        {
-            "name": "BOYLESTAD, Robert L. Introdução a Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
-            "url": null,
-            "description": null
-        }
-    ],
-    "images": [
-        {
-            "name": "",
-            "id": null,
-            "alt": "",
-            "url": "",
-            "source": "",
-            "author": ""
-        }
-    ],
-    "tags": ["analise de circuitos", "amplificadores", "Filtros", "filtros ativos", "filtros passa-baixa", "filtros passa-alta", "filtros passa-faixa", "filtro Butterworth", "filtro Chebyshev", "filtro MFB", "filtro VCVS"],
-    "alias": ["AC4", "AC IV", "analise de circuitos 4", "analise de circuitos", "analise de circuitos iv", "ac 4", "acIV"],
-    "articleWriters": [
-        {
-            "summary": [
-                {
-                    "name": "Pablo Maciel Pinto",
-                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
-                    "email": null,
-                    "github": "https://github.com/Mablozin",
-                    "date": "2025-04-08"
-                }
-            ],
-            "formulas": [
-                {
-                    "name": "Murilo",
-                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
-                    "email": null,
-                    "github": null,
-                    "date": "2024-12-01"
-                }
-            ],
-            "json": [
-                {
-                    "name": "Eduardo Peixoto Alves Decker",
-                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
-                    "email": null,
-                    "github":null,
-                    "date": "2025-07-06"
-                }
-            ]
-        }
-    ],
-    "files": [
-        {
-            "name": "",
-            "id": null,
-            "description": "",
-            "url": "",
-            "fileId": "",
-            "type": "",
-            "source": "",
-            "author": "",
-            "created_at": null,
-            "updated_at": null,
-            "deleted_at": null
-        }
-    ],
-    "embededVideos": [
-        {
-            "name": "",
-            "id": null,
-            "description": "",
-            "url": "",
-            "type": "",
-            "source": "",
-            "author": "",
-            "suggestedBy": "",
-            "created_at": null,
-            "updated_at": null,
-            "deleted_at": null
-        }
-    ],
-    "created_at": null,
-    "updated_at": null,
-    "deleted_at": null,
-    "fileVersion": 2
+"name_disc": "Análise de Circuitos IV",
+"id": 0,
+"status": "ativo",
+"slug": "analise-de-circuitos-iv",
+"parents": ["analise-de-circuitos-i", "analise-de-circuitos-ii", "analise-de-circuitos-iii", "analise-de-circuitos-iv"],
+"needs": ["analise de circuitos i", "analise-de-circuitos-ii", "analise-de-circuitos-iii"],
+"semmester": 6,
+"course": "eletronica",
+"period": "integrado",
+"description": "Demonstração dos diferentes usos dos amplificadores operacionais em filtros",
+"content": "A disciplina de Análise de Circuitos IV aborda o estudo de filtros ativos, abrangendo filtros passa-altas, passa-baixas e passa-faixa com amplificadores operacionais.",
+"obs": "tente compreender o conceito de filtros ativos por meio de exemplos práticos, como por exemplo os graficos gerados por cada um deles.",
+"chapters": ["Largura de Banda", "Largura de Banda(alternativa)", "Frequência Angular de Corte Superior", "Frequência Angular de Corte Inferior", "Função Resposta", "Função Resposta(alternativa1)" , "Função Resposta(alternativa2)","taxa de atenuação", "Polinômio de Chebyshev", "Expressão de ganho em decibeis", "fator de ripple", "fator de ripple em dB", "ganho do filtro","Resistor 1", "Resistor 1(alternativa)", "Resistor 2", "Resistor 3", "Resistor 4", "capacitor", "capacitor 1","capacitor 2","frequencia central", "frequencia de corte superior", "frequencia de Corte Superior", "frequencia de corte inferior", "frequencia de Corte Inferior", "Fator de Qualidade"],
+"formulas":
+[
+{
+"name": "Largura de Banda (RLC Série)",
+"description":"Circuito RLC Série",
+"latex": ["BW = f_{cs} - f_{ci}"],
+"constants":null,
+"variables":
+{
+"BW": "Largura de banda (Hertz = Hz)",
+"fcs": "Frequência de Corte Superior (Hertz = Hz)",
+"fci": "Frequência de Corte Inferior (Hertz = Hz)"
+}
+},
+{
+"name": "Largura de Banda (RLC Série)(alternativa)",
+"description":"Circuito RLC Série",
+"latex": ["BW = \\frac{f_{o}}{Q_{o}}"],
+"constants":null,
+"variables":
+{
+"BW": "Largura de Banda (Hertz = Hz)",
+"fo": "Frequência de Saída (Hertz = Hz)",
+"Qo": "Fator de Qualidade"
+}
+},
+{
+"name": "Frequência Angular de Corte Superior (RLC Série)",
+"description":"Circuito RLC Série",
+"latex": ["W_{cs} = W_o \\times \\left( \\sqrt{1 + \\left(\\frac{1}{4 \\times Q_o^2}\\right)} + \\frac{1}{2 \\times Q_o} \\right)"],
+"constants":null,
+"variables":
+{
+"ωcs": "Frequência Angular de Corte Superior (Radiano por Segundo = rad/s)",
+"ωo": "Frequência Angular (Radiano por Segundo = rad/s)",
+"Qo": "Fator de Qualidade"
+}
+},
+{
+"name": "Frequência Angular de Corte Inferior (RLC Série)",
+"description":"Circuito RLC Série",
+"latex": ["W_{ci} = W_o \\times \\left( \\sqrt{1 + \\left(\\frac{1}{4 \\times Q_o^2}\\right)} - \\frac{1}{2 \\times Q_o} \\right)"],
+"constants":null,
+"variables":
+{
+"ωci": "Frequência Angular de Corte Inferior (Radiano por Segundo = rad/s)",
+"ωo": "Frequência Angular (Radiano por Segundo = rad/s)",
+"Qo": "Fator de Qualidade"
+}
+},
+{
+"name": "Função Resposta (Filtro Butterworth)",
+"description":null,
+"latex": ["\\left| H(j\\omega) \\right| = \\frac{K_{PB}}{\\sqrt{1+\\left(\\frac{\\omega}{\\omega_c}\\right)^{2n}}}"],
+"constants":null,
+"variables":
+{
+"|H(jw)|": "Resposta em Magnitude",
+"K PB": "Ganho",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"n": "Ordem do Filtro Butterworth"
+}
+},
+{
+"name": "Função Resposta (Filtro Butterworth)(Alternativa 1)",
+"description":"se W >= 10 x Wc, filtro butterworth",
+"latex": ["\\left| H(j\\omega) \\right| \\approx K_{PB} \\times \\left( \\frac{\\omega_c}{\\omega} \\right)^n"],
+"constants":null,
+"variables":
+{
+"|Hjw|": "Resposta em Magnitude",
+"K PB": "Ganho",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"n": "Ordem do Filtro"
+}
+},
+{
+"name": "Função Resposta (Filtro Butterworth)(alternativa 2)",
+"description":"se ω > ωc, filtro butterworth",
+"latex": ["\\left| H(j\\omega) \\right|_{dB} \\approx K_{PB} - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
+"constants":null,
+"variables":
+{
+"|Hjw|dB": "Resposta em Magnitude em (Decibéis = dB)",
+"K PB": "Ganho",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"n": "Ordem do Filtro"
+}
+},
+{
+"name": "Taxa de Atenuação (Filtro Butterworth)",
+"description":"Filtro butterworth",
+"latex": ["TA = -20 \\times n \\times \\log \\left( \\frac{\\omega}{\\omega_c} \\right)"],
+"constants":null,
+"variables":
+{
+"TA": "Taxa de Atenuação (dB)",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"n": "Ordem do Filtro"
+}
+},
+{
+"name": "Função Resposta (Filtro Chebyshev)",
+"description":null,
+"latex": ["\\left| H(j\\omega) \\right| = \\frac{K_{PB}}{\\sqrt{1+E^2 \\times C_n^2 \\times \\left(\\frac{\\omega}{\\omega_c}\\right)}}"],
+"constants":null,
+"variables":
+{
+"|Hjw|": "Resposta em Magnitude",
+"K PB": "Ganho",
+"Cn": "Polinômio de Chebyshev",
+"E": "Fator de Amplitude Máxima do Ripple",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Polinômio de Chebyshev",
+"description":"Filtros Chebyshev",
+"latex": ["C_n(\\omega) = \\cos(n \\times \\omega)"],
+"constants":null,
+"variables":
+{
+"Cn": "Polinômio de Chebyshev",
+"K PB": "Ganho",
+"n": "Ordem do Filtro",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Expressão de Ganho em Decibéis (Filtros Chebyshev)",
+"description":"Filtros Chebyshev",
+"latex": ["\\left| H(j\\omega) \\right|_{dB} \\approx K_{PB} - 20 \\times \\log(E) - 6 \\times (n-1) - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
+"constants":null,
+"variables":
+{
+"|Hjw|dB": "Resposta em Magnitude em (Decibéis = dB)",
+"K PB": "Ganho",
+"E": "Fator de Amplitude Máxima do Ripple",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"n": "Ordem do Filtro"
+}
+},
+{
+"name": "Taxa de Atenuação (Filtros Chebyshev)",
+"description":"Filtros Chebyshev",
+"latex": ["TA = -20 \\times \\log(E) - 6 \\times (n-1) - 20 \\times n \\times \\log\\left( \\frac{\\omega}{\\omega_C} \\right)"],
+"constants":null,
+"variables":
+{
+"TA": "Taxa de atenuação (dB)",
+"E": "Fator de Amplitude Máxima do Ripple",
+"n": "Ordem do Filtro",
+"ω": "Frequência Angular (Radiano por Segundo = rad/s)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Fator de Ripple (Filtros Chebyshev)",
+"description":"Filtro Chebyshev",
+"latex": ["E = \\sqrt{10^{\\left(\\frac{PR}{10}\\right)}-1}"],
+"constants":null,
+"variables":
+{
+"E": "Fator de Amplitude Máxima do Ripple",
+"PR": "Fator de Amplitude Máxima do Ripple em (Decibéis = dB)"
+}
+},
+{
+"name": "Fator de Ripple em dB (Filtros Chebyshev)",
+"description":"Filtro Chebyshev",
+"latex": ["PR(dB) = 20 \\times \\log\\sqrt{1+E^2}"],
+"constants":null,
+"variables":
+{
+"E": "Fator de Amplitude Máxima do Ripple",
+"PR(dB)": "Fator de Amplitude Máxima do Ripple em (Decibéis = dB)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Baixa 1ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["K = 1 + \\frac{R_3}{R_2}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R3": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Baixa 1ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["R_1 = \\frac{R_2 \\times R_3}{R_2 + R_3}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)",
+"R3": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Baixa 1ºOrdem  VCVS)(alternativa)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["R_1 = \\frac{1}{B \\times \\omega_c \\times C}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"B": "Fator de Amortecimento",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Baixa 1ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["R_2 = R_1 \\times \\frac{K}{K-1}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"K": "Ganho do Filtro",
+"R1": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 3 (Passa-Baixa 1ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["R_3 = K \\times R_1"],
+"constants":null,
+"variables":
+{
+"R3": "Resistor 3 (Ohm = Ω)",
+"K": "Ganho do Filtro",
+"R1": "Resistor 1 (Ohm = Ω)"
+}
+},
+{
+"name": "Capacitor (Passa-Baixa 1ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Primeira Ordem - VCVS",
+"latex": ["C \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C": "Capacitor (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["K = 1 + \\frac{R_4}{R_3}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R4": "Resistor (Ohm = Ω)",
+"R3": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 3 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["R_3 = \\frac{K \\times (R_1 + R_2)}{K-1}"],
+"constants":null,
+"variables":
+{
+"R3": "Resistor (Ohm = Ω)",
+"R1": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)",
+"K":"Ganho do Filtro"
+}
+},
+{
+"name": "Resistor 1 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["R_1 = \\frac{2}{\\left( a \\times C_2 + \\sqrt{(a^2 + 4 \\times b \\times (K-1)) \\times C^2 - (4 \\times b \\times C_1 \\times C_2)} \\right) \\times W_c}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"a": "Coeficiente Polinomial 'a'",
+"b": "Coeficiente Polinomial 'b'",
+"C2": "Capacitor (Farad = F)",
+"C1": "Capacitor (Farad = F)",
+"K": "Ganho do Filtro",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "resistor 4 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["R_4 = K \\times (R_1 + R_2)"],
+"constants":null,
+"variables":
+{
+"R4": "Resistor 4 (Ohm = Ω)",
+"K": "Ganho do Filtro",
+"R1": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["R_2 = \\frac{1}{b \\times C_1 \\times C_2 \\times \\omega_c^2 \\times R_1}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"b": "Coeficiente Polinomial 'b'",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"ωc": "Frequência angular de Corte (Radiano por Segundo = rad/s)",
+"R1": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Capacitor 1 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["C_1 \\le \\frac{\\left[ a^2 + 4 \\times b \\times (K-1) \\right] \\times C_2}{4 \\times b}"],
+"constants":null,
+"variables":
+{
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"K": "Ganho do Filtro",
+"a": "Coeficiente Polinômial 'a'",
+"b": "Coeficiente Polinômial 'b'"
+}
+},
+{
+"name": "Capacitor 2 (Passa-Baixa 2ºOrdem VCVS)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - VCVS",
+"latex": ["C_2 \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C2": "Capacitor 2 (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["K = -\\frac{R_2}{R_1}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R1": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["R_2 = \\frac{2 \\times (K + 1)}{\\left[a \\times C_2 + \\sqrt{a^2 \\times C_2^2 - 4 \\times b \\times C_1 \\times C_2 \\times (K+1)}\\right] \\times \\omega_c}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"K": "Ganho do Filtro",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"a": "Coeficiente Polinomial 'a'",
+"b": "Coeficiente Polinomial 'b'",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["R_1 = \\frac{R_2}{K}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor 1 (Ohm = Ω)",
+"R2": "Resistor 2 (Ohm = Ω)",
+"K": "Ganho do Filtro Passa-Baixa"
+}
+},
+{
+"name": "Resistor 3 (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["R_3 = \\frac{1}{b \\times C_1 \\times C_2 \\times \\omega_c^2 \\times R_2}"],
+"constants":null,
+"variables":
+{
+"b": "Coeficiente Polinomial 'b'",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"R2": "Resistor 2 (Ohm = Ω)"
+}
+},
+{
+"name": "Capacitor 1 (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["C_1 \\le \\frac{a^2 \\times C_2}{4 \\times b \\times (K+1)}"],
+"constants":null,
+"variables":
+{
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"a": "Coeficiente Polinomial 'a'",
+"b": "Coeficiente Polinomial 'b'",
+"K": "Ganho do Filtro"
+}
+},
+{
+"name": "Capacitor 2 (Passa-Baixa 2ºOrdem MFB)",
+"description":"Filtro Passa-Baixa de Segunda Ordem - MFB",
+"latex": ["C_2 \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C2": "Capacitor (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Alta 1ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["K = 1 + \\frac{R_3}{R_2}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro Passa-Alta",
+"R3": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Alta 1ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["R_2 = R_1 \\times \\frac{K}{K-1}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R2": "Resistor (Ohm = Ω)",
+"R1": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Alta 1ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["R_1 = \\frac{R_2 \\times R_3}{R_2 + R_3}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"R2": "Resistor (Ohm = Ω)",
+"R3": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 3 (Passa-Alta 1ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["R_3 = K \\times R_1"],
+"constants":null,
+"variables":
+{
+"R3": "Resistor (Ohm = Ω)",
+"R1": "Resistor (Ohm = Ω)",
+"K": "Ganho do Filtro"
+}
+},
+{
+"name": "Resistor 1 (Passa-Alta 1ºOrdem VCVS)(alternativa)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["R_1 = \\frac{b}{\\omega_C \\times C}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"b": "Coeficiente Polinomial 'b'",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)"
+}
+},
+{
+"name": "Capacitor (Passa-Alta 1ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Primeira Ordem - VCVS",
+"latex": ["C \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C": "Capacitor (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["K = 1 + \\frac{R_4}{R_3}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R4": "Resistor 4 (Ohm = Ω)",
+"R3": "Resistor 3 (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 3 (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["R_3 = \\frac{K \\times R_1}{K-1}"],
+"constants":null,
+"variables":
+{
+"R3": "Resistor 3 (Ohm = Ω)",
+"R1": "Resistor 1 (Ohm = Ω)",
+"K": "Ganho do Filtro"
+}
+},
+{
+"name": "Resistor 1 (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["R_1 = \\frac{4 \\times b}{\\left[a + \\sqrt{a^2 + 8 \\times b \\times (K-1)}\\right] \\times \\omega_c \\times C}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"a": "Coeficiente Polinomial 'a'",
+"b": "Coeficiente Polinomial 'b'",
+"K": "Ganho do Filtro",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)"
+}
+},
+{
+"name": "Resistor 4 (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["R_4 = K \\times R_1"],
+"constants":null,
+"variables":
+{
+"R4": "Resistor 4 (Ohm = Ω)",
+"K": "Ganho do Filtro",
+"R1": "Resistor 1 (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["R_2 = \\frac{b}{\\omega_c^2 \\times R_1 \\times C^2}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"b": "Coeficiente Polinomial 'b'",
+"R1": "Resistor (Ohm = Ω)",
+"C": "Capacitor (Farad = F)",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Capacitor (Passa-Alta 2ºOrdem VCVS)",
+"description":"Filtro Passa-Alta de Segunda Ordem - VCVS",
+"latex": ["C \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C": "Capacitor (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Alta 2ºOrdem MFB)",
+"description":"Filtro Passa-Alta de Segunda Ordem - MFB",
+"latex": ["K = -\\frac{C_1}{C_2}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Alta 2ºOrdem MFB)",
+"description":"Filtro Passa-Alta de Segunda Ordem - MFB",
+"latex": ["R_1 = \\frac{a}{(2 \\times C_1 + C_2) \\times \\omega_C}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"a": "Coeficiente Polinomial 'a'",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Alta 2ºOrdem MFB)",
+"description":"Filtro Passa-Alta de Segunda Ordem - MFB",
+"latex": ["R_2 = \\frac{(2 \\times C_1 + C_2) \\times b}{a \\times C_1 \\times C_2 \\times \\omega_C}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"C1": "Capacitor (Farad = F)",
+"C2": "Capacitor (Farad = F)",
+"a": "Coeficiente Polinomial 'a'",
+"b": "Coeficiente Polinomial 'b'",
+"ωc": "Frequência Angular de Corte (Radiano por Segundo = rad/s)"
+}
+},
+{
+"name": "Capacitor (Passa-Alta 2ºOrdem MFB)",
+"description":"Filtro Passa-Alta de Segunda Ordem - MFB",
+"latex": ["C \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C": "Capacitor (Farad = F)",
+"Fc": "Frequência de Corte (Frequência = Hz)"
+}
+},
+{
+"name": "Frequência Central (Passa-Faixa MFB)",
+"description":"Filtro Passa-faixa com estrutura - MFB",
+"latex": ["F_o = \\sqrt{F_{ci} \\times F_{cs}}"],
+"constants":null,
+"variables":
+{
+"Fo": "Frequência Central (Hertz = Hz)",
+"Fci": "Frequência de Corte Inferior (Hertz = Hz)",
+"Fcs": "Frequência de Corte Superior (Hertz = Hz)"
+}
+},
+{
+"name": "Resistor 1 (Passa-Faixa MFB)",
+"description":"Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["R_1 = \\frac{Q_o}{\\omega_o \\times C \\times K}"],
+"constants":null,
+"variables":
+{
+"R1": "Resistor (Ohm = Ω)",
+"Qo": "Fator de Qualidade",
+"ω": "Frequência Angular Central (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)",
+"K": "Ganho do Filtro"
+}
+},
+{
+"name": "Capacitor (Passa-Faixa MFB)",
+"description":"Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["C \\approx \\frac{10}{F_c}"],
+"constants":null,
+"variables":
+{
+"C": "Capacitor (Farad = F)",
+"Fo": "Frequencia Central (Frequência = Hz)"
+}
+},
+{
+"name": "Ganho do Filtro (Passa-Faixa MFB)",
+"description":"se K < 2 x Qo², Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["K = \\frac{R_3}{2 \\times R_1}"],
+"constants":null,
+"variables":
+{
+"K": "Ganho do Filtro",
+"R3": "Resistor (Ohm = Ω)",
+"R1": "Resistor (Ohm = Ω)"
+}
+},
+{
+"name": "Resistor 2 (Passa-Faixa MFB)",
+"description":"Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["R_2 = \\frac{Q_o}{F_o \\times C \\times (2 \\times Q_o^2 - K)}"],
+"constants":null,
+"variables":
+{
+"R2": "Resistor (Ohm = Ω)",
+"Qo": "Fator de Qualidade",
+"ωo": "Frequência Angular Central (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)",
+"K": "Ganho do Filtro"
+}
+},
+{
+"name": "Resistor 3 (Passa-Faixa MFB)",
+"description":"Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["R_3 = \\frac{2 \\times Q_o}{W_o \\times C}"],
+"constants":null,
+"variables":
+{
+"R3": "Resistor (Ohm = Ω)",
+"Qo": "Fator de Qualidade",
+"ωo": "Frequência Angular Central (Radiano por Segundo = rad/s)",
+"C": "Capacitor (Farad = F)"
+}
+},
+{
+"name": "Fator de Qualidade (Passa-Faixa MFB)",
+"description":"Filtro Passa-Faixa com Estrutura - MFB",
+"latex": ["Q_o = \\frac{F_o}{F_{c2} - F_{c1}}"],
+"constants":null,
+"variables":
+{
+"Qo": "Fator de Qualidade",
+"Fo": "Frequência Central (Hertz = Hz)",
+"Fci": "Frequência de Corte Inferior (Hertz = Hz)",
+"Fcs": "Frequência de Corte Superior (Hertz = Hz)"
+}
+}
+],
+"supervisors": [
+{
+"name": "Fabricio Neitzke Ferreira",
+"role": "Professor",
+"degree": "Doutor",
+"university": "Universidade Federal de Pelotas",
+"campus": "Campus Pelotas",
+"course": "Curso Ténico em Eletrônica",
+"email": "fabricioferreira@ifsul.edu.br",
+"telephone": null,
+"github": null,
+"instagram": null,
+"youtube": null,
+"whatsapp": null
+}
+],
+"references": [
+{
+"name": "BOYLESTAD, Robert L. Introdução a Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
+"url": null,
+"description": null
+}
+],
+"images": [
+{
+"name": "",
+"id": null,
+"alt": "",
+"url": "",
+"source": "",
+"author": ""
+}
+],
+"tags": ["analise de circuitos", "amplificadores", "Filtros", "filtros ativos", "filtros passa-baixa", "filtros passa-alta", "filtros passa-faixa", "filtro Butterworth", "filtro Chebyshev", "filtro MFB", "filtro VCVS"],
+"alias": ["AC4", "AC IV", "analise de circuitos 4", "analise de circuitos", "analise de circuitos iv", "ac 4", "acIV"],
+"articleWriters": [
+{
+"summary": [
+{
+"name": null,
+"roles": [null],
+"email": null,
+"github": null,
+"date": null
+}
+],
+"formulas": [
+{
+"name": "Murilo",
+"roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+"email": null,
+"github": null,
+"date": "2024-12-01"
+}
+],
+"json": [
+{
+"name": "Eduardo Peixoto Alves Decker",
+"roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+"email": null,
+"github":null,
+"date": "2025-07-06"
+},
+{
+"name": "Carlos Alexandre Dutra Volz",
+"roles": ["Desenvolvedor","Code Review", "Estudante de Eletrônica"],
+"email": null,
+"github":null,
+"date": null
+}
+]
+}
+],
+"files": [
+{
+"name": "",
+"id": null,
+"description": "",
+"url": "",
+"fileId": "",
+"type": "",
+"source": "",
+"author": "",
+"created_at": null,
+"updated_at": null,
+"deleted_at": null
+}
+],
+"embededVideos": [
+{
+"name": "",
+"id": null,
+"description": "",
+"url": "",
+"type": "",
+"source": "",
+"author": "",
+"suggestedBy": "",
+"created_at": null,
+"updated_at": null,
+"deleted_at": null
+}
+],
+"created_at": null,
+"updated_at": null,
+"deleted_at": null,
+"fileVersion": 2
 }

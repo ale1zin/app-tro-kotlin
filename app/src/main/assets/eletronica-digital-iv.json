@@ -5,38 +5,204 @@
     "slug": "eletronica-digital-iv",
     "parents": ["eletronica-digital-i", "eletronica-digital-ii", "eletronica-digital-iii", "eletronica-digital-iv", "eletronica-digital-v"],
     "needs": [],
-    "semmester": 5,
+    "semmester": 6,
     "course": "eletrônica",
     "period": "integrado",
-    "description": "Estudo dos monoestaveis",
-    "content": "",
-    "obs": "",
-    "chapters": [],
-    "formulas": [
+    "description": "Demonstração dos usos dos conversores digitais-analógicos (CDA) e analógicos-digitais (CAD) em circuitos eletrônicos.",
+    "content": "A disciplina de Eletronica Digital IV aborda o estudo dos conversores digitais, analogicos e familias logicas.",
+    "obs": null,
+    "chapters": null,
+    "formulas":
+    [
         {
-            "name": "Resistência do Diodo Emissor",
-            "description": "Atalho para encontrar a resistência do diodo emissor evitando cálculos complexos",
-            "latex": [
-                "re' = \\frac{25\\,\\text{mV}}{I_E}"
-            ],
-            "constants": {
-                "25mV": "Tensão fixa"
-            },
+            "name": "Tensão de saída (resistores ponderados)",
+            "description": "Formula para calcular a tensão de saída de um cda/dac com resistores ponderados.",
+            "latex": ["V_{O} = -R_f \\times \\left(\\frac{V_D}{R_D} + \\frac{V_C}{R_C} + \\frac{V_B}{R_B} + \\frac{V_A}{R_A}\\right)"],
+            "constants": null,
             "variables": {
-                "re'": "Resistência do Diodo Emissor",
-                "IE": "Corrente de Emissor"
+                "VO": "Tensão de saída (volts)",
+                "Rf": "Resistor de realimentação (ohms)",
+                "VA, VB, VC, VD": "Tensões de entrada dos bits (lsb ao msb) (volts)",
+                "RA, RB, RC, RD": "Resistores ponderados de entrada (ohms)"
+            }
+        },
+        {
+            "name": "Tensão de saída (escada r-2r)",
+            "description": "Formula para calcular a tensão de saída de um cda/dac com rede r-2r.",
+            "latex": ["V_O = -\\frac{R_f}{3R} \\times \\left(\\frac{V_D}{2} + \\frac{V_C}{4} + \\frac{V_B}{8} + \\frac{V_A}{16}\\right)"],
+            "constants": null,
+            "variables": {
+                "VO": "Tensão de saída (volts)",
+                "Rf": "Resistor de realimentação (ohms)",
+                "R": "Valor base da resistência da escada (ohms)",
+                "VA, VB, VC, VD": "Tensões de entrada dos bits (lsb ao msb) (volts)"
+            }
+        },
+        {
+            "name": "Tensão de saída/corrente de saída (generica)",
+            "description": "Formula para calcular tensão/corrente de saída usando relação de proporcionalidade genérica de um cda/dac.",
+            "latex": ["S_A = K \\times E_D"],
+            "constants": null,
+            "variables": {
+                "SA": "Saída analógica do conversor (volts ou ampères)",
+                "K": "Valor de tensão/corrente por degrau (volts ou ampères)",
+                "ED": "Valor da entrada digital (em decimal)"
+            }
+        },
+        {
+            "name": "Número de níveis",
+            "description": "Calcula a quantidade total de valores de saída possíveis em um conversor.",
+            "latex": ["N_{\\text{níveis}} = 2^n"],
+            "constants": null,
+            "variables": {
+                "Nnivel": "Quantidade de níveis do conversor",
+                "n": "Número de bits do conversor"
+            }
+        },
+        {
+            "name": "Número de degraus",
+            "description": "Formula para calcular o número total de transições (degraus) de um conversor.",
+            "latex": ["N_{\\text{degraus}} = 2^n - 1"],
+            "constants": null,
+            "variables": {
+                "Ntransições": "Quantidade total de transições possiveis do conversor",
+                "n": "Número de bits do conversor"
+            }
+        },
+        {
+            "name": "Resolução percentual (por valor de um degrau)",
+            "description": "Calcula a resolução em porcentagem baseado no valor de fim de escala.",
+            "latex": ["Res_{\\%} = \\frac{T_{\\text{degrau}}}{V_{FE}} \\times 100\\%"],
+            "constants": null,
+            "variables": {
+                "Res%": "Resolução percentual (%)",
+                "Tdegrau": "Valor de uma transição (volts ou ampères)",
+                "VFE": "Valor maximo da escala (volts ou ampères)"
+            }
+        },
+        {
+            "name": "Resolução percentual (por nº total de degraus)",
+            "description": "Calcula a resolução em porcentagem baseado no número total de degraus.",
+            "latex": ["Res_{\\%} = \\frac{1}{N_{\\text{degraus}}} \\times 100\\%"],
+            "constants": null,
+            "variables": {
+                "Res%": "Resolução percentual (%)",
+                "Ndegraus": "Quantidade total de transições"
+            }
+        },
+        {
+            "name": "Tensão de saída (amplificador integrador)",
+            "description": "Calcula a tensão de saída de um amplificador integrador com realimentação negativa.",
+            "latex": ["v_o = -\\frac{1}{R \\times C} \\times V_i \\times t"],
+            "constants": null,
+            "variables": {
+                "VO": "Tensão de saída (volts)",
+                "R": "Resistência de entrada (ohms)",
+                "C": "Capacitância de realimentação (farads)",
+                "Vi": "Tensão de entrada (volts)",
+                "t": "Tempo decorrido (segundos)"
+            }
+        },
+        {
+            "name": "Declividade da rampa (integrador)",
+            "description": "Define a taxa de variação (slope) da rampa de saída do integrador.",
+            "latex": ["\\text{Declividade} = \\frac{V_i}{R \\times C}"],
+            "constants": null,
+            "variables": {
+                "Declividade": "Taxa de variação (volts por segundo)",
+                "Vi": "Tensão de entrada (volts)",
+                "R": "Resistência de entrada (ohms)",
+                "C": "Capacitância de realimentação (farads)"
+            }
+        },
+        {
+            "name": "Margem de ruído (nível baixo)",
+            "description": "Calcula a margem de ruído para o nível lógico baixo.",
+            "latex": ["MR_L = V_{IL(\\text{max})} - V_{OL(\\text{max})}"],
+            "constants": null,
+            "variables": {
+                "MRL": "Margem de ruído em nivel logico baixo (volts)",
+                "VILmax": "Tensão máxima de entrada reconhecida como nível baixo (volts)",
+                "VOLmax": "Tensão máxima de saída em nível baixo (volts)"
+            }
+        },
+        {
+            "name": "Margem de ruído (nível alto)",
+            "description": "Calcula a margem de ruído para o nível lógico alto.",
+            "latex": ["MR_H = V_{OH(\\text{min})} - V_{IH(\\text{min})}"],
+            "constants": null,
+            "variables": {
+                "MRH": "Margem de ruído em nivel logico alto (volts)",
+                "VOHmin": "Tensão mínima de saída em nível alto (volts)",
+                "VIHmin": "Tensão mínima de entrada reconhecida como nível alto (volts)"
+            }
+        },
+        {
+            "name": "Margem de ruído (total)",
+            "description": "Mostra a margem de ruído que deve ser considerada no circuito, sendo o menor valor entre mrl e mrh.",
+            "latex": ["MR = \\min(MR_L, MR_H)"],
+            "constants": null,
+            "variables": {
+                "MR": "Margem de ruído total (volts)",
+                "MRL": "Margem de ruído baixa (volts)",
+                "MRH": "Margem de ruído alta (volts)"
+            }
+        },
+        {
+            "name": "Fan-out (nível alto)",
+            "description": "Número de entradas que uma saída pode alimentar em nível lógico alto.",
+            "latex": ["FN_H = \\frac{I_{OH(\\text{max})}}{I_{IH}}"],
+            "constants": null,
+            "variables": {
+                "FNH": "Fan-out em nível lógico alto",
+                "IOHmax": "Corrente máxima de saída em nível lógico alto (ampères)",
+                "IIH": "Corrente de entrada em nível lógico alto (ampères)"
+            }
+        },
+        {
+            "name": "Fan-out (nível baixo)",
+            "description": "Número de entradas que uma saída pode alimentar em nível lógico baixo.",
+            "latex": ["FN_L = \\frac{I_{OL(\\text{max})}}{I_{IL}}"],
+            "constants": null,
+            "variables": {
+                "FNL": "Fan-out em nível lógico baixo",
+                "IOLmax": "Corrente máxima de saída em nível lógico baixo (ampères)",
+                "IIL": "Corrente de entrada em nível lógico baixo (ampères)"
+            }
+        },
+        {
+            "name": "Fan-out (total)",
+            "description": "O fan-out total garantido, sendo o menor valor entre fnh e fnl.",
+            "latex": ["FN = \\min(FN_H, FN_L)"],
+            "constants": null,
+            "variables": {
+                "FN": "Fan-out total (adimensional)",
+                "FNH": "Fan-out em nível lógico alto (adimensional)",
+                "FNL": "Fan-out em nível lógico baixo (adimensional)"
+            }
+        },
+        {
+            "name": "Temporização (monoestável)",
+            "description": "Formula generica para calcular o tempo em um estado de um monoestavel.",
+            "latex": ["t = K \\times R_{\\text{ext}} \\times C_{\\text{ext}}"],
+            "constants": null,
+            "variables": {
+                "t": "Largura do pulso de saída (segundos)",
+                "K": "Constante fornecida pelo fabricante",
+                "Rext": "Resistor externo de temporização (ohms)",
+                "Cext": "Capacitor externo de temporização (farads)"
             }
         }
     ],
     "supervisors": [
         {
-            "name": "Mateus Mendes Goncalves",
+            "name": "Alessandro de Souza Lima",
             "role": "Professor",
-            "degree": "",
-            "university": "",
-            "campus": "",
+            "degree": null,
+            "university": null,
+            "campus": null,
             "course": "Curso Técnico em Eletrônica",
-            "email": "mateusgoncalves@ifsul.edu.br",
+            "email": "alessandrolima@ifsul.edu.br",
             "telephone": null,
             "github": null,
             "instagram": null,
@@ -46,14 +212,14 @@
     ],
     "references": [
         {
-            "name": "",
-            "url": "",
-            "description": ""
+            "name": "BOYLESTAD, Robert L. Introdução à Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
+            "url": null,
+            "description": null
         }
     ],
     "images": [
         {
-            "name": "",
+            "name": "nao tem",
             "id": null,
             "alt": "",
             "url": "",
@@ -61,35 +227,35 @@
             "author": ""
         }
     ],
-    "tags": ["eletronica digital"],
-    "alias": ["ediv", "ed4", "eletronica digital", "ed 4", "ed iv", "ed-4", "ed-iv"],
+    "tags": ["eletronica", "digital", "cda", "dac", "conversor", "conversor digital-analogico", "conversor analogico-digital", "adc", "circuitos digitais", "logica digital"],
+    "alias": ["ediv", "ed4", "Eletronica Digital", "ed 4", "ed iv", "ed-4", "ed-iv"],
     "articleWriters": [
         {
             "summary": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Pablo Maciel Pinto",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
-                    "github": null,
-                    "date": null
+                    "github": "https://github.com/Mablozin",
+                    "date": "2025-04-08"
                 }
             ],
             "formulas": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Eduardo Decker",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
                     "github": null,
-                    "date": null
+                    "date": "2025-10-27"
                 }
             ],
             "json": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Eduardo Decker",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
                     "github": null,
-                    "date": null
+                    "date": "2025-10-27"
                 }
             ]
         }

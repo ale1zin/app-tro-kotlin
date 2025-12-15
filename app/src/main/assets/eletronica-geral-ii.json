@@ -1,0 +1,232 @@
+{
+    "name_disc": "Eletrônica Geral II",
+    "id": 0,
+    "status": "ativo",
+    "slug": "eletronica-geral-ii",
+    "parents": ["eletronica-geral-i", "eletronica-geral-ii", "eletronica-geral-iii", "eletronica-geral-iv", "eletronica-geral-v"],
+    "needs": [],
+    "semmester": 4,
+    "course": "eletrônica",
+    "period": "integrado",
+    "description": "Fórmulas e relações fundamentais do transistor bipolar de junção (TBJ) e amplificadores de áudio, incluindo impedâncias, ganhos e rendimento.",
+    "content": "A disciplina de Eletrônica Geral II aborda os fundamentos dos transistores bipolares (TBJ) e seus modos de operação (ativo, saturação e corte), bem como o funcionamento de amplificadores nas configurações emissor comum, coletor comum e base comum. Também são exploradas fórmulas para impedâncias, ganhos de corrente e tensão, potência e rendimento de amplificadores.",
+    "obs": "",
+    "chapters": ["transistores", "amplificadores", "modos de operação", "teste de transistores"],
+    "formulas": [
+        {
+            "name": "Equações do Transistor - Modo Ativo",
+            "description": "Relações fundamentais entre correntes e parâmetros do transistor no modo ativo.",
+            "latex": [
+                "I_E = I_C + I_B",
+                "I_C = \\beta \\cdot I_B",
+                "I_E = I_B (1 + \\beta)",
+                "\\alpha = \\frac{I_C}{I_E}",
+                "\\alpha = \\frac{\\beta}{\\beta + 1}"
+            ],
+            "variables": {
+                "I_E": "Corrente de emissor (A)",
+                "I_C": "Corrente de coletor (A)",
+                "I_B": "Corrente de base (A)",
+                "β": "Ganho de corrente do transistor",
+                "α": "Fator de transferência de corrente (Ic/Ie)"
+            }
+        },
+        {
+            "name": "Equações do Transistor - Modo de Saturação",
+            "description": "Relações válidas para o transistor operando no modo de saturação, onde o ganho de corrente é reduzido em relação ao modo ativo (β forçado < β).",
+            "latex": [
+                "Fator_{forçado} = \\frac{\\beta}{\\beta_{forçado}}",
+                "I_{C(sat)} = \\beta_{forçado} \\cdot I_B",
+                "I_E = I_B (1 + \\beta_{forçado})"
+            ],
+            "variables": {
+                "Fator_{forçado}": "Relação entre o ganho típico e o ganho forçado na saturação",
+                "β": "Ganho de corrente típico do transistor (modo ativo)",
+                "β_{forçado}": "Ganho de corrente forçado (reduzido na saturação)",
+                "I_{C(sat)}": "Corrente de coletor na saturação (A)",
+                "I_B": "Corrente de base (A)",
+                "I_E": "Corrente de emissor (A)"
+            }
+        },
+        {
+            "name": "Resistência Interna do Emissor (re')",
+            "description": "Define a resistência dinâmica do emissor em função da corrente de emissor.",
+            "latex": ["r_e' = \\frac{25\\,\\text{mV}}{I_E}"],
+            "constants": { "25mV": "Constante térmica aproximada a 25°C" },
+            "variables": {
+                "r_e'": "Resistência interna do emissor (ohms)",
+                "I_E": "Corrente de emissor (ampères)"
+            }
+        },
+        {
+            "name": "Impedância de Entrada - Emissor Comum (EC)",
+            "description": "Impedância de entrada vista pela base no amplificador emissor comum.",
+            "latex": ["Z_i = R_1 // R_2 // (\\beta \\cdot r_e')"],
+            "variables": {
+                "Z_i": "Impedância de entrada do circuito",
+                "R_1": "Resistor do divisor de base",
+                "R_2": "Resistor do divisor de base",
+                "β": "Ganho de corrente do transistor",
+                "r_e'": "Resistência interna do emissor"
+            }
+        },
+        {
+            "name": "Ganho de Tensão - Emissor Comum (EC)",
+            "description": "Determina o ganho de tensão no amplificador emissor comum.",
+            "latex": ["A_V = -\\frac{R_C}{r_e'}"],
+            "variables": {
+                "A_V": "Ganho de tensão (sem unidade)",
+                "R_C": "Resistor de coletor (ohms)",
+                "r_e'": "Resistência interna do emissor (ohms)"
+            }
+        },
+        {
+            "name": "Ganho de Corrente - Emissor Comum (EC)",
+            "description": "Define a relação entre corrente de coletor e corrente de base.",
+            "latex": ["\\beta = \\frac{I_C}{I_B}"],
+            "variables": {
+                "β": "Fator de amplificação de corrente",
+                "I_C": "Corrente de coletor (A)",
+                "I_B": "Corrente de base (A)"
+            }
+        },
+        {
+            "name": "Impedância de Entrada - Coletor Comum (CC)",
+            "description": "Impedância de entrada no amplificador coletor comum, também chamado de seguidor de emissor.",
+            "latex": ["Z_i \\approx R_1 // R_2 // (\\beta (r_e' + R_E))"],
+            "variables": {
+                "Z_i": "Impedância de entrada do circuito",
+                "R_1": "Resistor de polarização",
+                "R_2": "Resistor de polarização",
+                "β": "Ganho de corrente",
+                "r_e'": "Resistência interna do emissor",
+                "R_E": "Resistor do emissor"
+            }
+        },
+        {
+            "name": "Impedância de Saída - Coletor Comum (CC)",
+            "description": "Impedância de saída aproximada do amplificador coletor comum.",
+            "latex": ["Z_o \\approx \\frac{r_e' + R_E}{\\beta + 1}"],
+            "variables": {
+                "Z_o": "Impedância de saída do circuito",
+                "r_e'": "Resistência interna do emissor",
+                "R_E": "Resistor do emissor",
+                "β": "Ganho de corrente do transistor"
+            }
+        },
+        {
+            "name": "Ganho de Tensão - Coletor Comum (CC)",
+            "description": "Ganho de tensão do seguidor de emissor (próximo de 1).",
+            "latex": ["A_V \\approx \\frac{R_E}{r_e' + R_E}"],
+            "variables": {
+                "A_V": "Ganho de tensão",
+                "R_E": "Resistor do emissor",
+                "r_e'": "Resistência interna do emissor"
+            }
+        },
+        {
+            "name": "Impedância de Entrada - Base Comum (BC)",
+            "description": "Impedância de entrada típica no amplificador de base comum.",
+            "latex": ["Z_i \\approx r_e' // R_E"],
+            "variables": {
+                "Z_i": "Impedância de entrada",
+                "r_e'": "Resistência interna do emissor",
+                "R_E": "Resistor do emissor"
+            }
+        },
+        {
+            "name": "Ganho de Corrente - Base Comum (BC)",
+            "description": "Relação entre correntes de emissor e coletor na configuração de base comum.",
+            "latex": ["A_I = \\frac{\\alpha}{1 - \\alpha}"],
+            "variables": {
+                "A_I": "Ganho de corrente",
+                "α": "Fator de transferência de corrente do emissor para o coletor"
+            }
+        },
+        {
+            "name": "Relação entre α e β",
+            "description": "Mostra a relação entre os parâmetros de ganho de corrente α e β de um transistor.",
+            "latex": ["\\alpha = \\frac{\\beta}{\\beta + 1}"],
+            "variables": {
+                "α": "Ganho de corrente entre emissor e coletor",
+                "β": "Ganho de corrente entre base e coletor"
+            }
+        },
+        {
+            "name": "Tensão Eficaz (RMS)",
+            "description": "Fórmula para determinar o valor eficaz da tensão de um sinal senoidal.",
+            "latex": ["V_{\\text{RMS}} = \\frac{V_P}{\\sqrt{2}}"],
+            "variables": {
+                "V_{RMS}": "Tensão eficaz",
+                "V_P": "Tensão de pico"
+            }
+        },
+        {
+            "name": "Potência Real de Saída",
+            "description": "Potência dissipada na carga resistiva de um amplificador.",
+            "latex": ["P_{\\text{REAL}} = \\frac{(V_{\\text{RMS}})^2}{R_L}"],
+            "variables": {
+                "P_{REAL}": "Potência real na carga",
+                "V_{RMS}": "Tensão eficaz",
+                "R_L": "Resistência da carga"
+            }
+        },
+        {
+            "name": "Potência Máxima de Saída",
+            "description": "Potência máxima possível na carga considerando o valor pico a pico.",
+            "latex": ["P_{\\text{MÁX}} = \\frac{(V_{PP})^2}{R_L}"],
+            "variables": {
+                "P_{MÁX}": "Potência máxima de saída",
+                "V_{PP}": "Tensão pico a pico",
+                "R_L": "Resistência da carga"
+            }
+        },
+        {
+            "name": "Potência DC Fornecida",
+            "description": "Potência total fornecida pela fonte de alimentação ao amplificador.",
+            "latex": ["P_{CC} = V_{CC} \\times I_{CC}"],
+            "variables": {
+                "P_{CC}": "Potência da fonte DC",
+                "V_{CC}": "Tensão da fonte",
+                "I_{CC}": "Corrente de alimentação"
+            }
+        },
+        {
+            "name": "Rendimento do Amplificador",
+            "description": "Eficiência do amplificador, ou seja, a razão entre potência útil e potência fornecida.",
+            "latex": ["\\eta = \\frac{P_{REAL}}{P_{CC}} \\times 100\\%"],
+            "variables": {
+                "η": "Rendimento do amplificador (%)",
+                "P_{REAL}": "Potência real de saída",
+                "P_{CC}": "Potência DC fornecida"
+            }
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Guilherme Schwanke Cardoso",
+            "role": "Professor",
+            "degree": "",
+            "university": "",
+            "campus": "",
+            "course": "Curso Técnico em Eletrônica",
+            "email": "guilhermecardoso@ifsul.edu.br",
+            "telephone": null,
+            "github": null,
+            "instagram": null,
+            "youtube": null,
+            "whatsapp": null
+        }
+    ],
+    "references": [],
+    "images": [],
+    "tags": ["eletronica geral", "transistor", "amplificadores", "emissor comum", "base comum", "coletor comum", "rendimento"],
+    "alias": ["egii", "eg2", "eletronica geral", "eg 2", "eg ii", "eg-2", "eg-ii"],
+    "articleWriters": [],
+    "files": [],
+    "embededVideos": [],
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "fileVersion": 3
+}

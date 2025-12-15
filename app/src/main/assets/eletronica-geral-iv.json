@@ -1,0 +1,351 @@
+{
+  "name_disc": "Eletronica Geral IV",
+  "id": 2,
+  "status": "active",
+  "slug": "eletronica-geral-iv",
+  "parents": ["eletronica-geral-i", "eletronica-geral-ii", "eletronica-geral-iii", "eletronica-geral-iv", "eletronica-geral-v"],
+  "needs": [],
+  "semmester": 6,
+  "course": "eletrônica",
+  "period": "integrado",
+  "description": "Demonstração do uso de mosfets em circuitos digitais.",
+  "content": "A disciplina de Eletronica Geral IV aborda o estudo do funcionamento do transistor mosfet, das suas características e suas formulas em circuitos eletronicos.",
+  "obs": null,
+  "chapters": null,
+  "formulas":
+  [
+    {
+      "name": "Tensão drain-source no modo tríodo",
+      "description": "Estimativa da queda de tensão no mosfet ligado no modo tríodo.",
+      "latex": ["V_{DS} = I_{Dmax} \\times R_{DS(on)}"],
+      "constants": null,
+      "variables": {
+        "VDS": "Tensão drain-source (V = Volts).",
+        "IDmax": "Corrente máxima de drain (A = Amperes).",
+        "RDSon": "Resistência drain-source ligado (Ω = Ohms)."
+      }
+    },
+    {
+      "name": "Corrente de gate",
+      "description": "formula para calcular a corrente exigida pelo gate.",
+      "latex": ["I_{G} = I_{RG} = \\frac{V_{RG}}{R_{G}}"],
+      "constants": null,
+      "variables": {
+        "IG": "Corrente de gate (A = Amperes).",
+        "IRG": "Corrente no resistor de gate (A = Amperes).",
+        "VRG": "Tensão no resistor de gate (V = Volts).",
+        "RG": "Resistor de gate (Ω = Ohms)."
+      }
+    },
+    {
+      "name": "Tempo total (on)",
+      "description": "formula para calcular o Tempo total para o mosfet ligar.",
+      "latex": ["T_{on} = T_{d(on)} + T_{r}"],
+      "constants": null,
+      "variables": {
+        "Ton": "Tempo total para ligar (s = Segundos).",
+        "Tdon": "Tempo de atraso para ligar (s = Segundos).",
+        "Tr": "Tempo de subida do sinal (s = Segundos)."
+      }
+    },
+    {
+      "name": "Tempo total (off)",
+      "description": "formula para calcular o Tempo total para o mosfet desligar.",
+      "latex": ["T_{off} = T_{f} + T_{d(off)}"],
+      "constants": null,
+      "variables": {
+        "Toff": "Tempo total para desligar (s = Segundos).",
+        "Tf": "Tempo de descida do sinal (s = Segundos).",
+        "Tdoff": "Tempo de atraso para desligar (s = Segundos)."
+      }
+    },
+    {
+      "name": "Potência dissipada (on)",
+      "description": "formula para estimar a potência dissipada pelo mosfet na condição ligado.",
+      "latex": ["P_{on} = I_{D} \\times V_{DS}"],
+      "constants": null,
+      "variables": {
+        "Pon": "Potência dissipada no estado on (W = Watts).",
+        "ID": "Corrente de dreno (A = Amperes).",
+        "VDS": "Tensão drain-source (V = Volts)."
+      }
+    },
+    {
+      "name": "Potência dissipada (off)",
+      "description": "formula para estimar a potência dissipada pelo mosfet na condição desligado.",
+      "latex": ["P_{Off} = I_{DSS} \\times V_{DSS}"],
+      "constants": null,
+      "variables": {
+        "POff": "Potência dissipada no estado off (W = Watts).",
+        "IDSS": "Corrente de fuga dreno-fonte no estado off (A = Amperes).",
+        "VDSS": "Tensão dreno-fonte maxima suportada no estado off (V = Volts)."
+      }
+    },
+    {
+      "name": "Corrente de dreno nmos",
+      "description": "formula para calcular a corrente de dreno nmos no modo saturação.",
+      "latex": ["I_{D} = K(V_{GS}-V_{thN})^{2}"],
+      "constants": null,
+      "variables": {
+        "ID": "Corrente de dreno (A = Amperes).",
+        "K": "Valor Constante.",
+        "VGS": "Tensão gate-source (V = Volts).",
+        "VthN": "Tensão de limiar nmos (V = Volts)."
+      }
+    },
+    {
+      "name": "Corrente de dreno pmos",
+      "description": "formula para calcular a corrente de dreno pmos no modo saturação.",
+      "latex": ["I_{D} = K(|V_{GS}|-|V_{thP}|)^{2}"],
+      "constants": null,
+      "variables": {
+        "ID": "Corrente de dreno (A = Amperes).",
+        "K": "valor Constante.",
+        "VGS": "Tensão gate-source (V = Volts).",
+        "VthP": "Tensão de limiar pmos (V = Volts)."
+      }
+    },
+    {
+      "name": "Corrente de dreno nmos com lambda",
+      "description": "formula para calcular a Corrente de dreno nmos no modo saturação considerando a modulação do canal.",
+      "latex": ["I_{D} = K(V_{GS}-V_{thN})^{2}(1+\\lambda V_{DS})"],
+      "constants": null,
+      "variables": {
+        "ID": "Corrente de dreno (A = Amperes).",
+        "K": "Valor Constante.",
+        "VGS": "Tensão gate-source (V = Volts).",
+        "VthN": "Tensão de limiar nmos (V = Volts).",
+        "lambda": "Modulação do comprimento de canal.",
+        "VDS": "Tensão drain-source (V = Volts)."
+      }
+    },
+    {
+      "name": "Corrente de dreno pmos com lambda",
+      "description": "formula para calcular a Corrente de dreno pmos no modo saturação considerando a modulação do canal.",
+      "latex": ["I_{D} = K(|V_{GS}|-|V_{thP}|)^{2}(1+\\lambda|V_{DS}|)"],
+      "constants": null,
+      "variables": {
+        "ID": "Corrente de dreno (A = Amperes).",
+        "K": "Valor Constante.",
+        "VGS": "Tensão gate-source (V = Volts).",
+        "VthP": "Tensão de limiar pmos (V = Volts).",
+        "lambda": "Modulação do comprimento de canal.",
+        "VDS": "Tensão drain-source (V = Volts)."
+      }
+    },
+    {
+      "name": "Resistência de saída",
+      "description": "Resistência de saída do mosfet devido à modulação do canal.",
+      "latex": ["r_{O} = \\frac{1}{\\lambda I_{D}}"],
+      "constants": null,
+      "variables": {
+        "rO": "Resistência de saída (Ω = Ohms).",
+        "lambda": "Modulação do comprimento de canal.",
+        "ID": "Corrente de dreno (A = Amperes)."
+      }
+    },
+    {
+      "name": "Tensão drain-source malha de saída",
+      "description": "formula para calcular a tensão drain-source considerando a malha de saída.",
+      "latex": ["V_{DS} = V_{DD} - I_{D} \\times R_{D}"],
+      "constants": null,
+      "variables": {
+        "VDS": "Tensão drain-source (V = Volts).",
+        "VDD": "Tensão de alimentação (V = Volts).",
+        "ID": "Corrente de dreno (A = Amperes).",
+        "RD": "Resistor de dreno (Ω = Ohms)."
+      }
+    },
+    {
+      "name": "Ganho de tensão",
+      "description": "Formula para calcular o ganho de tensão de um amplificador.",
+      "latex": ["A_{V} = \\frac{V_{OUT}}{V_{IN}}"],
+      "constants": null,
+      "variables": {
+        "AV": "Ganho de tensão.",
+        "VOUT": "Tensão de saída (V = Volts).",
+        "VIN": "Tensão de entrada (V = Volts)."
+      }
+    },
+    {
+      "name": "Ganho de corrente",
+      "description": "Formula para calcular o ganho de corrente de um amplificador.",
+      "latex": ["A_{I} = \\frac{I_{OUT}}{I_{IN}}"],
+      "constants": null,
+      "variables": {
+        "AI": "Ganho de corrente (adimensional).",
+        "IOUT": "Corrente de saída (A = Amperes).",
+        "IIN": "Corrente de entrada (A = Amperes)."
+      }
+    },
+    {
+      "name": "Temperatura do dissipador",
+      "description": "Cálculo da temperatura do dissipador a partir da temperatura ambiente.",
+      "latex": ["T_{h} = T_{a} + (P_{D} \\times R_{\\theta HA})"],
+      "constants": null,
+      "variables": {
+        "Th": "Temperatura do dissipador (°C = Graus celsius).",
+        "Ta": "Temperatura ambiente (°C = Graus celsius).",
+        "PD": "Potência dissipada (W = Watts).",
+        "R0HA": "Resistência térmica do dissipador para o ambiente (°C/W)."
+      }
+    },
+    {
+      "name": "Temperatura da carcaça",
+      "description": "Cálculo da temperatura da carcaça a partir do dissipador.",
+      "latex": ["T_{c} = T_{h} + (P_{D} \\times R_{\\theta CH})"],
+      "constants": null,
+      "variables": {
+        "Tc": "Temperatura da carcaça (°C = Graus celsius).",
+        "Th": "Temperatura do dissipador (°C = Graus celsius).",
+        "PD": "Potência dissipada (W = Watts).",
+        "R0CH": "Resistência térmica carcaça-dissipador (°C/W)."
+      }
+    },
+    {
+      "name": "Temperatura de junção",
+      "description": "Cálculo da temperatura de junção a partir da carcaça.",
+      "latex": ["T_{J} = T_{c} + (P_{D} \\times R_{\\theta JC})"],
+      "constants": null,
+      "variables": {
+        "TJ": "Temperatura de junção (°C = Graus celsius).",
+        "Tc": "Temperatura da carcaça (°C = Graus celsius).",
+        "PD": "Potência dissipada (W = Watts).",
+        "R0JC": "Resistência térmica junção-carcaça (°C/W)."
+      }
+    },
+    {
+      "name": "Potência dissipada em forma térmica",
+      "description": "Potência dissipada na condição ligado.",
+      "latex": ["P_{D} = {I_{D}}^{2} \\times R_{DS(on)}"],
+      "constants": null,
+      "variables": {
+        "PD": "Potência dissipada (W = Watts).",
+        "ID": "Corrente de dreno (A = Amperes).",
+        "RDSon": "Resistência dreno-fonte ligado (Ω = Ohms)."
+      }
+    },
+    {
+      "name": "Corrente de gate por carga (rise)",
+      "description": "Relação entre corrente de gate e carga total (tempo de subida).",
+      "latex": ["I_G = \\frac{Q_T}{T_R}"],
+      "constants": null,
+      "variables": {
+        "IG": "Corrente de gate (A = Amperes).",
+        "QT": "Carga total de gate (C = Coulombs).",
+        "TR": "Tempo de subida (s = Segundos)."
+      }
+    },
+    {
+      "name": "Corrente de gate por carga (fall)",
+      "description": "Relação entre corrente de gate e carga total (tempo de queda).",
+      "latex": ["I_G = \\frac{Q_T}{T_F}"],
+      "constants": null,
+      "variables": {
+        "IG": "Corrente de gate (A = Amperes).",
+        "QT": "Carga total de gate (C = Coulombs).",
+        "TF": "Tempo de queda (s = Segundos)."
+      }
+    }
+  ],
+  "supervisors": [
+    {
+      "name": "Guilherme Schwanke Cardoso",
+      "role": "Professor",
+      "degree": null,
+      "university": null,
+      "campus": null,
+      "course": "Curso Técnico em Eletrônica",
+      "email": "guilhermecardoso@ifsul.edu.br",
+      "telephone": null,
+      "github": null,
+      "instagram": null,
+      "youtube": null,
+      "whatsapp": null
+    }
+  ],
+  "references": [
+    {
+      "name": "BOYLESTAD, Robert L. Introdução à Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
+      "url": null,
+      "description": null
+    }
+  ],
+  "images": [
+    {
+      "name": "nao tem",
+      "id": null,
+      "alt": "",
+      "url": "",
+      "source": "",
+      "author": ""
+    }
+  ],
+  "tags": ["eletronica", "geral", "logica", "circuitos eletricos", "circuitos", "mosfets"],
+  "alias": ["egiv","eg4", "eletronica geral iv", "eletronica geral 4", "eletronica geral quatro"],
+  "articleWriters": [
+    {
+      "summary": [
+        {
+          "name": "Pablo Maciel Pinto",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": "https://github.com/Mablozin",
+          "date": "2025-04-08"
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Eduardo Decker",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": null,
+          "date": "2025-12-01"
+        }
+      ],
+      "json": [
+        {
+          "name": "Eduardo Decker",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": null,
+          "date": "2025-12-01"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "fileId": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "embededVideos": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "suggestedBy": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "created_at": null,
+  "updated_at": null,
+  "deleted_at": null,
+  "fileVersion": 2
+}

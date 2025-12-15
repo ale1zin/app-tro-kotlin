@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapters.FormulasAdapter
 import com.example.myapplication.models.FormulaX
 import com.example.myapplication.utils.DisciplinaJsonReader
+import com.example.myapplication.utils.RecentFormulasManager
 
 class FormulasActivity : AppCompatActivity() {
 
@@ -23,112 +25,112 @@ class FormulasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulas)
 
-        // Inicializar views
+        // Inicializar componentes da tela
         btnBack = findViewById(R.id.btn_back)
         tvTituloFormulas = findViewById(R.id.tv_titulo_formulas)
         tvSubtituloFormulas = findViewById(R.id.tv_subtitulo_formulas)
         recyclerView = findViewById(R.id.rv_formulas)
 
-        // --- LÓGICA DE RECEBIMENTO DE DADOS ATUALIZADA ---
+        // Recupera dados enviados pela tela anterior (Home ou Disciplinas)
         val nomeDisciplina = intent.getStringExtra("disciplina_nome") ?: "Fórmulas"
         val nomeArquivoJson = intent.getStringExtra("disciplina_arquivo_json")
-        // --- NOVO: Recebendo o nome da fórmula específica que deve receber foco ---
         val formulaFocoNome = intent.getStringExtra("formula_nome_foco")
 
-        // Define o título da tela
+        // Define o título visual
         tvTituloFormulas.text = nomeDisciplina
 
-        // Configurar o clique no botão de voltar
+        // Configura ação de voltar usando o Dispatcher (padrão moderno)
         btnBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
-        // Configurar RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Carrega as fórmulas se o nome do arquivo foi recebido com sucesso
+        // Inicia o processo de leitura do arquivo JSON
         if (nomeArquivoJson != null) {
-            // --- ALTERADO: Passa o nome da fórmula de foco para a função de carregamento ---
-            carregarFormulasDoArquivo(nomeArquivoJson, formulaFocoNome)
+            carregarFormulasDoArquivo(nomeArquivoJson, nomeDisciplina, formulaFocoNome)
         } else {
-            // Se, por algum motivo, o nome do arquivo não foi passado, mostra um erro e fecha a tela.
-            Toast.makeText(this, "Erro: Arquivo da disciplina não encontrado.", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(this, "Erro: Arquivo da disciplina não encontrado.", Toast.LENGTH_LONG).show()
             finish()
         }
     }
 
-    /**
-     * Carrega os dados de uma disciplina a partir de um nome de arquivo JSON específico
-     * e configura o RecyclerView para exibi-los.
-     * --- ALTERADO: A assinatura da função agora aceita um segundo parâmetro opcional ---
-     */
-    private fun carregarFormulasDoArquivo(fileName: String, formulaFocoNome: String?) {
+    private fun carregarFormulasDoArquivo(
+        fileName: String,
+        nomeDisciplina: String,
+        formulaFocoNome: String?
+    ) {
+        // Instancia o leitor e busca o objeto Subject (Disciplina)
         val disciplinaJsonReader = DisciplinaJsonReader()
-
-        // Usa o reader para carregar o objeto completo da disciplina a partir do nome do arquivo
         val disciplina = disciplinaJsonReader.loadDisciplina(this, fileName)
-
-        // Pega a lista de fórmulas da disciplina. Se for nula, usa uma lista vazia para evitar crashes.
         val formulas = disciplina?.formulas ?: emptyList()
 
-        // Atualizar o subtítulo com o número de fórmulas
+        // Preenche metadados necessários para o funcionamento dos favoritos/recentes
+        formulas.forEachIndexed { index, formula ->
+            formula.disciplinaOrigem = nomeDisciplina
+            formula.arquivoJsonOrigem = fileName
+            formula.indiceNoArray = index
+        }
+
+        // Atualiza o subtítulo com a contagem
         val numFormulas = formulas.size
         tvSubtituloFormulas.text =
             if (numFormulas == 1) "1 fórmula disponível" else "$numFormulas fórmulas disponíveis"
 
-        // Configurar o adapter com as fórmulas
-        formulasAdapter = FormulasAdapter(this, formulas, formulaFocoNome) { formula ->
-            // TODO: Implementar o que acontece quando uma fórmula é clicada
-            android.util.Log.d("FormulasActivity", "Fórmula clicada: ${formula.name}")
+        // Verifica se precisamos focar em uma fórmula específica (vinda da busca)
+        val indexParaFocar: Int = if (formulaFocoNome != null) {
+            formulas.indexOfFirst { it.name.equals(formulaFocoNome, ignoreCase = true) }
+        } else {
+            -1
+        }
+
+        Log.d("FormulasActivity", "Buscando foco para: '$formulaFocoNome', Index: $indexParaFocar")
+
+        if (indexParaFocar != -1) {
+            val focusedFormula = formulas[indexParaFocar]
+            focusedFormula.isExpanded = true // Abre o card automaticamente
+
+            // Registra nos recentes já que o usuário entrou direto nela
+            registerRecentFormula(focusedFormula)
+        }
+
+        // Configura o adapter e define o clique para salvar no histórico
+        formulasAdapter = FormulasAdapter(this, formulas, indexParaFocar) { clickedFormula ->
+            Log.d("FormulasActivity", "Fórmula clicada: ${clickedFormula.name}")
+            registerRecentFormula(clickedFormula)
         }
         recyclerView.adapter = formulasAdapter
 
-        // --- NOVO: Lógica para encontrar e rolar até a fórmula de foco ---
-        // Verifica se recebemos um nome de fórmula para focar
-        // Em FormulasActivity.kt, dentro de carregarFormulasDoArquivo()
+        // Lógica de rolagem automática para centralizar o item focado
+        if (indexParaFocar != -1) {
+            recyclerView.post {
+                // Primeiro scroll simples
+                (recyclerView.layoutManager as? LinearLayoutManager)?.scrollToPosition(indexParaFocar)
 
-        // --- LÓGICA DE ROLAGEM CORRIGIDA PARA CENTRALIZAÇÃO ---
-        if (formulaFocoNome != null) {
-            val indexParaRolar =
-                formulas.indexOfFirst { it.name.equals(formulaFocoNome, ignoreCase = true) }
-
-            if (indexParaRolar != -1) {
+                // Segundo ajuste fino para centralizar o item na tela
                 recyclerView.post {
-                    // PASSO 1: Rolar imediatamente para a posição.
-                    // Isso garante que a RecyclerView crie e posicione a view do item na tela.
-                    // O item aparecerá desalinhado (geralmente na parte inferior ou superior).
-                    (recyclerView.layoutManager as? LinearLayoutManager)?.scrollToPosition(
-                        indexParaRolar
-                    )
+                    val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return@post
+                    val viewDoItem = layoutManager.findViewByPosition(indexParaFocar)
 
-                    // PASSO 2: Postar uma segunda ação para o ajuste fino.
-                    // Este segundo 'post' garante que a ação do Passo 1 foi concluída e a view existe.
-                    recyclerView.post {
-                        val layoutManager =
-                            recyclerView.layoutManager as? LinearLayoutManager ?: return@post
-                        // Agora, com a view garantidamente na tela, podemos encontrá-la.
-                        val viewDoItem = layoutManager.findViewByPosition(indexParaRolar)
+                    if (viewDoItem != null) {
+                        val alturaTela = recyclerView.height
+                        val alturaItem = viewDoItem.height
+                        val posicaoAtualDoItem = viewDoItem.top
+                        val offsetDesejado = (alturaTela / 2) - (alturaItem / 2)
+                        val distanciaParaRolar = posicaoAtualDoItem - offsetDesejado
 
-                        if (viewDoItem != null) {
-                            val alturaTela = recyclerView.height
-                            val alturaItem = viewDoItem.height
-
-                            // A posição 'y' do topo do item na tela.
-                            val posicaoAtualDoItem = viewDoItem.top
-
-                            // O offset que queremos para centralizar o item.
-                            val offsetDesejado = (alturaTela / 2) - (alturaItem / 2)
-
-                            // A distância que precisamos rolar para fazer o ajuste.
-                            val distanciaParaRolar = posicaoAtualDoItem - offsetDesejado
-
-                            // Executa a rolagem suave para o ajuste final.
-                            recyclerView.smoothScrollBy(0, distanciaParaRolar, null, 500)
-                        }
+                        recyclerView.smoothScrollBy(0, distanciaParaRolar, null, 500)
                     }
                 }
             }
+        } else if (formulaFocoNome != null) {
+            Log.w("FormulasActivity", "Fórmula solicitada não encontrada na lista.")
         }
+    }
+
+    // Salva a fórmula na lista de "Recentes" do SharedPreferences
+    private fun registerRecentFormula(formula: FormulaX) {
+        val formulaId = formula.getUniqueId()
+        RecentFormulasManager.addFormula(this, formulaId)
     }
 }

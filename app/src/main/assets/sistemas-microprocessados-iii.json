@@ -1,0 +1,171 @@
+{
+    "name_disc": "Sistemas Microprocessados III",
+    "id": 10,
+    "status": "ativo",
+    "slug": "sistemas-microprocessados-iii",
+    "parents": ["sistemas-microprocessados-i, sistemas-microprocessados-ii, sistemas-microprocessados-iii, sistemas-microprocessados-iv"],
+    "needs": [],
+    "semmester": 7,
+    "course": "eletrônica",
+    "period": "integrado",
+    "description": "Princípios da arquitetura de computadores e a aplicação de técnicas para o diagnóstico e solução de problemas de hardware",
+    "content": "A disciplina de Organização de Computadores e Sistemas Microprocessados explora a estrutura fundamental do hardware, começando pela hierarquia de memórias, que otimiza o desempenho do sistema. Aprofunda-se no estudo da memória cache (SRAM), detalhando sua organização em níveis (L1, L2, L3) e seu funcionamento através de mapeamento, hits e misses. Em paralelo, aborda a memória principal (DRAM), incluindo seus ciclos de leitura/escrita e especificações técnicas. O curso integra esse conhecimento teórico com a prática de diagnóstico, ensinando procedimentos para solucionar problemas comuns de hardware, como a limpeza de contatos, a verificação de conexões, a interpretação de bipes da BIOS e a execução de um Clear CMOS.",
+    "obs": "",
+    "chapters": ["hierarquia de memória", "memória cache", "memória principal", "diagnóstico de hardware", "manutenção de computadores"],
+    "formulas": [
+        {
+            "name": "Tamanho da Cache",
+            "description": "Calcula o tamanho total da memória cache em bits, considerando o número de linhas e a quantidade de bits por linha (bit de validade, tag e dados).",
+            "latex": [
+                "T = \\text{N° de Linhas} \\times \\text{N° Bits de Barramento}"
+            ],
+            "variables": {
+                "T": "Tamanho total da cache em bits",
+                "N° de Linhas": "Quantidade de posições/linhas da cache",
+                "N° Bits de Barramento": "Largura do barramento de dados em bits (64 por exemplo)"
+            }
+        },
+        {
+            "name": "Taxa de Acertos (Hit Rate)",
+            "description": "Representa a porcentagem de vezes que um dado foi encontrado na cache em relação ao total de acessos.",
+            "latex": [
+                "\\text{hit}\\% = \\frac{\\text{Nº de acertos}}{\\text{Nº de acessos}} \\times 100\\%"
+            ],
+            "variables": {
+                "hit%": "Taxa de acertos da cache",
+                "Nº de acertos": "Quantidade de vezes que a informação foi encontrada na cache (hits)",
+                "Nº de acessos": "Número total de requisições à memória (hits + misses)"
+            }
+        },
+        {
+            "name": "Taxa de Erros (Miss Rate)",
+            "description": "Representa a porcentagem de vezes que um dado não foi encontrado na cache, exigindo um acesso à memória principal.",
+            "latex": [
+                "\\text{miss}\\% = \\frac{\\text{Nº de erros}}{\\text{Nº de acessos}} \\times 100\\%",
+                "\\text{miss}\\% = 100\\% - \\text{hit}\\%"
+            ],
+            "variables": {
+                "miss%": "Taxa de erros da cache",
+                "Nº de erros": "Quantidade de vezes que a informação não foi encontrada na cache (misses)",
+                "Nº de acessos": "Número total de requisições à memória (hits + misses)",
+                "hit%": "Taxa de acertos da cache"
+            }
+        },
+        {
+            "name": "Taxa da Memória",
+            "description": "Calcula a largura de banda teórica máxima de um módulo de memória principal, expressa em Megabytes por segundo (MB/s).",
+            "latex": [
+                "\\text{Taxa da Memória} = \\frac{\\text{f} \\times \\text{N° Bits de Barramento}}{8}"
+            ],
+            "constants": {
+                "8": "Serve apenas para converter de bits para bytes"
+            },
+            "variables": {
+                "Taxa da Memória": "É taxa de transferência da memória, sua máxima teórica ou largura de banda, dada em (MB/s)",
+                "f": "Frequência de clock da memória (2400MHz por exemplo)",
+                "N° Bits de Barramento": "Largura do barramento de dados em bits (64 por exemplo)"
+            }
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Roberta de Carvalho Nobre Palau",
+            "role": "",
+            "degree": "",
+            "university": "",
+            "campus": "",
+            "course": null,
+            "email": null,
+            "telephone": null,
+            "github": null,
+            "instagram": null,
+            "youtube": null,
+            "whatsapp": null
+        }
+    ],
+    "references": [
+        {
+            "name": "",
+            "url": "",
+            "description": ""
+        }
+    ],
+    "images": [
+        {
+            "name": "",
+            "id": null,
+            "alt": "",
+            "url": "",
+            "source": "",
+            "author": ""
+        }
+    ],
+    "tags": ["sistemas microprocessados", "memória cache", "hierarquia de memória", "memória principal", "computadores", "notebooks"],
+    "alias": ["smiii", "sm3", "sistemas microprocessados", "sm 3", "sm iii", "sm-3", "sm-iii"],
+    "articleWriters": [
+        {
+            "summary": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "formulas": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ],
+            "json": [
+                {
+                    "name": "",
+                    "roles": [],
+                    "email": null,
+                    "github": null,
+                    "date": null
+                }
+            ]
+        }
+    ],
+    "files": [
+        {
+            "name": "",
+            "id": null,
+            "description": "",
+            "url": "",
+            "fileId": "",
+            "type": "",
+            "source": "",
+            "author": "",
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "embededVideos": [
+        {
+            "name": "",
+            "id": null,
+            "description": "",
+            "url": "",
+            "type": "",
+            "source": "",
+            "author": "",
+            "suggestedBy": "",
+            "created_at": null,
+            "updated_at": null,
+            "deleted_at": null
+        }
+    ],
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "fileVersion": 2
+}
+

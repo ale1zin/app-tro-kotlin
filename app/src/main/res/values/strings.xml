@@ -7,4 +7,6 @@
     <string name="instagram_do_desenvolvedor">Instagram GitHub do desenvolvedor</string>
     <string name="expand">Expandir</string>
     <string name="collapse">Recolher</string>
+    <string name="favorite_formula_action">Marcar ou desmarcar como favorito</string>
+    <string name="my_favorites">Meus Favoritos</string>
 </resources>

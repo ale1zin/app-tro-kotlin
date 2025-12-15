@@ -1,57 +1,195 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    tools:context=".HomeTab">
+    android:background="?attr/colorSurface">
+
+    <!-- Conteúdo principal em ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="24dp"
+            tools:context=".HomeTab">
+
+            <!-- MODIFICAÇÃO: Container para o Título e o Botão de Editar Nome -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/welcome_home_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/audiowide"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    tools:text="Olá, Usuário! 💡\nSua próxima aventura te espera." />
+
+                <ImageButton
+                    android:id="@+id/btn_edit_user_name"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Editar nome de usuário"
+                    android:src="@drawable/ic_edit"
+                    app:tint="?attr/colorOnSurfaceVariant" />
+
+            </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/welcome_home_textview"
-        android:layout_width="0dp"
+            <!-- Barra de Pesquisa -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="4dp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Pesquisar conteúdo..." />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- Favoritos -->
+            <TextView
+                android:id="@+id/tv_favorites_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/audiowide"
+                android:text="@string/my_favorites"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_favorites_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:fadingEdgeLength="25dp"
+                android:orientation="horizontal"
+                android:requiresFadingEdge="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_favorite_card"
+                tools:visibility="visible" />
+
+            <!-- TÍTULO DOS ACESSADOS RECENTEMENTE -->
+            <TextView
+                android:id="@+id/tv_recents_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/audiowide"
+                android:text="Últimos Acessos"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <!-- CARROSSEL DE ACESSADOS RECENTEMENTE -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recents_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:fadingEdgeLength="25dp"
+                android:orientation="horizontal"
+                android:requiresFadingEdge="horizontal"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_favorite_card"
+                tools:visibility="visible" />
+
+            <!-- CARD DE BOAS-VINDAS PARA NOVOS USUÁRIOS -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_welcome_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tudo pronto para começar! 📝"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:text="Explore as disciplinas para encontrar fórmulas e adicione suas favoritas para um acesso rápido aqui."
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Lista de Resultados SOBREPOSTA (fora do ScrollView) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/results_overlay_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="176dp"
         android:layout_marginEnd="24dp"
-        android:fontFamily="@font/audiowide"
-        android:textAppearance="?attr/textAppearanceHeadlineSmall"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Olá, Usuário!" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/search_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:visibility="gone"
         app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-        app:cardCornerRadius="28dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="@id/welcome_home_textview"
-        app:layout_constraintStart_toStartOf="@id/welcome_home_textview"
-        app:layout_constraintTop_toBottomOf="@id/welcome_home_textview">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                app:iconifiedByDefault="false"
-                app:queryHint="Pesquisar conteúdo..."
-                />
-
-
             <View
+                android:id="@+id/search_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?attr/colorOutlineVariant" />
@@ -60,13 +198,14 @@
                 android:id="@+id/recycler_view_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="130dp"
-                android:overScrollMode="ifContentScrolls"
+                android:fadingEdgeLength="50dp"
+                android:maxHeight="400dp"
+                android:requiresFadingEdge="vertical"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_search_result" />
 
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

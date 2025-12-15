@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyRounded.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:windowBackground">@drawable/dialog_rounded_background</item>
+        <item name="android:background">@drawable/dialog_rounded_background</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+</resources>

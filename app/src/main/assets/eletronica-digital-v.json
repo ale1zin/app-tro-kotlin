@@ -4,27 +4,98 @@
     "status": "ativo",
     "slug": "eletronica-digital-v",
     "parents": ["eletronica-digital-i", "eletronica-digital-ii", "eletronica-digital-iii", "eletronica-digital-iv", "eletronica-digital-v"],
-    "needs": [],
-    "semmester": 5,
+    "needs": ["eletronica-digital-i", "eletronica-digital-ii", "eletronica-digital-iii", "eletronica-digital-iv"],
+    "semmester": 7,
     "course": "eletrônica",
     "period": "integrado",
-    "description": "Revisão de monoestaveis e estudo dos astaveis e biestaveis, como o 555",
-    "content": "",
-    "obs": "",
-    "chapters": [],
+    "description": "Demonstração dos usos do CI 555 e suas aplicações.",
+    "content": "A disciplina de Eletronica Digital V aborda o estudo dos diversos usos do CI 555 em circuitos eletrônicos e a criação de um frequencímetro.",
+    "obs": null,
+    "chapters": null,
     "formulas": [
         {
-            "name": "Resistência do Diodo Emissor",
-            "description": "Atalho para encontrar a resistência do diodo emissor evitando cálculos complexos",
-            "latex": [
-                "re' = \\frac{25\\,\\text{mV}}{I_E}"
-            ],
-            "constants": {
-                "25mV": "Tensão fixa"
-            },
+            "name": "Carga do capacitor (geral)",
+            "description": "Calcula a tensão em um capacitor durante a carga em um circuito rc.",
+            "latex": ["V_C = V \\cdot (1 - e^{-\\frac{t}{R \\cdot C}})"],
+            "constants": null,
             "variables": {
-                "re'": "Resistência do Diodo Emissor",
-                "IE": "Corrente de Emissor"
+                "VC": "Tensão no capacitor no instante t (volts)",
+                "V": "Tensão total aplicada ao circuito rc (volts)",
+                "t": "Tempo decorrido (segundos)",
+                "R": "Resistência da malha de carga (ohms)",
+                "C": "Capacitância do capacitor (farads)",
+                "e": "Base do logaritmo natural (constante de Euler ≈ 2.718)"
+            }
+        },
+        {
+            "name": "Temporização monoestável (555)",
+            "description": "Calcula a duração do pulso de saída de um ci 555 configurado como monoestável.",
+            "latex": ["t \\approx 1.1 \\cdot Ra \\cdot C"],
+            "constants": null,
+            "variables": {
+                "t": "Duração do pulso de saída (segundos)",
+                "Ra": "Resistência externa de temporização (ohms)",
+                "C": "Capacitância externa de temporização (farads)"
+            }
+        },
+        {
+            "name": "Tempo de carga astável (555)",
+            "description": "Calcula o tempo que a saída de um ci 555 astável permanece em nível alto (tempo de carga do capacitor).",
+            "latex": ["t_{\\text{carga}} \\approx 0.7 \\cdot (Ra + Rb) \\cdot C"],
+            "constants": null,
+            "variables": {
+                "t_carga": "Tempo de carga do capacitor / saída em nível alto (segundos)",
+                "Ra": "Resistência externa (ohms)",
+                "Rb": "Resistência externa (ohms)",
+                "C": "Capacitância externa (farads)"
+            }
+        },
+        {
+            "name": "Descarga do capacitor (geral)",
+            "description": "Calcula a tensão em um capacitor durante a descarga em um circuito rc.",
+            "latex": ["V_C = V_0 \\cdot e^{-\\frac{t}{R \\cdot C}}"],
+            "constants": null,
+            "variables": {
+                "VC": "Tensão no capacitor no instante t (volts)",
+                "V0": "Tensão inicial do capacitor (volts)",
+                "t": "Tempo decorrido desde o início da descarga (segundos)",
+                "R": "Resistência da malha de descarga (ohms)",
+                "C": "Capacitância do capacitor (farads)",
+                "e": "Base do logaritmo natural (constante de Euler ≈ 2.718)"
+            }
+        },
+        {
+            "name": "Tempo de descarga astável (555)",
+            "description": "Calcula o tempo que a saída de um ci 555 astável permanece em nível baixo (tempo de descarga do capacitor).",
+            "latex": ["t_{\\text{descarga}} \\approx 0.7 \\cdot Rb \\cdot C"],
+            "constants": null,
+            "variables": {
+                "t_descarga": "Tempo de descarga do capacitor / saída em nível baixo (segundos)",
+                "Rb": "Resistência externa (ohms)",
+                "C": "Capacitância externa (farads)"
+            }
+        },
+        {
+            "name": "Período astável (555)",
+            "description": "Calcula o período total (tempo de um ciclo completo) de um ci 555 astável.",
+            "latex": ["T \\approx 0.7 \\cdot (Ra + 2 \\cdot Rb) \\cdot C"],
+            "constants": null,
+            "variables": {
+                "T": "Período do sinal de saída (segundos)",
+                "Ra": "Resistência externa (ohms)",
+                "Rb": "Resistência externa (ohms)",
+                "C": "Capacitância externa (farads)"
+            }
+        },
+        {
+            "name": "Frequência oscilador cmos (inversores)",
+            "description": "Calcula a frequência de oscilação de um circuito usando inversores cmos, resistor e capacitor.",
+            "latex": ["f = \\frac{1}{2.2 \\times Rt \\times Ct}"],
+            "constants": null,
+            "variables": {
+                "f": "Frequência de oscilação (hertz)",
+                "Rt": "Resistência de temporização (ohms)",
+                "Ct": "Capacitância de temporização (farads)"
             }
         }
     ],
@@ -32,9 +103,9 @@
         {
             "name": "Alessandro de Souza Lima",
             "role": "Professor",
-            "degree": "",
-            "university": "",
-            "campus": "",
+            "degree": null,
+            "university": null,
+            "campus": null,
             "course": "Curso Técnico em Eletrônica",
             "email": "alessandrolima@ifsul.edu.br",
             "telephone": null,
@@ -46,14 +117,14 @@
     ],
     "references": [
         {
-            "name": "",
-            "url": "",
-            "description": ""
+            "name": "BOYLESTAD, Robert L. Introdução à Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
+            "url": null,
+            "description": null
         }
     ],
     "images": [
         {
-            "name": "",
+            "name": "nao tem",
             "id": null,
             "alt": "",
             "url": "",
@@ -61,35 +132,35 @@
             "author": ""
         }
     ],
-    "tags": ["eletronica digital"],
-    "alias": ["edv", "ed5", "eletronica digital", "ed 5", "ed v", "ed-5", "ed-v"],
+    "tags": ["eletronica", "digital", "ci555", "temporizadores", "osciladores", "frequencimetro"],
+    "alias": ["edv", "ed5", "Eletronica Digital", "ed 5", "ed v", "ed-5", "ed-v"],
     "articleWriters": [
         {
             "summary": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Pablo Maciel Pinto",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
-                    "github": null,
-                    "date": null
+                    "github": "https://github.com/Mablozin",
+                    "date": "2025-04-08"
                 }
             ],
             "formulas": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Eduardo Decker",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
                     "github": null,
-                    "date": null
+                    "date": "2025-10-27"
                 }
             ],
             "json": [
                 {
-                    "name": "",
-                    "roles": [],
+                    "name": "Eduardo Decker",
+                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
                     "email": null,
                     "github": null,
-                    "date": null
+                    "date": "2025-10-27"
                 }
             ]
         }

@@ -6,36 +6,38 @@
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground">
 
-    <!-- Botão de voltar -->
-
-    <!-- Header com título -->
-
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="60dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Voltar"
         android:src="@drawable/ic_arrow_back"
-        android:tint="?android:attr/textColorPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?android:attr/textColorPrimary" />
 
     <TextView
         android:id="@+id/tv_titulo_formulas"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Nome da Disciplina" />
+        tools:text="Sistemas Microprocessados III" />
 
-    <!-- Subtítulo -->
     <TextView
         android:id="@+id/tv_subtitulo_formulas"
         android:layout_width="wrap_content"
@@ -48,7 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_titulo_formulas" />
 
-    <!-- RecyclerView para lista de fórmulas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_formulas"
         android:layout_width="0dp"
@@ -56,16 +57,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_formulas" />
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_formulas"
 
-    <!-- Layout para estado vazio -->
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="25dp" />
+        <!-- As duas linhas acima dão o efeito Fading Edge no scroll -->
+
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="wrap_content"
@@ -95,7 +99,6 @@
 
     </LinearLayout>
 
-    <!-- Loading indicator -->
     <ProgressBar
         android:id="@+id/progress_loading"
         android:layout_width="wrap_content"

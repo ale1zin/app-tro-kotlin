@@ -1,7 +1,7 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.models.Desenvolvedor
 import com.example.myapplication.models.TipoDesenvolvedor
+import com.example.myapplication.adapters.DesenvolvedorAdapter
+import com.example.myapplication.adapters.DevActionsListener
 
 class DevsTab : Fragment(), DevActionsListener {
 
@@ -24,7 +27,7 @@ class DevsTab : Fragment(), DevActionsListener {
     private var listaCompletaDevs: List<Desenvolvedor> = listOf()
     private var listaExibidaDevs: MutableList<Desenvolvedor> = mutableListOf()
 
-    // Novos botões
+    // Views de controle
     private lateinit var btnFiltroDropdown: Button
     private lateinit var btnColaboradores: Button
 
@@ -34,7 +37,7 @@ class DevsTab : Fragment(), DevActionsListener {
     ): View? {
         val view = inflater.inflate(R.layout.tab_devs, container, false)
 
-        // Inicializar RecyclerView
+        // Inicializar RecyclerView e layout manager
         recyclerViewDesenvolvedores = view.findViewById(R.id.recycler_view_desenvolvedores)
         recyclerViewDesenvolvedores.layoutManager = LinearLayoutManager(requireContext())
 
@@ -42,16 +45,15 @@ class DevsTab : Fragment(), DevActionsListener {
         devAdapter = DesenvolvedorAdapter(listaExibidaDevs, this)
         recyclerViewDesenvolvedores.adapter = devAdapter
 
-        // Configurar novos botões
+        // Configurar botões de ação
         btnFiltroDropdown = view.findViewById(R.id.btn_filtro_dropdown)
         btnColaboradores = view.findViewById(R.id.btn_colaboradores)
 
-        // Configurar botão dropdown de filtros
+        // Ações de clique
         btnFiltroDropdown.setOnClickListener {
             mostrarMenuFiltro(it)
         }
 
-        // Configurar botão de colaboradores
         btnColaboradores.setOnClickListener {
             abrirColaboradores()
         }
@@ -61,10 +63,13 @@ class DevsTab : Fragment(), DevActionsListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Carrega dados iniciais e exibe a lista completa
         carregarDesenvolvedoresOriginais()
-        aplicarFiltro(null) // Exibe todos inicialmente
+        aplicarFiltro(null)
     }
 
+    // Exibe o menu popup para filtrar a lista por tipo
+    @SuppressLint("SetTextI18n") // Permite setar texto direto sem resources
     private fun mostrarMenuFiltro(view: View) {
         val popupMenu = PopupMenu(requireContext(), view)
         popupMenu.menuInflater.inflate(R.menu.menu_filtro_devs, popupMenu.menu)
@@ -96,20 +101,14 @@ class DevsTab : Fragment(), DevActionsListener {
         popupMenu.show()
     }
 
+    // Navega para a tela de colaboradores externos
     private fun abrirColaboradores() {
         Log.d("DevsTab", "Abrindo tela de Colaboradores")
-
-        // Cria o novo fragment
-        val fragment = ColaboradoresFragment()
-
-        // Navega para o fragment de Colaboradores
-        // O container é o mesmo que contém o DevsTab atualmente
-        parentFragmentManager.beginTransaction()
-            .replace(android.R.id.content, fragment) // Usa o container root padrão
-            .addToBackStack(null) // Adiciona à pilha para poder voltar
-            .commit()
+        val intent = Intent(requireContext(), ColaboradoresActivity::class.java)
+        startActivity(intent)
     }
 
+    // Carrega a lista estática de desenvolvedores do projeto
     private fun carregarDesenvolvedoresOriginais() {
         val devsOriginais = listOf(
             Desenvolvedor("1", "Alexandre Nunes da Silva Filho", "ic_dev1", "Desenvolvedor Full-Stack", TipoDesenvolvedor.ALUNO, "xandyhsilvah@gmail.com", "https://github.com/ale1zin", "https://www.linkedin.com/in/ale1zin/", "https://www.instagram.com/ale1zin/"),
@@ -120,9 +119,11 @@ class DevsTab : Fragment(), DevActionsListener {
             Desenvolvedor("6", "Rodrigo Nuevo Lellis", "ic_devt2", "Professor Orientador", TipoDesenvolvedor.PROFESSOR, "rodrigolellis@ifsul.edu.br", null, null, "https://www.instagram.com/rodrigonuevolellis/")
         )
         listaCompletaDevs = devsOriginais
-        Log.d("DevsTab", "Lista completa de desenvolvedores carregada: ${listaCompletaDevs.size} itens")
+        Log.d("DevsTab", "Devs carregados: ${listaCompletaDevs.size}")
     }
 
+    // Filtra a lista e atualiza o RecyclerView
+    @SuppressLint("NotifyDataSetChanged") // Atualização total da lista é intencional aqui
     private fun aplicarFiltro(tipo: TipoDesenvolvedor?) {
         val listaFiltrada: List<Desenvolvedor> = if (tipo == null) {
             listaCompletaDevs
@@ -133,18 +134,12 @@ class DevsTab : Fragment(), DevActionsListener {
         listaExibidaDevs.clear()
         listaExibidaDevs.addAll(listaFiltrada)
 
-        Log.d("DevsTab_Filtro", "--- Aplicando Filtro ---")
-        Log.d("DevsTab_Filtro", "Tipo: $tipo")
-        Log.d("DevsTab_Filtro", "Lista Exibida (Tamanho: ${listaExibidaDevs.size}):")
-        for ((index, dev) in listaExibidaDevs.withIndex()) {
-            Log.d("DevsTab_Filtro", "  [$index] Nome: ${dev.nome}, FotoURL: ${dev.fotoUrl}")
-        }
-
         devAdapter.notifyDataSetChanged()
 
-        Log.d("DevsTab", "Filtro aplicado. Exibindo ${listaExibidaDevs.size} desenvolvedores.")
+        Log.d("DevsTab", "Filtro aplicado. Exibindo ${listaExibidaDevs.size} itens.")
     }
 
+    // Tenta abrir app de email caso o intent direto falhe
     private fun fallbackEmailChooser(email: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "message/rfc822"
@@ -156,45 +151,41 @@ class DevsTab : Fragment(), DevActionsListener {
             Toast.makeText(requireContext(), "Escolha seu aplicativo de email", Toast.LENGTH_SHORT).show()
             val chooser = Intent.createChooser(intent, "Enviar email usando:")
             startActivity(chooser)
-            Log.d("DevsTab", "AÇÃO: Chooser de email iniciado com sucesso")
         } catch (e: Exception) {
-            Log.e("DevsTab", "ERRO: Falha ao iniciar chooser de email", e)
+            Log.e("DevsTab", "Erro ao abrir chooser de email", e)
             Toast.makeText(requireContext(), "Nenhum aplicativo de email encontrado.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onEmailClick(email: String) {
-        Log.d("DevsTab", "AÇÃO: onEmailClick recebido para email: $email")
+    // --- Implementação dos clicks do Adapter (DevActionsListener) ---
 
+    override fun onEmailClick(email: String) {
+        // Warning resolvido: Uso da extensão KTX toUri()
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$email?subject=")
+            data = "mailto:$email?subject=".toUri()
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
 
         try {
             startActivity(intent)
-            Log.d("DevsTab", "AÇÃO: EMAIL direto enviado")
-        } catch (e: Exception) {
-            Log.e("DevsTab", "ERRO: $e")
+        } catch (_: Exception) {
             fallbackEmailChooser(email)
         }
     }
 
     override fun onGithubClick(githubUrl: String) {
-        Log.d("DevsTab", "GitHub click: $githubUrl")
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(githubUrl))
+        // Warning resolvido: Uso da extensão KTX toUri()
+        val intent = Intent(Intent.ACTION_VIEW, githubUrl.toUri())
         startActivity(intent)
     }
 
     override fun onLinkedinClick(linkedinUrl: String) {
-        Log.d("DevsTab", "LinkedIn click: $linkedinUrl")
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkedinUrl))
+        val intent = Intent(Intent.ACTION_VIEW, linkedinUrl.toUri())
         startActivity(intent)
     }
 
     override fun onInstagramClick(instagramUrl: String) {
-        Log.d("DevsTab", "Instagram click: $instagramUrl")
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl))
+        val intent = Intent(Intent.ACTION_VIEW, instagramUrl.toUri())
         startActivity(intent)
     }
 }

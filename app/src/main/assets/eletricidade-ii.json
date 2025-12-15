@@ -61,7 +61,7 @@
                 "latex": ["B = \\frac{4 \\times \\pi \\times 10^{-7} \\times N \\times I}{l}"],
                 "constants": 
                 {
-                    "pi": "3,14"
+                    "π": "3,14"
                 },
 
                 "variables":
@@ -224,7 +224,7 @@
                 "latex": ["\\mu_{0} = 4 \\times \\pi \\times 10^{-7}"],
                 "constants": 
                 {
-                    "pi": "3,14"
+                    "π": "3,14"
                 },
 
                 "variables":
@@ -382,7 +382,7 @@
                 "latex": ["\\omega = \\frac{2 \\times \\pi}{T}"],
                 "constants":
                 {
-                    "pi":"3,14"
+                    "π":"3,14"
                 },
 
                 "variables":
@@ -397,7 +397,7 @@
                 "latex": ["\\omega = 2 \\times \\pi \\times f"],
                 "constants":
                 {
-                    "pi":"3,14"
+                    "π":"3,14"
                 },
                 "variables":
                 {
@@ -462,12 +462,12 @@
             {
                 "name": "Potência Instantânea",
                 "description":null,
-                "latex": ["p = R \\times i^{2}"],
+                "latex": ["P = R \\times i^{2}"],
                 "constants":null,
 
                 "variables":
                 {
-                    "p": "Potência instantânea (Watts = W)",
+                    "P": "Potência instantânea (Watts = W)",
                     "R": "Resistência (Ohm = Ω)",
                     "i": "Valor instantâneo da corrente (Ampère =A)"
                 }
@@ -575,10 +575,10 @@
                 },
                 {
                     "name": "Carlos Alexandre Dutra Volz",
-                    "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+                    "roles": ["Desenvolvedor", "Code Review","Estudante de Eletrônica"],
                     "email": null,
                     "github":null,
-                    "date": "2025-05-04"
+                    "date": "2025-10-24"
                 }
             ]
             

@@ -5,26 +5,206 @@
     "slug": "eletronica-geral-v",
     "parents": ["eletronica-geral-i", "eletronica-geral-ii", "eletronica-geral-iii", "eletronica-geral-iv", "eletronica-geral-v"],
     "needs": [],
-    "semmester": 5,
+    "semmester": 7,
     "course": "eletrônica",
     "period": "integrado",
-    "description": "Estudo da radiofrequência",
+    "description": "Estudo da radiofrequência, ondas eletromagnéticas, meios de transmissão, antenas e da eletrônica necessária para transmissão e recepção",
     "content": "",
     "obs": "",
     "chapters": ["amplificadores", "transistores", "microfones", "auto-falantes"],
     "formulas": [
         {
-            "name": "Resistência do Diodo Emissor",
-            "description": "Atalho para encontrar a resistência do diodo emissor evitando cálculos complexos",
+            "name": "Comprimento de Onda de Rádio",
+            "description": "Relação entre o comprimento de onda, velocidade de propagação e frequência",
             "latex": [
-                "re' = \\frac{25\\,\\text{mV}}{I_E}"
+                "\\lambda = \\frac{3 \\times 10^8}{f}"
             ],
             "constants": {
-                "25mV": "Tensão fixa"
+                "3x10⁸": "Velocidade de Propagação da Luz (em metros por segundo)"
             },
             "variables": {
-                "re'": "Resistência do Diodo Emissor",
-                "IE": "Corrente de Emissor"
+                "λ": "Comprimento de Onda (em metros)",
+                "f": "Frequência da Onda (em Hertz)"
+            }
+        },
+        {
+            "name": "Potência em dBm (Decibel-milliwatt)",
+            "description": "Fórmula para converter uma potência absoluta em Watts para a escala logarítmica de dBm, referenciada a 1 miliwatt",
+            "latex": [
+                "P_{\\text{dBm}} = 10 \\log \\left( \\frac{P_{\\text{Watts}}}{1\\,\\text{mW}} \\right)"
+            ],
+            "constants": {
+                "1mW": "Constante de referência da própria escala de dBm"
+            },
+            "variables": {
+                "PdBm": "Potência em decibel-milliwatts (em dBm)",
+                "PWatts": "Potência absoluta (em Watts)"
+            }
+        },
+        {
+            "name": "Potência em Watts (a partir de dBm)",
+            "description": "Fórmula para converter uma potência da escala logarítmica dBm de volta para a escala linear em Watts",
+            "latex": [
+                "P_{\\text{Watts}} = 10^{\\left( \\frac{P_{\\text{dBm}}}{10} \\right)} \\times 1\\,\\text{mW}"
+            ],
+            "constants": {
+                "1mW": "Constante de referência da própria escala de dBm"
+            },
+            "variables": {
+                "PdBm": "Potência em decibel-milliwatts (em dBm)",
+                "PWatts": "Potência absoluta (em Watts)"
+            }
+        },
+        {
+            "name": "Largura de Banda do Canal",
+            "description": "Largura de banda (GBW) como a diferença entre a frequência de corte superior e a inferior (Padrões: AM=10kHz; FM=100kHz; TV=6MHz)",
+            "latex": [
+                "GBW = f_{CS} - f_{CI}"
+            ],
+            "variables": {
+                "GBW": "Largura de Banda (em Hertz)",
+                "fcs": "Frequência de Corte Superior (Hz), obtida em -3dB a direita em relação a crista",
+                "fci": "Frequência de Corte Inferior (Hz), obtida em -3dB a esquerda em relação a crista"
+            }
+        },
+        {
+            "name": "Frequência de Ressonância do Circuito Tanque LC",
+            "description": "Fórmula para calcular a frequência de ressonância (fr) de um circuito oscilador Tanque LC",
+            "latex": [
+                "f_r = \\frac{1}{2\\pi \\sqrt{LC}}"
+            ],
+            "variables": {
+                "fr": "Frequência de Ressonância (em Hertz)",
+                "L": "Indutância (em Henrys)",
+                "C": "Capacitância (em Farads)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Frequência de Ressonância do Circuito Colpitts",
+            "description": "Fórmula para calcular a frequência de ressonância (fr) de um circuito oscilador Colpitts",
+            "latex": [
+                "f_r = \\frac{1}{2\\pi\\sqrt{L \\left( \\frac{C_1 \\times C_2}{C_1 + C_2} \\right)}}"
+            ],
+            "variables": {
+                "fr": "Frequência de Ressonância (em Hertz)",
+                "L": "Indutância (em Henrys)",
+                "C1": "Capacitância C1 (em Farads)",
+                "C2": "Capacitância C2 (em Farads)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Frequência de Ressonância do Circuito Hartley",
+            "description": "Fórmula para calcular a frequência de ressonância (fr) de um circuito oscilador Hartley",
+            "latex": [
+                "f = \\frac{1}{2\\pi\\sqrt{(L_1 + L_2)C}}"
+            ],
+            "variables": {
+                "fr": "Frequência de Ressonância (em Hertz)",
+                "L1": "Indutância L1 (em Henrys)",
+                "L2": "Indutância L2 (em Henrys)",
+                "C": "Capacitância (em Farads)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Frequência de Ressonância do Circuito Armstrong",
+            "description": "Fórmula para calcular a frequência de ressonância (fr) de um circuito oscilador Armstrong",
+            "latex": [
+                "f_r = \\frac{1}{2\\pi \\sqrt{LC}}"
+            ],
+            "variables": {
+                "fr": "Frequência de Ressonância (em Hertz)",
+                "L": "Indutância (em Henrys)",
+                "C": "Capacitância (em Farads)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Reatância Capacitiva",
+            "description": "Fórmula para calcular a oposição oferecida por um capacitor (XC) à passagem de corrente alternada.",
+            "latex": [
+                "X_C = \\frac{1}{2\\pi f C}"
+            ],
+            "variables": {
+                "XC": "Reatância Capacitiva (em Ohms)",
+                "f": "Frequência (em Hertz)",
+                "C": "Capacitância (em Farads)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Reatância Indutiva",
+            "description": "Fórmula para calcular a oposição oferecida por um indutor (XL) à passagem de corrente alternada.",
+            "latex": [
+                "X_L = 2\\pi f L"
+            ],
+            "variables": {
+                "XL": "Reatância Indutiva (em Ohms)",
+                "f": "Frequência (em Hertz)",
+                "L": "Indutância (em Henrys)"
+            },
+            "constants": {
+                "π": "Constante matemática 'pi' (3,14159...)"
+            }
+        },
+        {
+            "name": "Conversão de Ganho dBd <-> dBi",
+            "description": "Relação de conversão entre ganho de antena relativo a uma antena isotrópica (dBi) e ganho relativo a um dipolo de meia onda (dBd).",
+            "latex": [
+                "dBd = dBi - 2,15",
+                "dBi = dBd + 2,15"
+            ],
+            "variables": {
+                "dBd": "Ganho em relação a um dipolo de meia onda (decibéis dipolo)",
+                "dBi": "Ganho em relação a uma fonte isotrópica (decibéis isotrópicos)"
+            }
+        },
+        {
+            "name": "Relação Frente-Costas (RFC)",
+            "description": "Fórmula para calcular a Relação Frente-Costas (RFC) de uma antena em decibéis (dB)",
+            "latex": [
+                "RFC = 10 \\log \\left( \\frac{P_F}{P_C} \\right)"
+            ],
+            "variables": {
+                "RFC": "Relação Frente-Costas (em decibéis, dB)",
+                "PF": "Potência irradiada na direção frontal (em Watts ou unidade relativa)",
+                "PC": "Potência irradiada na direção traseira/costas (na mesma unidade de PF)"
+            }
+        },
+        {
+            "name": "Frequência do Oscilador Local",
+            "description": "Fórmula para calcular a frequência do oscilador local (fOSC) a partir da frequência selecionada (fs) e da intermediária (fi, que para AM é 455kHZ)",
+            "latex": [
+                "f_{OSCL} = f_S + f_{I}"
+            ],
+            "variables": {
+                "fOSCL": "Frequência do Oscilador Local (em Hertz)",
+                "fs": "Frequência do Sinal Selecionado (em Hertz)",
+                "FI": "Frequência Intermediária do receptor (em Hertz)"
+            }
+        },
+        {
+            "name": "Frequência do Misturador",
+            "description": "Componente de frequência gerada quando o sinal do oscilador local (fOSCL) é misturado com o selecionado (fS)",
+            "latex": [
+                "f_{mist} = \\frac{1}{2} \\cos(f_{OSCL} - f_S) + \\frac{1}{2} \\cos(f_{OSCL} + f_S)"
+            ],
+            "variables": {
+                "fmist": "Frequência do Misturador (em Hertz)",
+                "fOSCL": "Frequência do Oscilador Local (em Hertz)",
+                "fs": "Frequência do Sinal Selecionado (em Hertz)"
             }
         }
     ],

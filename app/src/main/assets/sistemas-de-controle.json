@@ -1,7 +1,7 @@
 {
     "name_disc": "Sistemas de Controle",
     "id": 0,
-    "status": "active",
+    "status": "ativo",
     "slug": "sistemas-de-controle",
     "needs": [],
     "semmester": 8,

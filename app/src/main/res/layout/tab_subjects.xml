@@ -8,7 +8,6 @@
     android:background="?android:attr/colorBackground"
     tools:context=".MainActivity">
 
-    <!-- Header com título -->
     <TextView
         android:id="@+id/tv_titulo_disciplinas"
         android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Subtítulo opcional -->
     <TextView
         android:id="@+id/tv_subtitulo_disciplinas"
         android:layout_width="wrap_content"
@@ -35,24 +33,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_titulo_disciplinas" />
 
-    <!-- RecyclerView para lista de disciplinas -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggle_group_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_disciplinas"
+        app:singleSelection="true"
+        app:checkedButton="@id/btn_sort_semestre">
+
+        <Button
+            android:id="@+id/btn_sort_semestre"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Por Semestre"
+            android:textAllCaps="false"
+
+            android:textSize="12sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btn_sort_disciplina"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Por Disciplina"
+            android:textAllCaps="false"
+
+            android:textSize="12sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_disciplinas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:clipToPadding="false"
+        android:clipToPadding="true"
         android:paddingTop="8dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_disciplinas" />
+        app:layout_constraintTop_toBottomOf="@id/toggle_group_sort"
 
-    <!-- Layout para estado vazio (quando não há disciplinas) -->
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="25dp" />
+        <!-- As duas linhas acima dão o efeito Fading Edge no scroll -->
+
     <LinearLayout
         android:id="@+id/layout_empty_state"
         android:layout_width="wrap_content"
@@ -63,7 +109,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_disciplinas">
+        app:layout_constraintTop_toBottomOf="@id/toggle_group_sort">
 
         <ImageView
             android:layout_width="80dp"
@@ -90,7 +136,6 @@
 
     </LinearLayout>
 
-    <!-- Loading indicator (opcional para futuro) -->
     <ProgressBar
         android:id="@+id/progress_loading"
         android:layout_width="wrap_content"
@@ -99,6 +144,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitulo_disciplinas" />
+        app:layout_constraintTop_toBottomOf="@id/toggle_group_sort" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

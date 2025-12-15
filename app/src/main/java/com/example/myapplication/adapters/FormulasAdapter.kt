@@ -20,6 +20,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -27,28 +28,22 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.models.FormulaX
+import com.example.myapplication.utils.FavoritesManager
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class FormulasAdapter(
     private val context: Context,
     private val formulas: List<FormulaX>,
-    private val formulaFocoNome: String?,
+    formulaFocoIndice: Int,
     private val onFormulaClick: (FormulaX) -> Unit
 ) : RecyclerView.Adapter<FormulasAdapter.FormulaViewHolder>() {
 
-    // Armazena a posição exata da fórmula alvo
-    private val targetPosition = formulas.indexOfFirst {
-        it.name.equals(formulaFocoNome, ignoreCase = true)
-    }
-
-    // ID único para a animação
+    private val targetPosition = formulaFocoIndice
     private var animationId = System.currentTimeMillis()
-
-    // Guarda qual ID foi animado
     private var animatedId: Long? = null
 
-    // Cor de fundo padrão do tema (calculada uma vez)
+    // Cor de fundo padrão para animações de destaque
     private val defaultBackgroundColor: Int by lazy {
         val typedValue = TypedValue()
         context.theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurfaceInverse, typedValue, true)
@@ -59,13 +54,14 @@ class FormulasAdapter(
         }
     }
 
+    // Carrega o template HTML apenas uma vez
     private val htmlKatexTemplate: String by lazy {
-        loadHtmlFromAssets(context, "katex_renderer.html")
+        loadKatexTemplate(context)
     }
 
-    private fun loadHtmlFromAssets(context: Context, fileName: String): String {
+    private fun loadKatexTemplate(context: Context): String {
         return try {
-            val inputStream = context.assets.open(fileName)
+            val inputStream = context.assets.open("katex_renderer.html")
             BufferedReader(InputStreamReader(inputStream)).use { it.readText() }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -73,6 +69,7 @@ class FormulasAdapter(
         }
     }
 
+    // Obtém a cor do texto primário para ajustar o LaTeX ao tema (Claro/Escuro)
     private fun getTextColorPrimaryHex(): String {
         return try {
             val typedValue = TypedValue()
@@ -98,32 +95,34 @@ class FormulasAdapter(
     }
 
     inner class FormulaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val favoriteButton: ImageButton = view.findViewById(R.id.btn_favorite)
+        private val variablesListTextView: TextView = view.findViewById(R.id.tv_variables_list)
+        private val constantsListTextView: TextView = view.findViewById(R.id.tv_constants_list)
+        private val separatorView: View = view.findViewById(R.id.separator_variables_constants)
+
         val cardView: CardView = view as CardView
-        val contentLayout: LinearLayout = view.findViewById<LinearLayout>(R.id.layout_expandable_content).parent as LinearLayout
+        val contentLayout: LinearLayout = view.findViewById(R.id.contentLayout)
         val formulaName: TextView = view.findViewById(R.id.tv_formula_name)
         val formulaDescription: TextView = view.findViewById(R.id.tv_formula_description)
         val formulaWebView: WebView = view.findViewById(R.id.webview_latex_formula)
-
         private val expandableContentLayout: LinearLayout = view.findViewById(R.id.layout_expandable_content)
         private val expandStatusTextView: TextView = view.findViewById(R.id.tv_expand_status)
         private val variablesHeaderTextView: TextView = view.findViewById(R.id.tv_variables_header)
-        private val variablesListTextView: TextView = view.findViewById(R.id.tv_variables_list)
-        private val separatorView: View = view.findViewById(R.id.separator_variables_constants)
         private val constantsHeaderTextView: TextView = view.findViewById(R.id.tv_constants_header)
-        private val constantsListTextView: TextView = view.findViewById(R.id.tv_constants_list)
 
-        // REMOVIDO: private var isExpanded = false
         private var isFormulaRendered = false
         private var isWebViewSetupDone = false
         lateinit var currentFormula: FormulaX
 
+        // Configurações básicas do WebView para suportar JS e KaTeX
         @SuppressLint("SetJavaScriptEnabled")
         fun setupWebViewDefaults(webView: WebView) {
             if (isWebViewSetupDone) return
+
             webView.settings.javaScriptEnabled = true
             webView.settings.domStorageEnabled = true
             webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
-            webView.setBackgroundColor(0x00000000)
+            webView.setBackgroundColor(0x00000000) // Fundo transparente
             webView.webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
                     consoleMessage?.let {
@@ -139,32 +138,54 @@ class FormulasAdapter(
             currentFormula = formula
             formulaName.text = formula.name
             formulaDescription.text = formula.description
+
             if (!isWebViewSetupDone) {
                 setupWebViewDefaults(formulaWebView)
             }
-            val variablesText = formatTermsForDisplay(formula.variables)
-            variablesListTextView.text = variablesText.ifBlank { "" }
-            val constantsText = formatTermsForDisplay(formula.constants)
-            constantsListTextView.text = constantsText.ifBlank { "" }
-            isFormulaRendered = false
 
-            // MUDANÇA: Atualiza UI baseado no estado da fórmula
+            variablesListTextView.text = formatTermsForDisplay(formula.variables)
+            constantsListTextView.text = formatTermsForDisplay(formula.constants)
+
+            isFormulaRendered = false
             updateExpandCollapseUI(formula)
 
-            // MUDANÇA: Altera o listener para modificar o estado da fórmula e notificar
+            // Expande ou recolhe o card ao clicar
             cardView.setOnClickListener {
                 formula.isExpanded = !formula.isExpanded
                 notifyItemChanged(adapterPosition)
                 onFormulaClick(formula)
             }
+
+            Log.d("FormulasAdapter", "Bind - Fórmula: '${formula.name}', ID Único: '${formula.getUniqueId()}', isFavorite: ${formula.isFavorite}")
+
+            updateFavoriteIcon(formula)
+
+            // Gerencia clique no botão de favorito
+            favoriteButton.setOnClickListener {
+                FavoritesManager.toggleFormulaFavorite(context, formula)
+                formula.isFavorite = !formula.isFavorite
+                updateFavoriteIcon(formula)
+            }
         }
 
-        // MUDANÇA: Função agora recebe a fórmula como parâmetro
+        private fun updateFavoriteIcon(formula: FormulaX) {
+            if (formula.isFavorite) {
+                favoriteButton.setImageResource(R.drawable.ic_star_filled)
+                favoriteButton.setColorFilter(ContextCompat.getColor(context, R.color.golden))
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_star_border)
+                favoriteButton.clearColorFilter()
+            }
+        }
+
+        // Controla visibilidade dos elementos expandidos
         fun updateExpandCollapseUI(formula: FormulaX) {
             if (formula.isExpanded) {
                 expandableContentLayout.visibility = View.VISIBLE
                 expandStatusTextView.text = context.getString(R.string.collapse)
                 expandStatusTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_up, 0)
+
+                // Renderiza LaTeX se houver
                 if (currentFormula.latex.isNotEmpty()) {
                     formulaWebView.visibility = View.VISIBLE
                     if (!isFormulaRendered) {
@@ -173,26 +194,25 @@ class FormulasAdapter(
                 } else {
                     formulaWebView.visibility = View.GONE
                 }
+
+                // Controla visibilidade de variáveis e constantes
                 val variablesPresent = variablesListTextView.text.isNotBlank()
                 variablesHeaderTextView.visibility = if (variablesPresent) View.VISIBLE else View.GONE
                 variablesListTextView.visibility = if (variablesPresent) View.VISIBLE else View.GONE
+
                 val constantsPresent = constantsListTextView.text.isNotBlank()
                 constantsHeaderTextView.visibility = if (constantsPresent) View.VISIBLE else View.GONE
                 constantsListTextView.visibility = if (constantsPresent) View.VISIBLE else View.GONE
+
                 separatorView.visibility = if (variablesPresent && constantsPresent) View.VISIBLE else View.GONE
             } else {
                 expandableContentLayout.visibility = View.GONE
                 expandStatusTextView.text = context.getString(R.string.expand)
                 expandStatusTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
-                formulaWebView.visibility = View.GONE
-                variablesHeaderTextView.visibility = View.GONE
-                variablesListTextView.visibility = View.GONE
-                separatorView.visibility = View.GONE
-                constantsHeaderTextView.visibility = View.GONE
-                constantsListTextView.visibility = View.GONE
             }
         }
 
+        // Formata lista de termos (variáveis/constantes) em negrito
         private fun formatTermsForDisplay(termsMap: Map<String, String>?): SpannableStringBuilder {
             val builder = SpannableStringBuilder()
             termsMap?.forEach { (symbol, description) ->
@@ -207,6 +227,7 @@ class FormulasAdapter(
             return builder
         }
 
+        // Injeta o código JS para renderizar a fórmula no WebView
         private fun renderFormulaInWebView(formula: FormulaX) {
             formulaWebView.webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
@@ -224,9 +245,10 @@ class FormulasAdapter(
                         isFormulaRendered = false
                     }
                 }
+
                 override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                     super.onReceivedError(view, request, error)
-                    val errorDescription = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) "${error?.errorCode} ${error?.description}" else error?.description ?: "Unknown error"
+                    val errorDescription = "${error?.errorCode} ${error?.description}"
                     val urlString = request?.url?.toString() ?: "Unknown URL"
                     Log.e("KaTeX_WebView_Error", "Erro ao carregar WebView ($urlString): $errorDescription")
                     isFormulaRendered = false
@@ -243,42 +265,29 @@ class FormulasAdapter(
 
     override fun onBindViewHolder(holder: FormulaViewHolder, position: Int) {
         val formula = formulas[position]
+        formula.isFavorite = FavoritesManager.isFormulaFavorite(context, formula)
+
         holder.bind(formula)
 
-        // SEMPRE restaura a cor de fundo padrão primeiro (para views recicladas)
         holder.contentLayout.setBackgroundColor(defaultBackgroundColor)
-
-        // Remove qualquer tag anterior
         holder.contentLayout.tag = null
 
-        // Verifica se é exatamente a posição alvo
-        if (position == targetPosition && targetPosition != -1 && animatedId == null) {
-            // Marca como animado SINCRONAMENTE
+        if (position == targetPosition && animatedId == null) {
             animatedId = animationId
-
-            // Tag a view com o ID da animação
             holder.contentLayout.tag = animationId
-
-            // Anima IMEDIATAMENTE sem post
             animateHighlight(holder.contentLayout, animationId)
         }
     }
 
+    // Anima a cor de fundo para destacar a fórmula selecionada
     private fun animateHighlight(contentLayout: LinearLayout, expectedId: Long) {
         try {
-            // Verifica se a tag ainda corresponde
             if (contentLayout.tag != expectedId) {
                 return
             }
-
             val highlightColor = ContextCompat.getColor(context, R.color.highlight_color) or 0xFF000000.toInt()
-
-            // Define a cor de destaque
             contentLayout.setBackgroundColor(highlightColor)
-
-            // Anima de volta para a cor padrão
             contentLayout.postDelayed({
-                // Verifica novamente antes de animar
                 if (contentLayout.tag == expectedId) {
                     val colorAnimator = ValueAnimator.ofObject(ArgbEvaluator(), highlightColor, defaultBackgroundColor)
                     colorAnimator.duration = 1500

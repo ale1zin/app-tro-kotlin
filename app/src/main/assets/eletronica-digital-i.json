@@ -1,0 +1,237 @@
+{
+  "name_disc": "Eletronica Digital I",
+  "id": 2,
+  "status": "active",
+  "slug": "eletronica-digital-i",
+  "parents": ["eletronica-digital-i", "eletronica-digital-ii", "eletronica-digital-iii", "eletronica-digital-iv", "eletronica-digital-v"],
+  "needs": [],
+  "semmester": 3,
+  "course": "eletrônica",
+  "period": "integrado",
+  "description": "Demonstração da lógica de circuitos digitais.",
+  "content": "A disciplina de Eletronica Digital I aborda o estudo da álgebra booleana, suas representações e as operações lógicas básicas.",
+  "obs": null,
+  "chapters": null,
+  "formulas":
+  [
+    {
+      "name": "Postulado da identidade (or)",
+      "description": "A soma lógica (or) de qualquer variável com a constante 0 (falso) resulta na própria variável.",
+      "latex": ["A + 0 = A"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "0": "constante booleana 'falso'."
+      }
+    },
+    {
+      "name": "Postulado da anulação (or)",
+      "description": "A soma lógica (or) de qualquer variável com a constante 1 (verdadeiro) resulta sempre em 1.",
+      "latex": ["A + 1 = 1"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "1": "constante booleana 'verdadeiro'."
+      }
+    },
+    {
+      "name": "Lei da idempotência (or)",
+      "description": "A soma lógica (or) de uma variável com ela mesma é igual à própria variável.",
+      "latex": ["A + A = A"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1)."
+      }
+    },
+    {
+      "name": "Lei do complemento (or)",
+      "description": "A soma lógica (or) de uma variável com o seu complemento (negação) resulta sempre em 1 (verdadeiro).",
+      "latex": ["A + \\overline{A} = 1"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "Anegado": "O complemento (not) da variável A."
+      }
+    },
+    {
+      "name": "Postulado da anulação (and)",
+      "description": "O produto lógico (and) de qualquer variável com a constante 0 (falso) resulta sempre em 0.",
+      "latex": ["A \\cdot 0 = 0"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "0": "constante booleana 'falso'."
+      }
+    },
+    {
+      "name": "Postulado da identidade (and)",
+      "description": "O produto lógico (and) de qualquer variável com a constante 1 (verdadeiro) resulta na própria variável.",
+      "latex": ["A \\cdot 1 = A"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "1": "constante booleana 'verdadeiro'."
+      }
+    },
+    {
+      "name": "Lei da idempotência (and)",
+      "description": "O produto lógico (and) de uma variável com ela mesma é igual à própria variável.",
+      "latex": ["A \\cdot A = A"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1)."
+      }
+    },
+    {
+      "name": "Lei do complemento (and)",
+      "description": "O produto lógico (and) de uma variável com o seu complemento (negação) resulta sempre em 0 (falso).",
+      "latex": ["A \\cdot \\overline{A} = 0"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "Anegado": "O complemento (not) da variável A."
+      }
+    },
+    {
+      "name": "Lei da dupla negação (involução)",
+      "description": "A negação da negação de uma variável booleana é igual à própria variável.",
+      "latex": ["\\overline{\\overline{A}} = A"],
+      "constants": null,
+      "variables": {
+        "A": "Uma variável booleana."
+      }
+    },
+    {
+      "name": "Lei da absorção (1)",
+      "description": "A soma lógica de uma variável com o produto lógico dela mesma e outra variável resulta na própria variável inicial.",
+      "latex": ["A + A \\cdot B = A"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "B": "variável booleana (pode ser 0 ou 1)."
+      }
+    },
+    {
+      "name": "Teorema da adjacência (simplificação)",
+      "description": "A soma lógica de uma variável com o produto de seu complemento e outra variável é igual à soma da primeira variável com a segunda.",
+      "latex": ["A + \\overline{A} \\cdot B = A + B"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "Anegado": "O complemento (not) da variável A.",
+        "B": "variável booleana (pode ser 0 ou 1)."
+      }
+    },
+    {
+      "name": "Lei distributiva (or sobre and)",
+      "description": "O produto lógico de duas somas lógicas que compartilham uma variável é igual à soma dessa variável com o produto das outras duas.",
+      "latex": ["(A + B) \\cdot (A + C) = A + B \\cdot C"],
+      "constants": null,
+      "variables": {
+        "A": "variável booleana (pode ser 0 ou 1).",
+        "B": "variável booleana (pode ser 0 ou 1).",
+        "C": "variável booleana (pode ser 0 ou 1)."
+      }
+    }
+  ],
+  "supervisors": [
+    {
+      "name": "Sandro Vilela da Silva",
+      "role": "Professor",
+      "degree": null,
+      "university": null,
+      "campus": null,
+      "course": "Curso Técnico em Eletrônica",
+      "email": "sandrosilva@ifsul.edu.br",
+      "telephone": null,
+      "github": null,
+      "instagram": null,
+      "youtube": null,
+      "whatsapp": null
+    }
+  ],
+  "references": [
+    {
+      "name": "BOYLESTAD, Robert L. Introdução à Análise de Circuitos. Ed. Pearson Prentice Education, 2007.",
+      "url": null,
+      "description": null
+    }
+  ],
+  "images": [
+    {
+      "name": "nao tem",
+      "id": null,
+      "alt": "",
+      "url": "",
+      "source": "",
+      "author": ""
+    }
+  ],
+  "tags": ["eletronica", "digital", "logica", "circuitos digitais", "circuitos", "booleana", "algebra booleana", "portas logicas", "portas", "logica digital"],
+  "alias": ["edi","ed1", "eletronica digital i", "eletronica digital 1", "eletronica digital um"],
+  "articleWriters": [
+    {
+      "summary": [
+        {
+          "name": "Pablo Maciel Pinto",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": "https://github.com/Mablozin",
+          "date": "2025-04-08"
+        }
+      ],
+      "formulas": [
+        {
+          "name": "Eduardo Decker",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": null,
+          "date": "2025-10-27"
+        }
+      ],
+      "json": [
+        {
+          "name": "Eduardo Decker",
+          "roles": ["Desenvolvedor", "Estudante de Eletrônica"],
+          "email": null,
+          "github": null,
+          "date": "2025-10-27"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "fileId": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "embededVideos": [
+    {
+      "name": "",
+      "id": null,
+      "description": "",
+      "url": "",
+      "type": "",
+      "source": "",
+      "author": "",
+      "suggestedBy": "",
+      "created_at": null,
+      "updated_at": null,
+      "deleted_at": null
+    }
+  ],
+  "created_at": null,
+  "updated_at": null,
+  "deleted_at": null,
+  "fileVersion": 2
+}

@@ -1,5 +1,5 @@
 {
-    "name_disc": "Instrumentação industrial",
+    "name_disc": "Instrumentação Industrial",
     "id": 12,
     "status": "ativo",
     "slug": "instrumentacao-industrial",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "name": "Incerteza de medição",
+            "name": "Incerteza de Medição",
             "description": "Formula para calcular a incerteza associada à resolução do instrumento de medição.",
             "latex": ["IM = \\pm \\dfrac{MVL}{2}"],
             "constants": null,
@@ -36,7 +36,7 @@
             }
         },
         {
-            "name": "Incerteza total",
+            "name": "Incerteza Total",
             "description": "Formula para calcular a soma de diferentes incertezas.",
             "latex": ["IncertezaTotal = \\pm \\sqrt{(Incerteza_1)^2 + (Incerteza_2)^2 + \\dots + (Incerteza_n)^2}"],
             "constants": null,
@@ -48,7 +48,7 @@
             }
         },
         {
-            "name": "Desvio padrão",
+            "name": "Desvio Padrão",
             "description": "Mede a dispersão dos valores de um conjunto de dados em relação à média.",
             "latex": ["\\sigma = \\sqrt{\\dfrac{\\sum (x_i - \\mu)^2}{N}}"],
             "constants": null,
@@ -61,7 +61,7 @@
             }
         },
         {
-            "name": "Erro de carregamento",
+            "name": "Erro de Carregamento",
             "description": "Calcula o erro causado pela inserção do instrumento de medição no sistema.",
             "latex": ["Erro_{carregamento} = E_{th} - V_l = E_{th} \\times \\left(1 - \\dfrac{Z_l}{Z_{th} + Z_l}\\right)"],
             "constants": null,
@@ -74,7 +74,7 @@
             }
         },
         {
-            "name": "Ponte de wheatstone(equilíbrio)",
+            "name": "Ponte de Wheatstone(Equilíbrio)",
             "description": "Demonstra a relação entre os resistores em uma ponte de wheatstone (equilíbrio).",
             "latex": ["\\frac{R_1}{R_3} = \\frac{R_2}{R_x}"],
             "constants": null,
@@ -86,7 +86,7 @@
             }
         },
         {
-            "name": "Resistência desconhecida na ponte de wheatstone (equilíbrio)",
+            "name": "Resistência desconhecida na Ponte de Wheatstone (Equilíbrio)",
             "description": "Fórmula para calcular Rx em uma ponte de wheatstone (equilíbrio).",
             "latex": ["R_x = R_2 \\cdot \\frac{R_3}{R_1}"],
             "constants": null,
@@ -98,7 +98,7 @@
             }
         },
         {
-            "name": "Tensão de saída na ponte de wheatstone (desequilíbrio)",
+            "name": "Tensão de saída na ponte de Wheatstone (Desequilíbrio)",
             "description": "Fórmula para calcular Vout em uma ponte de wheatstone (desequilíbrio)",
             "latex": ["V_{out} = V_{in} \\cdot \\left( \\frac{R_3}{R_3 + R_x} - \\frac{R_2}{R_1 + R_2} \\right)"],
             "constants": null,

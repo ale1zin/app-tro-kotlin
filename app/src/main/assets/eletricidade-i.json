@@ -152,7 +152,7 @@
                 "constants": {},
                 "variables": {
                     "rho": "Resistividade Final (Ω·m)",
-                    "rho_0": "Resistividade Inicial (Ω·m)",
+                    "rho0": "Resistividade Inicial (Ω·m)",
                     "alpha": "Coeficiente de Temperatura do Material (°C⁻¹)",
                     "deltaT": "Variação de Temperatura (°C)"
                 }
@@ -165,8 +165,8 @@
                 "variables": {
                     "R": "Resistência Final (Ω)",
                     "rho": "Resistividade Final (Ω·m)",
-                    "R_0": "Resistência Inicial (Ω)",
-                    "rho_0": "Resistividade Inicial (Ω·m)"
+                    "R0": "Resistência Inicial (Ω)",
+                    "rho0": "Resistividade Inicial (Ω·m)"
                 }
             },
             {
@@ -175,7 +175,7 @@
                 "latex": ["V_{ab}=R\\times I"],
                 "constants": {},
                 "variables": {
-                    "V_ab": "Diferença de Potencial (V)",
+                    "Vab": "Diferença de Potencial (V)",
                     "R": "Resistência Elétrica (Ω)",
                     "I": "Corrente Elétrica (A)"
                 }

@@ -50,6 +50,10 @@
         android:paddingEnd="8dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_devs" /> <!-- tools:listitem é para preview no editor -->
+        tools:listitem="@layout/item_devs"
+
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="25dp" />
+        <!-- As duas linhas acima dão o efeito Fading Edge no scroll -->
 
 </LinearLayout>

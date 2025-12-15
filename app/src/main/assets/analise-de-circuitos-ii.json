@@ -15,8 +15,8 @@
     "formulas": 
     [
         {
-            "name": "Tensão de Saída",
-            "description":"Amplificador Operacional (Genérico)",
+            "name": "Tensão de Saída (Amplificador Operacional) (Genérico)",
+            "description":null,
             "latex": ["V_o = A_{v} \\times (V_{i2} - V_{i1})"],
             "constants":null,
 
@@ -28,8 +28,8 @@
             }
         },
         {
-            "name": "Impedância de Entrada",
-            "description":"Amplificador Operacional (Genérico)",
+            "name": "Impedância de Entrada (Amplificador Operacional) (Genérico)",
+            "description":null,
             "latex": ["Z_i = \\frac{V_i}{I_i}"],
             "constants":null,
 
@@ -41,8 +41,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Amplificador Operacional (Genérico)",
+            "name": "Ganho de Tensão (Amplificador Operacional) (Genérico)",
+            "description":null,
             "latex": ["A_v = \\frac{V_o}{V_i}"],
             "constants":null,
 
@@ -54,8 +54,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Amplificador Inversor",
+            "name": "Ganho de Tensão (Amplificador Inversor)",
+            "description":null,
             "latex": ["A_v = - \\frac{R_f}{R_i}"],
             "constants":null,
 
@@ -67,8 +67,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Amplificador Não Inversor",
+            "name": "Ganho de Tensão (Amplificador Não Inversor)",
+            "description":null,
             "latex": ["A_v = \\frac{R_f}{R_i} + 1"],
             "constants":null,
 
@@ -80,8 +80,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Amplificador Não Inversor (Alternativa)",
+            "name": "Ganho de Tensão (Amplificador Não Inversor) (Alternativa)",
+            "description":null,
             "latex": ["A_v = \\frac{R_f + R_i}{R_i}"],
             "constants":null,
 
@@ -93,8 +93,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Buffer",
+            "name": "Tensão de Saída (Buffer)",
+            "description":null,
             "latex": ["V_o = A_{v1} \\times A_{v2} \\times V_i"],
             "constants":null,
 
@@ -106,8 +106,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Somador Inversor",
+            "name": "Tensão de Saída (Somador Inversor)",
+            "description":null,
             "latex": ["V_o = A_{v1} \\times V_{i1} + A_{v2} \\times V_{i2} + \\dots + A_{vn} \\times V_{in}"],
             "constants":null,
 
@@ -119,8 +119,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Somador Não Inversor",
+            "name": "Tensão de Saída (Somador Não Inversor)",
+            "description":null,
             "latex": ["V_o = \\left( \\frac{R_f}{R_o} + 1 \\right) \\times \\left\\{ \\left[ V_{i1} \\times \\left( \\frac{R_2 || R_3 || \\dots || R_n}{(R_2 || R_3 || \\dots || R_n) + R_1} \\right) \\right] + \\left[ V_{i2} \\times \\left( \\frac{R_1 || R_3 || \\dots || R_n}{(R_1 || R_3 || \\dots || R_n) + R_2} \\right) \\right] + \\left[ V_{i3} \\times \\left( \\frac{R_1 || R_2 || \\dots || R_n}{(R_1 || R_2 || \\dots || R_n) + R_3} \\right) \\right] + \\dots + \\left[ V_{in} \\times \\left( \\frac{R_1 || R_2 || R_3 || \\dots || R_{n-1}}{(R_1 || R_2 || R_3 || \\dots || R_{n-1}) + R_n} \\right) \\right] \\right\\}"],
             "constants":null,
 
@@ -134,8 +134,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Subtrator (Amplificador Inversor)",
+            "name": "Tensão de Saída (Amplificador Inversor)",
+            "description":null,
             "latex": ["V_{o1} = A_v \\times V_{i1}"],
             "constants":null,
 
@@ -147,8 +147,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Subtrator (Amplificador Inversor) (Alternativa)",
+            "name": "Tensão de Saída (Amplificador Inversor) (Alternativa)",
+            "description":null,
             "latex": ["V_{o1} = \\left( - \\frac{R_f}{R_i} \\right) \\times V_{i1}"],
             "constants":null,
 
@@ -161,8 +161,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Subtrator (Amplificador Não Inversor)",
+            "name": "Tensão de Saída (Amplificador Não Inversor)",
+            "description":null,
             "latex": ["V_o = \\left( \\left( - \\frac{R_f}{R_i} \\right) \\times V_{i1} \\right) + \\left( \\left( \\frac{R_i + R_f}{R_i} \\right) \\times V_{i2} \\right) \\times \\left( \\frac{R_4}{R_3 + R_4} \\right)"],
             "constants":null,
 
@@ -176,8 +176,8 @@
             }
         },
         {
-            "name": "Tensão de Saída em Função do Tempo",
-            "description":"Circuito Integrador",
+            "name": "Tensão de Saída em Função do Tempo (Circuito Integrador)",
+            "description":null,
             "latex": ["V_o(t) = - \\frac{1}{R \\times C} \\int_{0}^{t} V_i(t) \\, dt - V_C"],
             "constants":null,
 
@@ -192,8 +192,8 @@
             }
         },
         {
-            "name": "Ganho de Tensão",
-            "description":"Integrador Prático",
+            "name": "Ganho de Tensão (Integrador Prático)",
+            "description":null,
             "latex": ["A_v = - \\frac{1}{2 \\times \\pi \\times f \\times C \\times R}"],
             "constants":
             {
@@ -209,8 +209,8 @@
             }
         },
         {
-            "name": "Tensão de Saída",
-            "description":"Circuito Diferenciador",
+            "name": "Tensão de Saída (Circuito Diferenciador)",
+            "description":null,
             "latex": ["V_o(t) = - R \\times C \\times \\frac{dV_i(t)}{dt}"],
             "constants":null,
 
