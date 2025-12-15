@@ -14,8 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.models.FormulaX
 
 /**
- * Adapter projetado especificamente para o carrossel horizontal de favoritos na tela inicial.
- * Ele recebe uma lista de objetos FormulaX e exibe cada um em um card simples.
+ * Adapter para o carrossel horizontal de favoritos e recentes na tela inicial.
  */
 class FavoritesCarouselAdapter(
     private val context: Context,
@@ -23,7 +22,6 @@ class FavoritesCarouselAdapter(
 ) : RecyclerView.Adapter<FavoritesCarouselAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val nameTextView: TextView = itemView.findViewById(R.id.tv_favorite_formula_name)
         private val subjectNameTextView: TextView = itemView.findViewById(R.id.tv_favorite_subject_name)
 
@@ -31,56 +29,40 @@ class FavoritesCarouselAdapter(
             nameTextView.text = formula.name
             subjectNameTextView.text = formula.disciplinaOrigem
 
-            Log.d(
-                "FavCarouselAdapter",
-                "Binding: Fórmula='${formula.name}', Disciplina='${formula.disciplinaOrigem}'"
-            )
+            Log.d("FavCarouselAdapter", "Binding: '${formula.name}' em '${formula.disciplinaOrigem}'")
 
             itemView.setOnClickListener {
-                // Validação para garantir que temos os dados necessários para navegar
+                // Garante que temos os dados necessários para navegação
                 if (formula.disciplinaOrigem.isNullOrBlank() || formula.arquivoJsonOrigem.isNullOrBlank()) {
-                    Log.e("FavoritesClick", "Não foi possível navegar: dados de origem ausentes na fórmula '${formula.name}'.")
+                    Log.e("FavoritesClick", "Dados incompletos para navegar para '${formula.name}'.")
                     Toast.makeText(context, "Erro ao abrir favorito.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                Log.d("FavoritesClick", "Clicou em '${formula.name}'. Navegando para a disciplina '${formula.disciplinaOrigem}' usando o arquivo '${formula.arquivoJsonOrigem}'.")
-
+                Log.d("FavoritesClick", "Navegando para '${formula.name}' em '${formula.disciplinaOrigem}'.")
 
                 val intent = Intent(context, FormulasActivity::class.java).apply {
-
                     putExtra("disciplina_arquivo_json", formula.arquivoJsonOrigem)
-
                     putExtra("disciplina_nome", formula.disciplinaOrigem)
-
                     putExtra("formula_nome_foco", formula.name)
-
                     putExtra("formula_indice_foco", formula.indiceNoArray)
                 }
-                // Inicia a activity
                 context.startActivity(intent)
             }
         }
     }
 
-
-     //Chamado quando a RecyclerView precisa de um novo ViewHolder.
-
+    // Cria o layout do item (card)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_favorite_card, parent, false)
         return FavoriteViewHolder(view)
     }
 
-
-     // Chamado pela RecyclerView para exibir os dados em uma posição específica.
-
+    // Vincula os dados ao layout
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(favoriteFormulas[position])
     }
-
-
-     //Retorna o número total de itens na lista de favoritos.
 
     override fun getItemCount() = favoriteFormulas.size
 }
