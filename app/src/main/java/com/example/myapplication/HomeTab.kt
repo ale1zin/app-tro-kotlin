@@ -17,6 +17,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
+import androidx.core.content.edit
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,8 @@ import com.example.myapplication.utils.RecentFormulasManager
 import java.util.Locale
 
 class HomeTab : Fragment() {
+
+    // Dados para frases motivacionais na home
     data class PhrasePair(val phrase: String, val emoji: String)
     private val phrasePairs = listOf(
         PhrasePair("Pronto para aprender algo novo hoje?", "💡"),
@@ -52,9 +56,13 @@ class HomeTab : Fragment() {
         PhrasePair("A teoria conecta com a prática aqui.", "📚"),
         PhrasePair("Aprender também pode ser diversão!", "😄"),
     )
+
+    // Listas e adaptadores para busca e exibição
     private val searchableList = mutableListOf<SearchableItem>()
     private lateinit var searchAdapter: SearchAdapter
     private val disciplinaReader = DisciplinaJsonReader()
+
+    // Componentes de UI (Favoritos, Recentes, Welcome)
     private lateinit var rvFavoritesCarousel: RecyclerView
     private lateinit var tvFavoritesTitle: TextView
     private var allFormulas: List<FormulaX>? = null
@@ -64,6 +72,7 @@ class HomeTab : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Carrega o conteúdo JSON assim que o fragmento é criado
         loadAllContentFromAssets()
     }
 
@@ -76,8 +85,9 @@ class HomeTab : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupGreetingMessage(view)
 
+        // Inicializa e configura os componentes visuais
+        setupGreetingMessage(view)
         setupSearch(view)
         setupFavoritesCarousel(view)
         setupRecentsCarousel(view)
@@ -86,29 +96,34 @@ class HomeTab : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        // Atualiza a saudação e as listas sempre que a tela volta a aparecer
         view?.let { setupGreetingMessage(it) }
         displayFavorites()
         displayRecents()
     }
+
+    // Exibe diálogo para o usuário trocar seu nome de exibição
     private fun showEditUserNameDialog() {
         if (!isAdded) return
 
-        // MODIFICAÇÃO: Aplicando o tema com bordas arredondadas
         val builder = AlertDialog.Builder(requireContext(), R.style.MyRounded_AlertDialog)
 
         builder.setTitle("Alterar nome de usuário")
         val input = EditText(requireContext())
         input.hint = "Digite seu nome"
+
         val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val currentName = sharedPreferences.getString("user_name", "")
         input.setText(currentName)
         builder.setView(input)
+
         builder.setPositiveButton("Salvar") { dialog, _ ->
             val newName = input.text.toString().trim()
             if (newName.isNotEmpty()) {
-                // Salva o novo nome
-                sharedPreferences.edit().putString("user_name", newName).apply()
-                // Atualiza a UI imediatamente
+                sharedPreferences.edit {
+                    putString("user_name", newName)
+                }
+
                 view?.let { setupGreetingMessage(it) }
                 Toast.makeText(requireContext(), "Nome atualizado!", Toast.LENGTH_SHORT).show()
             } else {
@@ -117,18 +132,16 @@ class HomeTab : Fragment() {
             dialog.dismiss()
         }
 
-        // Configura o botão "Cancelar"
         builder.setNegativeButton("Cancelar") { dialog, _ ->
             dialog.cancel()
         }
 
         val dialog = builder.create()
 
-        // Desabilita o botão Salvar se o campo estiver vazio
+        // Lógica para habilitar/desabilitar botão de salvar baseado no texto
         dialog.setOnShowListener {
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.isEnabled = input.text.toString().trim().isNotEmpty()
-
             input.addTextChangedListener { text ->
                 positiveButton.isEnabled = text.toString().trim().isNotEmpty()
             }
@@ -136,26 +149,27 @@ class HomeTab : Fragment() {
 
         dialog.show()
     }
-    private fun updateEmptyStateUI() {
-        val areFavoritesVisible = rvFavoritesCarousel.visibility == View.VISIBLE
-        val areRecentsVisible = rvRecentsCarousel.visibility == View.VISIBLE
 
-        if (!areFavoritesVisible && !areRecentsVisible) {
-            cardWelcomePrompt.visibility = View.VISIBLE
-        } else {
-            cardWelcomePrompt.visibility = View.GONE
-        }
+    // Controla a visibilidade do cartão de boas-vindas (se não houver favoritos/recentes)
+    private fun updateEmptyStateUI() {
+        val areFavoritesVisible = rvFavoritesCarousel.isVisible
+        val areRecentsVisible = rvRecentsCarousel.isVisible
+        cardWelcomePrompt.isVisible = !areFavoritesVisible && !areRecentsVisible
     }
+
+    // Configura a mensagem de "Olá, [Nome]" com frase aleatória
     private fun setupGreetingMessage(view: View) {
         val welcomeTextView = view.findViewById<TextView>(R.id.welcome_home_textview)
-        val btnEditName = view.findViewById<ImageButton>(R.id.btn_edit_user_name) // Pega a referência do botão
+        val btnEditName = view.findViewById<ImageButton>(R.id.btn_edit_user_name)
 
         val sharedPreferences =
             requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val userName = sharedPreferences.getString("user_name", "Usuário") ?: "Usuário"
+
         val randomPair = phrasePairs.random()
         val greetingPart = "Olá, $userName! ${randomPair.emoji}\n"
         val fullText = greetingPart + randomPair.phrase
+
         val spannableString = SpannableString(fullText)
         val sizeSpan = RelativeSizeSpan(0.8f)
         val startIndex = greetingPart.length
@@ -163,11 +177,12 @@ class HomeTab : Fragment() {
         spannableString.setSpan(sizeSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         welcomeTextView.text = spannableString
 
-        // Configura o clique do botão para chamar o diálogo
         btnEditName.setOnClickListener {
             showEditUserNameDialog()
         }
     }
+
+    // Configura a barra de pesquisa e o adapter de resultados
     private fun setupSearch(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_results)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -175,8 +190,7 @@ class HomeTab : Fragment() {
             navigateToFormulas(clickedItem)
         }
         recyclerView.adapter = searchAdapter
-
-        val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.search_view)
+        val searchView = view.findViewById<SearchView>(R.id.search_view)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -200,14 +214,15 @@ class HomeTab : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
+    // Carrega e exibe as fórmulas acessadas recentemente
     private fun displayRecents() {
         if (!isAdded) return
 
         val recentFormulaIds = RecentFormulasManager.getRecentFormulas(requireContext())
 
         if (recentFormulaIds.isEmpty() || allFormulas == null) {
-            tvRecentsTitle.visibility = View.GONE
-            rvRecentsCarousel.visibility = View.GONE
+            tvRecentsTitle.isVisible = false
+            rvRecentsCarousel.isVisible = false
             updateEmptyStateUI()
             return
         }
@@ -217,75 +232,60 @@ class HomeTab : Fragment() {
         }
 
         if (recentFormulas.isNotEmpty()) {
-            tvRecentsTitle.visibility = View.VISIBLE
-            rvRecentsCarousel.visibility = View.VISIBLE
-
+            tvRecentsTitle.isVisible = true
+            rvRecentsCarousel.isVisible = true
             val recentsAdapter = FavoritesCarouselAdapter(requireContext(), recentFormulas)
             rvRecentsCarousel.adapter = recentsAdapter
         } else {
-            tvRecentsTitle.visibility = View.GONE
-            rvRecentsCarousel.visibility = View.GONE
+            tvRecentsTitle.isVisible = false
+            rvRecentsCarousel.isVisible = false
         }
 
         updateEmptyStateUI()
     }
 
+    // Carrega e exibe as fórmulas marcadas como favoritas
     private fun displayFavorites() {
         if (!isAdded) return
 
         val favoriteIds = FavoritesManager.getFormulaFavorites(requireContext())
 
-        Log.d("HomeTab_Favorites", "=== DEBUG FAVORITOS ===")
-        Log.d("HomeTab_Favorites", "IDs salvos no SharedPreferences: $favoriteIds")
+        Log.d("HomeTab_Favorites", "IDs salvos: $favoriteIds")
 
         if (favoriteIds.isEmpty()) {
-            tvFavoritesTitle.visibility = View.GONE
-            rvFavoritesCarousel.visibility = View.GONE
-            Log.d("HomeTab_Favorites", "Nenhum favorito encontrado")
+            tvFavoritesTitle.isVisible = false
+            rvFavoritesCarousel.isVisible = false
             updateEmptyStateUI()
             return
         }
 
         if (allFormulas == null) {
-            Log.e("HomeTab_Display", "A lista 'allFormulas' ainda está nula.")
             updateEmptyStateUI()
             return
-        }
-
-        Log.d("HomeTab_Favorites", "--- Fórmulas Carregadas (primeiras 5) ---")
-        allFormulas!!.take(5).forEach { formula ->
-            Log.d("HomeTab_Favorites", "Nome: '${formula.name}', ID Único: '${formula.getUniqueId()}'")
         }
 
         val favoriteFormulaObjects = favoriteIds.mapNotNull { favoriteId ->
             allFormulas!!.find { formula ->
                 formula.getUniqueId() == favoriteId
             }
-        }.also { formulas ->
-            Log.d("HomeTab_Favorites", "Total de favoritos filtrados (sem duplicatas): ${formulas.size}")
-            formulas.forEach { formula ->
-                Log.d("HomeTab_Favorites", "✓ MATCH: '${formula.name}' (ID: '${formula.getUniqueId()}')")
-            }
         }
 
-        Log.d("HomeTab_Favorites", "Total de favoritos filtrados: ${favoriteFormulaObjects.size}")
-
         if (favoriteFormulaObjects.isEmpty()) {
-            tvFavoritesTitle.visibility = View.GONE
-            rvFavoritesCarousel.visibility = View.GONE
-            Log.w("HomeTab_Favorites", "Nenhuma fórmula correspondeu aos IDs salvos!")
+            tvFavoritesTitle.isVisible = false
+            rvFavoritesCarousel.isVisible = false
             updateEmptyStateUI()
             return
         }
 
-        tvFavoritesTitle.visibility = View.VISIBLE
-        rvFavoritesCarousel.visibility = View.VISIBLE
+        tvFavoritesTitle.isVisible = true
+        rvFavoritesCarousel.isVisible = true
 
         val carouselAdapter = FavoritesCarouselAdapter(requireContext(), favoriteFormulaObjects)
         rvFavoritesCarousel.adapter = carouselAdapter
         updateEmptyStateUI()
     }
 
+    // Lê todos os arquivos JSON dos assets para criar a lista pesquisável e de referências
     private fun loadAllContentFromAssets() {
         if (allFormulas != null) return
 
@@ -296,6 +296,7 @@ class HomeTab : Fragment() {
             val fileNames = requireContext().assets.list("")?.filter { it.endsWith(".json") }
             fileNames?.forEach { fileName ->
                 val subject = disciplinaReader.loadDisciplina(requireContext(), fileName)
+
                 if (subject?.formulas != null) {
                     subject.formulas.forEachIndexed { index, formula ->
                         formula.disciplinaOrigem = subject.name
@@ -305,9 +306,9 @@ class HomeTab : Fragment() {
                         tempAllFormulas.add(formula)
 
                         val searchText = (
-                                (subject.name ?: "") + " " +
+                                subject.name + " " +
                                         formula.name + " " +
-                                        (formula.description ?: "") + " " +
+                                        formula.description + " " +
                                         (subject.tags?.joinToString(" ") ?: "") + " " +
                                         (subject.alias?.joinToString(" ") ?: "")
                                 ).lowercase(Locale.ROOT)
@@ -315,7 +316,7 @@ class HomeTab : Fragment() {
                         tempSearchableList.add(
                             SearchableItem(
                                 title = formula.name,
-                                description = subject.name ?: "Disciplina Desconhecida",
+                                description = subject.name,
                                 searchText = searchText,
                                 sourceFile = fileName
                             )
@@ -328,25 +329,20 @@ class HomeTab : Fragment() {
             searchableList.clear()
             searchableList.addAll(tempSearchableList)
 
-            Log.d("HomeTab_Loader", "Carregou com sucesso ${allFormulas?.size} fórmulas.")
-
-            allFormulas?.take(3)?.forEach { formula ->
-                Log.d("HomeTab_Loader",
-                    "Fórmula: '${formula.name}', Arquivo: '${formula.arquivoJsonOrigem}', " +
-                            "Índice: ${formula.indiceNoArray}, ID: '${formula.getUniqueId()}'")
-            }
+            Log.d("HomeTab_Loader", "Carregou ${allFormulas?.size} fórmulas.")
 
         } catch (e: Exception) {
-            Log.e("HomeTab_Loader", "Erro CRÍTICO ao carregar assets.", e)
+            Log.e("HomeTab_Loader", "Erro ao carregar assets.", e)
         }
     }
 
+    // Filtra a lista principal baseado no texto digitado
     private fun filterContent(query: String?) {
         val resultsOverlay = view?.findViewById<CardView>(R.id.results_overlay_container)
 
         if (query.isNullOrBlank()) {
             searchAdapter.updateList(emptyList())
-            resultsOverlay?.visibility = View.GONE
+            resultsOverlay?.isVisible = false
             return
         }
 
@@ -355,19 +351,19 @@ class HomeTab : Fragment() {
         }
 
         searchAdapter.updateList(filteredList)
-        resultsOverlay?.visibility = if (filteredList.isEmpty()) View.GONE else View.VISIBLE
+        resultsOverlay?.isVisible = filteredList.isNotEmpty()
     }
 
+    // Abre a tela de detalhes da fórmula clicada
     private fun navigateToFormulas(item: SearchableItem) {
         try {
-
             val intent = Intent(requireContext(), FormulasActivity::class.java).apply {
                 putExtra("disciplina_arquivo_json", item.sourceFile)
                 putExtra("disciplina_nome", item.description)
                 putExtra("formula_nome_foco", item.title)
             }
             startActivity(intent)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Toast.makeText(requireContext(), "Não foi possível abrir a disciplina.", Toast.LENGTH_SHORT).show()
         }
     }
