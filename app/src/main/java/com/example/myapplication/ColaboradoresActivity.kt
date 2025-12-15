@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.models.Desenvolvedor
 import com.example.myapplication.models.TipoDesenvolvedor
+import com.example.myapplication.adapters.DesenvolvedorAdapter
+import com.example.myapplication.adapters.DevActionsListener
 
 /**
  * Activity responsável por exibir a lista de colaboradores (Técnicos, Professores externos, etc).

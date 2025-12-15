@@ -1,5 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.adapters
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,12 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-// Glide Imports:
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.models.Desenvolvedor
 
+// Interface para tratar os cliques nos botões de contato
 interface DevActionsListener {
     fun onEmailClick(email: String)
     fun onGithubClick(githubUrl: String)
@@ -34,19 +35,11 @@ class DesenvolvedorAdapter(
 
     override fun onBindViewHolder(holder: DesenvolvedorViewHolder, position: Int) {
         val desenvolvedor = desenvolvedores[position]
-
-        // LOG
-        Log.d("DevAdapter_onBind", "Pos: $position, Nome: ${desenvolvedor.nome}, FotoString: ${desenvolvedor.fotoUrl}, Tipo: ${desenvolvedor.tipo}")
-
+        Log.d("DevAdapter", "Exibindo: ${desenvolvedor.nome} (${desenvolvedor.tipo})")
         holder.bind(desenvolvedor, listener)
     }
 
     override fun getItemCount(): Int = desenvolvedores.size
-
-    fun updateData(newDesenvolvedores: List<Desenvolvedor>) {
-        this.desenvolvedores = newDesenvolvedores
-        notifyDataSetChanged()
-    }
 
     class DesenvolvedorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgFoto: ImageView = itemView.findViewById(R.id.img_desenvolvedor_foto)
@@ -57,19 +50,16 @@ class DesenvolvedorAdapter(
         private val btnLinkedin: ImageButton = itemView.findViewById(R.id.btn_desenvolvedor_linkedin)
         private val btnInstagram: ImageButton = itemView.findViewById(R.id.btn_desenvolvedor_instagram)
 
+        @SuppressLint("DiscouragedApi") // Permite buscar recursos pelo nome (string)
         fun bind(desenvolvedor: Desenvolvedor, listener: DevActionsListener?) {
-
-            Log.d("DevAdapter_bind", "Binding - Nome: ${desenvolvedor.nome}, FotoString: ${desenvolvedor.fotoUrl}")
-
             tvNome.text = desenvolvedor.nome
             tvFuncao.text = desenvolvedor.funcao
 
+            // Configuração da Imagem (Glide ou Resource Local)
             val fotoUrl = desenvolvedor.fotoUrl
-            val placeholderDrawable = R.drawable.ic_devdefault // Seu drawable padrão
+            val placeholderDrawable = R.drawable.ic_devdefault
 
             Glide.with(itemView.context).clear(imgFoto)
-
-            imgFoto.setImageResource(placeholderDrawable)
 
             if (fotoUrl != null && fotoUrl.isNotBlank()) {
                 val requestOptions = RequestOptions()
@@ -77,68 +67,56 @@ class DesenvolvedorAdapter(
                     .error(placeholderDrawable)
                     .dontAnimate()
 
-                if (fotoUrl.startsWith("http://") || fotoUrl.startsWith("https://")) {
-                    // Carregar de URL da Internet
+                if (fotoUrl.startsWith("http")) {
+                    // Carrega via URL
                     Glide.with(itemView.context)
                         .load(fotoUrl)
                         .apply(requestOptions)
                         .into(imgFoto)
                 } else {
+                    // Carrega drawable local pelo nome
                     val imageResId = itemView.context.resources.getIdentifier(
                         fotoUrl,
                         "drawable",
                         itemView.context.packageName
                     )
+
                     if (imageResId != 0) {
                         imgFoto.setImageResource(imageResId)
-                        Log.d("DevAdapter", "Drawable carregado diretamente: $fotoUrl para ${desenvolvedor.nome}")
                     } else {
-                        // Recurso drawable NÃO encontrado com esse nome
-                        Log.w("DevAdapter", "Drawable NÃO encontrado para: $fotoUrl. Usando default.")
+                        Log.w("DevAdapter", "Imagem não encontrada: $fotoUrl")
                         imgFoto.setImageResource(placeholderDrawable)
                     }
                 }
             } else {
-                // fotoUrl é nula ou vazia
-                Log.d("DevAdapter", "fotoUrl é nula ou vazia para ${desenvolvedor.nome}. Usando default.")
                 imgFoto.setImageResource(placeholderDrawable)
             }
 
-            // Configuração dos botões
-
-            // Botão do Email
-            if (desenvolvedor.email != null && desenvolvedor.email.isNotBlank()) {
-                btnEmail.visibility = View.VISIBLE
-                btnEmail.setOnClickListener {
-                    Log.d("DevAdapter", "CLIQUE: Botão de Email para: ${desenvolvedor.email}")
-                    listener?.onEmailClick(desenvolvedor.email)
-                }
-            } else {
-                btnEmail.visibility = View.GONE
+            // Configuração dos Botões de Ação
+            setupButton(btnEmail, desenvolvedor.email) {
+                listener?.onEmailClick(it)
             }
 
-            // Botão do GitHub
-            if (desenvolvedor.githubUrl != null) {
-                btnGithub.visibility = View.VISIBLE
-                btnGithub.setOnClickListener { listener?.onGithubClick(desenvolvedor.githubUrl) }
-            } else {
-                btnGithub.visibility = View.GONE
+            setupButton(btnGithub, desenvolvedor.githubUrl) {
+                listener?.onGithubClick(it)
             }
 
-            // Botão do LinkedIn
-            if (desenvolvedor.linkedinUrl != null) {
-                btnLinkedin.visibility = View.VISIBLE
-                btnLinkedin.setOnClickListener { listener?.onLinkedinClick(desenvolvedor.linkedinUrl) }
-            } else {
-                btnLinkedin.visibility = View.GONE
+            setupButton(btnLinkedin, desenvolvedor.linkedinUrl) {
+                listener?.onLinkedinClick(it)
             }
 
-            // Botão do Instagram
-            if (desenvolvedor.instagramUrl != null) {
-                btnInstagram.visibility = View.VISIBLE
-                btnInstagram.setOnClickListener { listener?.onInstagramClick(desenvolvedor.instagramUrl) }
+            setupButton(btnInstagram, desenvolvedor.instagramUrl) {
+                listener?.onInstagramClick(it)
+            }
+        }
+
+        // Função auxiliar para exibir ou esconder botões
+        private fun setupButton(button: View, data: String?, onClick: (String) -> Unit) {
+            if (!data.isNullOrBlank()) {
+                button.visibility = View.VISIBLE
+                button.setOnClickListener { onClick(data) }
             } else {
-                btnInstagram.visibility = View.GONE
+                button.visibility = View.GONE
             }
         }
     }
