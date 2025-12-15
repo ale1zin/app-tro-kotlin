@@ -6,52 +6,54 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri // 1. IMPORT NECESSÁRIO
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.models.Desenvolvedor
 import com.example.myapplication.models.TipoDesenvolvedor
 
-// Herda de AppCompatActivity e implementa DevActionsListener
+/**
+ * Activity responsável por exibir a lista de colaboradores (Técnicos, Professores externos, etc).
+ * Implementa DevActionsListener para tratar cliques nos ícones de contato.
+ */
 class ColaboradoresActivity : AppCompatActivity(), DevActionsListener {
 
     private lateinit var recyclerViewColaboradores: RecyclerView
     private lateinit var colaboradorAdapter: DesenvolvedorAdapter
     private lateinit var btnVoltar: ImageButton
 
-    // usa onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Define o layout da Activity
         setContentView(R.layout.activity_colaboradores)
 
-        // Configurar o Botão Voltar
+        // Configura o botão para fechar a tela (voltar)
         btnVoltar = findViewById(R.id.btn_voltar_colaboradores)
         btnVoltar.setOnClickListener {
-            // Em Activities, usamos finish() para voltar
             finish()
         }
 
-        // Inicializar RecyclerView
+        // Configura a lista (RecyclerView)
         recyclerViewColaboradores = findViewById(R.id.recycler_view_colaboradores)
-        recyclerViewColaboradores.layoutManager = LinearLayoutManager(this) // usa 'this'
+        recyclerViewColaboradores.layoutManager = LinearLayoutManager(this)
 
-        // Carregar os dados
+        // Carrega a lista estática de dados
         val listaColaboradores = carregarColaboradores()
 
-        // Instanciar o DesenvolvedorAdapter, passando 'this' como listener
+        // Inicializa o adapter passando esta Activity como listener dos cliques
         colaboradorAdapter = DesenvolvedorAdapter(listaColaboradores, this)
         recyclerViewColaboradores.adapter = colaboradorAdapter
     }
 
+    // Retorna a lista manual de colaboradores
     private fun carregarColaboradores(): List<Desenvolvedor> {
-        // (Sua lista de colaboradores ATUALIZADA)
         return listOf(
             Desenvolvedor(
                 id = "c8",
                 nome = "Murilo Chagas Martin",
                 fotoUrl = "ic_c8",
                 funcao = "Técnico em Eletrônica",
+                // Definido um valor padrão aqui (não é usado na aba Colaboradores, mas é essencial em DevsTab)
+                // Isso resolve o erro na ColaboradoresActivity sem quebrar o DevsTab.
                 tipo = TipoDesenvolvedor.PROFESSOR,
                 email = "martinmurilo29@gmail.com",
                 githubUrl = "https://github.com/murcilonx",
@@ -160,60 +162,52 @@ class ColaboradoresActivity : AppCompatActivity(), DevActionsListener {
         )
     }
 
+    // Tenta abrir o cliente de email do usuário (caso o envio direto falhe)
     private fun fallbackEmailChooser(email: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "message/rfc822"
             putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-            putExtra(Intent.EXTRA_SUBJECT, "Assunto do email")
+            putExtra(Intent.EXTRA_SUBJECT, "Contato via App Eletrônica")
         }
 
         try {
-            // usa 'this' em vez de 'requireContext()'
             Toast.makeText(this, "Escolha seu aplicativo de email", Toast.LENGTH_SHORT).show()
-            val chooser = Intent.createChooser(intent, "Enviar email usando:")
-            startActivity(chooser)
-            Log.d("ColaboradoresActivity", "AÇÃO: Chooser de email iniciado com sucesso")
+            startActivity(Intent.createChooser(intent, "Enviar email usando:"))
         } catch (e: Exception) {
-            Log.e("ColaboradoresActivity", "ERRO: Falha ao iniciar chooser de email", e)
+            Log.e("ColaboradoresActivity", "Erro ao abrir chooser de email", e)
             Toast.makeText(this, "Nenhum aplicativo de email encontrado.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onEmailClick(email: String) {
-        Log.d("ColaboradoresActivity", "AÇÃO: onEmailClick recebido para email: $email")
+    // --- Implementação dos métodos de clique da interface DevActionsListener ---
 
+    override fun onEmailClick(email: String) {
+        // Tenta abrir direto para envio
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            // 2. CORREÇÃO KTX
             data = "mailto:$email?subject=".toUri()
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
 
         try {
             startActivity(intent)
-            Log.d("ColaboradoresActivity", "AÇÃO: EMAIL direto enviado")
         } catch (e: Exception) {
-            Log.e("ColaboradoresActivity", "ERRO: $e")
+            Log.e("ColaboradoresActivity", "Erro envio direto: $e")
             fallbackEmailChooser(email)
         }
     }
 
     override fun onGithubClick(githubUrl: String) {
-        Log.d("ColaboradoresActivity", "GitHub click: $githubUrl")
-        // 3. CORREÇÃO KTX
+        // Abre o link no navegador
         val intent = Intent(Intent.ACTION_VIEW, githubUrl.toUri())
         startActivity(intent)
     }
 
     override fun onLinkedinClick(linkedinUrl: String) {
-        Log.d("ColaboradoresActivity", "LinkedIn click: $linkedinUrl")
-        // 4. CORREÇÃO KTX
         val intent = Intent(Intent.ACTION_VIEW, linkedinUrl.toUri())
         startActivity(intent)
     }
 
     override fun onInstagramClick(instagramUrl: String) {
-        Log.d("ColaboradoresActivity", "Instagram click: $instagramUrl")
-        // 5. CORREÇÃO KTX
         val intent = Intent(Intent.ACTION_VIEW, instagramUrl.toUri())
         startActivity(intent)
     }
