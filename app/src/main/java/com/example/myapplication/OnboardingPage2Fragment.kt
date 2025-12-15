@@ -26,20 +26,16 @@ class OnboardingPage2Fragment : Fragment() {
 
         Log.d("OnboardingFragment2", "onViewCreated FOI CHAMADO!")
 
-
         val lampOff = view.findViewById<ImageView>(R.id.imageView2)
         val lampOn = view.findViewById<ImageView>(R.id.imageView3)
 
-
         Handler(Looper.getMainLooper()).postDelayed({
             Log.d("OnboardingFragment2", "Handler ativado. Iniciando animação da lâmpada.")
-
 
             lampOff.animate()
                 .alpha(0f)
                 .setDuration(1500)
                 .start()
-
 
             lampOn.animate()
                 .alpha(1f)

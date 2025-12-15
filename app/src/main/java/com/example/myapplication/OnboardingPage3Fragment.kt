@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -28,30 +29,24 @@ class OnboardingPage3Fragment : Fragment() {
         val nameEditText = view.findViewById<TextInputEditText>(R.id.name_edit_text)
 
         finishButton.setOnClickListener {
-
             val userName = nameEditText.text.toString().trim()
 
             if (userName.isEmpty()) {
-
                 nameInputLayout.error = "Por favor, digite seu nome."
                 return@setOnClickListener
             }
 
-
             nameInputLayout.error = null
 
-
             val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-            with(sharedPreferences.edit()) {
+
+            sharedPreferences.edit {
                 putBoolean("onboarding_completed", true)
                 putString("user_name", userName)
-                apply()
             }
-
 
             val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)
-
 
             requireActivity().finish()
         }
