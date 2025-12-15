@@ -1,13 +1,14 @@
 package com.example.myapplication.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.models.Subjects
+import java.util.Locale
 
 class SubjectsButtonAdapter(
     private var disciplinas: List<Subjects>,
@@ -28,60 +29,38 @@ class SubjectsButtonAdapter(
         return DisciplinaViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n") // Permite textos diretos sem necessidade de strings.xml
     override fun onBindViewHolder(holder: DisciplinaViewHolder, position: Int) {
         val disciplina = disciplinas[position]
 
-        // Nome da disciplina
+        // Define os textos básicos
         holder.tvNome.text = disciplina.name
-
-        // Semestre
         holder.tvSemestre.text = "${disciplina.semmester}° semestre"
-
-        // Descrição
         holder.tvDescricao.text = disciplina.description
 
-        // Curso
-        holder.tvCurso.text = disciplina.course.capitalize()
+        // Formata o nome do curso (Primeira letra maiúscula)
+        holder.tvCurso.text = disciplina.course.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+        }
 
-        // Contador de fórmulas
-        val formulasCount = disciplina.formulas?.size
+        // Lógica de plural para fórmulas
+        val formulasCount = disciplina.formulas?.size ?: 0
         holder.tvFormulas.text = if (formulasCount == 1) {
             "1 fórmula"
         } else {
             "$formulasCount fórmulas"
         }
 
-        // Click listener
+        // Configura o clique
         holder.itemView.setOnClickListener {
-
-
-
             onDisciplinaClick(disciplina)
         }
     }
 
     override fun getItemCount(): Int = disciplinas.size
 
-    private fun configureStatusBackground(textView: TextView, status: String) {
-        val context = textView.context
-
-        when (status.lowercase()) {
-            "active", "ativo" -> {
-                textView.setBackgroundResource(R.drawable.status_active_background)
-                textView.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            }
-            "inactive", "inativo" -> {
-                textView.setBackgroundResource(R.drawable.status_inactive_background)
-                textView.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-            }
-            else -> {
-                textView.setBackgroundResource(R.drawable.status_default_background)
-                textView.setTextColor(ContextCompat.getColor(context, android.R.color.black))
-            }
-        }
-    }
-
-
+    // Atualiza a lista completa e notifica o RecyclerView
+    @SuppressLint("NotifyDataSetChanged")
     fun updateDisciplinas(newDisciplinas: List<Subjects>) {
         disciplinas = newDisciplinas
         notifyDataSetChanged()
