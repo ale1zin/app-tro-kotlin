@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import android.graphics.drawable.VectorDrawable
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import java.util.Locale
+import kotlin.math.abs
+import kotlin.math.floor
+import kotlin.math.log10
 import kotlin.math.pow
 
 class ResistorTab : Fragment() {
@@ -103,12 +106,6 @@ class ResistorTab : Fragment() {
     }
 
     private fun setDefaultResistor() {
-        // Resistor de 1kΩ:
-        // Faixa 1: Marrom (1)
-        // Faixa 2: Preto (0)
-        // Faixa 3: Vermelho (x100)
-        // Faixa 4: Dourado (±5%)
-
         firstBand = 1    // Marrom
         secondBand = 0   // Preto
         multiplier = 2   // Vermelho (x100)
@@ -118,24 +115,27 @@ class ResistorTab : Fragment() {
         calculateAndDisplayValue()
     }
 
+    @SuppressLint("DiscouragedApi") // Uso de getIdentifier é necessário devido à estrutura dinâmica
     private fun setupButtons(view: View) {
+        val packageName = requireContext().packageName
+
         // Configurar botões da primeira coluna (primeiro dígito)
         for (i in 0..9) {
-            val buttonId = resources.getIdentifier("btn_c1_$i", "id", requireContext().packageName)
+            val buttonId = resources.getIdentifier("btn_c1_$i", "id", packageName)
             val button = view.findViewById<MaterialButton>(buttonId)
             button?.setOnClickListener { selectFirstBand(i) }
         }
 
         // Configurar botões da segunda coluna (segundo dígito)
         for (i in 0..9) {
-            val buttonId = resources.getIdentifier("btn_c2_$i", "id", requireContext().packageName)
+            val buttonId = resources.getIdentifier("btn_c2_$i", "id", packageName)
             val button = view.findViewById<MaterialButton>(buttonId)
             button?.setOnClickListener { selectSecondBand(i) }
         }
 
         // Configurar botões da terceira coluna (multiplicador)
         for (i in 0..11) {
-            val buttonId = resources.getIdentifier("btn_c3_$i", "id", requireContext().packageName)
+            val buttonId = resources.getIdentifier("btn_c3_$i", "id", packageName)
             val button = view.findViewById<MaterialButton>(buttonId)
             button?.setOnClickListener { selectMultiplier(i) }
         }
@@ -143,7 +143,7 @@ class ResistorTab : Fragment() {
         // Configurar botões da quarta coluna (tolerância)
         val toleranceButtons = listOf(1, 2, 5, 6, 7, 8, 10, 11)
         for (i in toleranceButtons) {
-            val buttonId = resources.getIdentifier("btn_c4_$i", "id", requireContext().packageName)
+            val buttonId = resources.getIdentifier("btn_c4_$i", "id", packageName)
             val button = view.findViewById<MaterialButton>(buttonId)
             button?.setOnClickListener { selectTolerance(i) }
         }
@@ -174,31 +174,20 @@ class ResistorTab : Fragment() {
     }
 
     private fun updateResistorDisplay() {
-        // Atualizar a cor da primeira faixa
-        firstBand.takeIf { it != -1 }?.let { value ->
-            val color = ContextCompat.getColor(requireContext(), getColorForValue(value))
-            band1Image.setColorFilter(color)
+        // Helper interno para aplicar cor
+        fun applyColor(view: ImageView, value: Int) {
+            val colorRes = getColorForValue(value)
+            val color = ContextCompat.getColor(requireContext(), colorRes)
+            view.setColorFilter(color)
         }
 
-        // Atualizar a cor da segunda faixa
-        secondBand.takeIf { it != -1 }?.let { value ->
-            val color = ContextCompat.getColor(requireContext(), getColorForValue(value))
-            band2Image.setColorFilter(color)
-        }
-
-        // Atualizar a cor do multiplicador
-        multiplier.takeIf { it != -1 }?.let { value ->
-            val color = ContextCompat.getColor(requireContext(), getColorForValue(value))
-            band3Image.setColorFilter(color)
-        }
-
-        // Atualizar a cor da tolerância
-        tolerance.takeIf { it != -1 }?.let { value ->
-            val color = ContextCompat.getColor(requireContext(), getColorForValue(value))
-            band4Image.setColorFilter(color)
-        }
+        if (firstBand != -1) applyColor(band1Image, firstBand)
+        if (secondBand != -1) applyColor(band2Image, secondBand)
+        if (multiplier != -1) applyColor(band3Image, multiplier)
+        if (tolerance != -1) applyColor(band4Image, tolerance)
     }
 
+    @SuppressLint("SetTextI18n") // Texto formatado dinamicamente para exibição de valores
     private fun calculateAndDisplayValue() {
         if (firstBand == -1 || secondBand == -1 || multiplier == -1) {
             resistanceValue.text = "--- Ω"
@@ -217,28 +206,25 @@ class ResistorTab : Fragment() {
         } else {
             ""
         }
-        resistanceValue.text = "$formattedValue$toleranceText"
+
+        // Uso de String.format para evitar concatenação direta em setText
+        resistanceValue.text = String.format(Locale.getDefault(), "%s%s", formattedValue, toleranceText)
 
         // Validação E12
         val isValidE12 = validateE12(finalValue)
-        
-        // Sempre mostrar o ícone de validação
-        validationIcon.visibility = View.VISIBLE
-        
-        // Atualizar ícone de validação
-        if (isValidE12) {
-            validationIcon.setImageResource(R.drawable.ic_check)
-            validationIcon.setColorFilter(ContextCompat.getColor(requireContext(), android.R.color.holo_green_dark))
-            // Opcional: Adicionar descrição para acessibilidade
-            validationIcon.contentDescription = "Valor válido na série E12"
-        } else {
-            validationIcon.setImageResource(R.drawable.ic_error)
-            validationIcon.setColorFilter(ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark))
-            // Opcional: Adicionar descrição para acessibilidade
-            validationIcon.contentDescription = "Valor não pertence à série E12"
-        }
 
-        // Opcional: Adicionar animação suave na troca dos ícones
+        validationIcon.visibility = View.VISIBLE
+
+        // Atualizar ícone de validação
+        val iconRes = if (isValidE12) R.drawable.ic_check else R.drawable.ic_error
+        val colorRes = if (isValidE12) android.R.color.holo_green_dark else android.R.color.holo_red_dark
+        val desc = if (isValidE12) "Valor válido na série E12" else "Valor não pertence à série E12"
+
+        validationIcon.setImageResource(iconRes)
+        validationIcon.setColorFilter(ContextCompat.getColor(requireContext(), colorRes))
+        validationIcon.contentDescription = desc
+
+        // Animação suave na troca dos ícones
         validationIcon.alpha = 0f
         validationIcon.animate()
             .alpha(1f)
@@ -247,116 +233,43 @@ class ResistorTab : Fragment() {
     }
 
     private fun formatResistanceValue(value: Double): String {
-        // Adiciona uma verificação específica para o valor 0.0
+        val locale = Locale.getDefault()
+
         if (value == 0.0) {
-            return String.format("%.2f Ω", 0.0) // Retorna "0.00 Ω"
+            return String.format(locale, "%.2f Ω", 0.0)
         }
 
         return when {
-            value >= 1_000_000_000 -> String.format("%.2f GΩ", value / 1_000_000_000)
-            value >= 1_000_000 -> String.format("%.2f MΩ", value / 1_000_000)
-            value >= 1_000 -> String.format("%.2f kΩ", value / 1_000)
-            value >= 1 -> String.format("%.2f Ω", value)
-            value >= 0.001 -> String.format("%.2f mΩ", value * 1_000)
-            else -> String.format("%.2e Ω", value) // Agora só para valores muito pequenos (não-zero)
+            value >= 1_000_000_000 -> String.format(locale, "%.2f GΩ", value / 1_000_000_000)
+            value >= 1_000_000 -> String.format(locale, "%.2f MΩ", value / 1_000_000)
+            value >= 1_000 -> String.format(locale, "%.2f kΩ", value / 1_000)
+            value >= 1 -> String.format(locale, "%.2f Ω", value)
+            value >= 0.001 -> String.format(locale, "%.2f mΩ", value * 1_000)
+            else -> String.format(locale, "%.2e Ω", value)
         }
     }
 
     private fun validateE12(resistance: Double): Boolean {
         if (resistance <= 0) return false
 
-        // Encontrar a potência de 10 mais próxima
-        val exponent = Math.floor(Math.log10(resistance))
-        val decade = Math.pow(10.0, exponent)
-        
+        // Encontrar a potência de 10 mais próxima usando Kotlin Math
+        val exponent = floor(log10(resistance))
+        val decade = 10.0.pow(exponent)
+
         // Normalizar o valor para o intervalo [1, 10)
         val normalizedValue = resistance / decade
 
-        // Tolerância padrão para comparação (mais restrita para maior precisão)
-        val tolerance = 0.005 // 0.5% de tolerância para comparação
+        // Tolerância padrão para comparação
+        val toleranceVal = 0.005
 
         // Verificar se o valor normalizado está próximo de algum valor E12
-        val isValid = e12Values.any { e12Value ->
-            val relativeError = Math.abs(normalizedValue - e12Value) / e12Value
-            relativeError <= tolerance
+        return e12Values.any { e12Value ->
+            val relativeError = abs(normalizedValue - e12Value) / e12Value
+            relativeError <= toleranceVal
         }
-
-        return isValid
     }
 
-    // Função auxiliar para obter o valor E12 mais próximo (opcional, pode ser útil para feedback)
-    private fun getNearestE12Value(resistance: Double): Double {
-        if (resistance <= 0) return 0.0
-
-        val exponent = Math.floor(Math.log10(resistance))
-        val decade = Math.pow(10.0, exponent)
-        val normalizedValue = resistance / decade
-
-        // Encontrar o valor E12 mais próximo
-        val nearestE12 = e12Values.minByOrNull { e12Value ->
-            Math.abs(Math.log10(normalizedValue) - Math.log10(e12Value))
-        } ?: 1.0
-
-        return nearestE12 * decade
-    }
-
-    // Função auxiliar para obter cor por valor
     private fun getColorForValue(value: Int): Int {
         return colorMap[value] ?: R.color.black
-    }
-
-    // Função para resetar todas as seleções
-    fun resetCalculator() {
-        firstBand = -1
-        secondBand = -1
-        multiplier = -1
-        tolerance = -1
-        resistanceValue.text = "--- Ω"
-        validationIcon.visibility = View.GONE
-        updateResistorDisplay()
-    }
-
-    // Função para obter informações detalhadas sobre o resistor atual
-    fun getResistorInfo(): String {
-        if (firstBand == -1 || secondBand == -1 || multiplier == -1) {
-            return "Resistor incompleto"
-        }
-
-        val baseValue = (firstBand * 10 + secondBand).toDouble()
-        val multiplierValue = multipliers[multiplier] ?: 1.0
-        val finalValue = baseValue * multiplierValue
-        val toleranceValue = if (tolerance != -1) tolerances[tolerance] else null
-
-        val info = StringBuilder()
-        info.append("Valor: ${formatResistanceValue(finalValue)}\n")
-        info.append("Primeira faixa: $firstBand\n")
-        info.append("Segunda faixa: $secondBand\n")
-        info.append("Multiplicador: ${getMultiplierText(multiplier)}\n")
-
-        if (toleranceValue != null) {
-            info.append("Tolerância: ±${toleranceValue}%\n")
-        }
-
-        info.append("E12 válido: ${if (validateE12(finalValue)) "Sim" else "Não"}")
-
-        return info.toString()
-    }
-
-    private fun getMultiplierText(multiplierIndex: Int): String {
-        return when (multiplierIndex) {
-            0 -> "x1"
-            1 -> "x10"
-            2 -> "x100"
-            3 -> "x10³"
-            4 -> "x10⁴"
-            5 -> "x10⁵"
-            6 -> "x10⁶"
-            7 -> "x10⁷"
-            8 -> "x10⁸"
-            9 -> "x10⁹"
-            10 -> "x0.1"
-            11 -> "x0.01"
-            else -> "x1"
-        }
     }
 }
